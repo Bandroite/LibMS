@@ -1,0 +1,21 @@
+{
+  "name": "prototype",
+  "version": "1.0.0",
+  "description": "What is CodeIgniter ###################",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "bootstrap": "^4.6.0",
+    "bootstrap-select": "^1.13.18",
+    "datatables-bootstrap": "0.0.1",
+    "datatables.net-bs4": "^1.10.24",
+    "jquery": "^3.6.0",
+    "jquery-parallax.js": "^1.5.0",
+    "jquery-validation": "^1.19.3"
+  }
+}

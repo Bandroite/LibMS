@@ -1,0 +1,46 @@
+// 
+// Sidenav Light
+// 
+
+// Light theme for sidenav
+// Append .sb-sidenav-light to .sb-sidenav to use
+
+.sb-sidenav-light {
+    background-color: white;
+    color: $sidenav-light-color;
+    box-shadow: $box-shadow;
+
+    .sb-sidenav-menu {
+        .sb-sidenav-menu-heading {
+            color: $theme-secondary;
+        }
+
+        .nav-link {
+            color: $sidenav-light-link-color;
+
+            .sb-nav-link-icon {
+                color: $sidenav-light-icon-color;
+            }
+
+            .sb-sidenav-collapse-arrow {
+                color: $sidenav-light-icon-color;
+            }
+
+            &:hover {
+                background: $theme-muted;
+            }
+
+            &.active {
+                color: $theme-primary;
+
+                .sb-nav-link-icon {
+                    color: $theme-primary;
+                }
+            }
+        }
+    }
+
+    .sb-sidenav-footer {
+        background-color: $sidenav-light-footer-bg;
+    }
+}

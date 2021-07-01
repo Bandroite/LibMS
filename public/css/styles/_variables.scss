@@ -1,0 +1,50 @@
+// Bootstrap Customized Theme Colors
+$theme-primary    : #F97316;
+$theme-secondary  : #64748B;
+$theme-success    : #16A34A;
+$theme-info       : #14B8A6;
+$theme-warning    : #EAB308;
+$theme-danger     : #DC2626;
+$theme-dark       : #374151;
+$theme-light      : #F9FAFB;
+$theme-muted      : #e9ecef;
+
+// Custom Colors
+$theme-blue       : #3B82F6;
+$theme-brown      : #9A3412;
+
+$theme-colors: (
+    // Bootstrap Default Colors
+    "primary"   : $theme-primary,
+    "secondary" : $theme-secondary,
+    "success"   : $theme-success,
+    "info"      : $theme-info,
+    "warning"   : $theme-warning,
+    "danger"    : $theme-danger,
+    "dark"      : $theme-dark,
+    "light"     : $theme-light,
+
+    // Customize Theme Colors
+    "blue"      : $theme-blue,
+    "brown"     : $theme-brown,
+    "muted"     : $theme-muted
+);
+
+// Eliminate all box-shadow in control elements
+$btn-focus-box-shadow:            none !important;
+$input-focus-box-shadow:          none !important;
+$custom-select-focus-box-shadow:  none !important;
+$pagination-focus-box-shadow:     none !important;
+
+// All elements no border-radius
+// $border-radius: 0;
+// $border-radius-sm: 0;
+// $border-radius-lg: 0;
+
+// Custom tooltip
+$tooltip-bg: #4B5563;
+$tooltip-opacity: 0.9;
+$tooltip-font-size: 12px;
+$tooltip-padding-y: 5px;
+$tooltip-padding-x: 10px;
+$tooltip-border-radius: 5px;
