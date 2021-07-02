@@ -29,7 +29,7 @@
                         class="form-control"
                         id="publisherName"
                         name="publisherName"
-                        placeholder="Enter genre here"
+                        placeholder="Enter publisher name here"
                     >
                 </div>
 

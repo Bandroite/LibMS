@@ -44,7 +44,7 @@
             <table class="table" id="publishersDT">
                 <thead>
                     <tr>
-                        <th>Publishher Name</th>
+                        <th>Publisher Name</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
