@@ -16,7 +16,7 @@
  */
 
 // Base URLs
-const BASE_URL_WEB = 'http://localhost/LMS-Prototype/';
+const BASE_URL_WEB = 'http://localhost/LibMS/';
 const BASE_URL_API = 'http://localhost:3600/api/v1/';
 
 
