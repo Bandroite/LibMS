@@ -7,7 +7,7 @@
 <?php $this->load->view('admin/components/summary_card', [
     'theme' => 'dark',
     'icon'  => 'book',
-    'title' => 'Numebr of Weeded Materials',
+    'title' => 'Number of Weeded Materials',
     'id'    => 'numberOfWeededMaterials',
     'value' => '8'
 ]); ?>
