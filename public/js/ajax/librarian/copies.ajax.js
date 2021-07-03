@@ -46,9 +46,14 @@ loadCopiesDT = () => {
                                 <div class="badge alert-success text-success p-2 w-100">Available</div>
                             `
                         }
-                        else{
+                        else if(data.status == 'Weeded'){
                             return `
                                 <div class="badge alert-secondary text-secondary p-2 w-100">Weeded</div>
+                            `
+                        }
+                        else{
+                            return `
+                                <div class="badge alert-danger text-danger p-2 w-100">Unavailable</div>
                             `
                         }
                     }

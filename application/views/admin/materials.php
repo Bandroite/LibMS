@@ -76,7 +76,7 @@
                                     </a>
                                     <a 
                                         class="dropdown-item"
-                                        href="<?= base_url() ?>admin/edit-materials/1"
+                                        href="<?= base_url() ?>admin/edit-material"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>

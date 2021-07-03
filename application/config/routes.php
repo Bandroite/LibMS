@@ -88,6 +88,7 @@ $route['admin/add-borrower']            = 'admin/add_borrower';
 $route['admin/returned']                = 'admin/returned';
 $route['admin/materials/(:book_ID)']    = 'admin/materials/$1'; 
 $route['admin/add-material']            = 'admin/add_material';
+$route['admin/edit-material']            = 'admin/edit_material';
 $route['admin/genres']                  = 'admin/genres';
 $route['admin/material-types']          = 'admin/material_types';
 $route['admin/authors']                 = 'admin/authors';

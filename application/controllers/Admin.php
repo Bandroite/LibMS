@@ -120,6 +120,11 @@ class Admin extends CI_Controller {
         $this->load_views('Add Material', 'Materials', [['add_material']]);
 	}
 
+    // Edit Material
+	public function edit_material() {
+        $this->load_views('Edit Material', 'Materials', [['edit_material']]);
+	}
+
     // Genre
 	public function genres() {
         $this->load_views('Genres', 'Genres', [
