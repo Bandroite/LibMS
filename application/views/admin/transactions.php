@@ -4,6 +4,9 @@
     'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 ]); ?>
 
+<!-- Show Alert -->
+<div id="alertContainer"></div>
+
 <!-- Transactions Summary -->
 <div class="card card-status card-info mb-4">
     <div class="card-body">

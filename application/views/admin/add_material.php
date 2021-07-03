@@ -3,6 +3,9 @@
     <div class="text-secondary">Add borrower here by filling up the required fields</div>
 </div>
 
+<!-- Show Alert -->
+<div id="alertContainer"></div>
+
 <form id="addMaterialsForm">
 
     <!-- Material Details -->

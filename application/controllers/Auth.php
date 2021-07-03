@@ -49,7 +49,7 @@ class Auth extends CI_Controller {
         
                 // Redirect to user page
                 if($this->session->userType === 'Staff' || $this->session->userType === 'Student') {
-                    redirect('me');
+                    redirect('home');
                 } else if ($this->session->userType === 'Librarian') {
                     redirect('admin');
                 } else {

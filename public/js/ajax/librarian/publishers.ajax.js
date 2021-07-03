@@ -6,7 +6,7 @@
  * ===============================================================================
  */
 
- $(() => {
+$(() => {
     loadPublishersDT()
 })
 
@@ -16,7 +16,7 @@
  * ===============================================================================
  */
 
- loadPublishersDT = () => {
+loadPublishersDT = () => {
     const dt = $('#publishersDT');
     if(dt.length){
         dt.DataTable({
@@ -182,7 +182,7 @@ add_publisherAJAX = () => {
  * ===============================================================================
  */
 
- editPublisher = (publisherID) => {
+editPublisher = (publisherID) => {
     $.ajax({
         url: `${ BASE_URL_API }librarian/publishers/${publisherID}`,
         type: 'GET',

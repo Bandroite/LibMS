@@ -6,7 +6,7 @@
  * ===============================================================================
  */
 
- $(() => {
+$(() => {
     loadCopiesDT()
 })
 
@@ -62,36 +62,43 @@ loadCopiesDT = () => {
                     data: null,
                     class: 'text-center',
                     render: (data) => {
-                        return `
-                            <div class="dropdown d-inline-block">
-                                <div data-toggle="dropdown">
-                                    <div 
-                                        class       = "btn btn-sm btn-muted"
-                                        data-toggle = "tooltip"
-                                        title       = "More"
-                                    >
-                                        <i class="fas fa-ellipsis-v"></i>
+                        if(data.status == 'Unavailable'){
+                            return `
+                                <div class="text-center font-italic text-muted">No action</div>
+                            `
+                        }
+                        else{
+                            return `
+                                <div class="dropdown d-inline-block">
+                                    <div data-toggle="dropdown">
+                                        <div 
+                                            class       = "btn btn-sm btn-muted"
+                                            data-toggle = "tooltip"
+                                            title       = "More"
+                                        >
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </div>
+                                    </div>
+    
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <div 
+                                            class="dropdown-item"
+                                            onclick = "editCopy('${data.copyID}')"
+                                        >
+                                            <i class="fas fa-edit dropdown-icon-item text-blue"></i>
+                                            <span>Edit</span>
+                                        </div>
+                                        <div 
+                                            class="dropdown-item"
+                                            onclick = "removeCopy('${data.copyID}')"
+                                        >
+                                            <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
+                                            <span>Remove</span>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <div 
-                                        class="dropdown-item"
-                                        onclick = "editCopy('${data.copyID}')"
-                                    >
-                                        <i class="fas fa-edit dropdown-icon-item text-blue"></i>
-                                        <span>Edit</span>
-                                    </div>
-                                    <div 
-                                        class="dropdown-item"
-                                        onclick = "removeCopy('${data.copyID}')"
-                                    >
-                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Remove</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `
+                            `
+                        }
                     }
                 },
             ],

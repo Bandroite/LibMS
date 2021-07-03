@@ -133,7 +133,7 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="roomName"
+                        id="roomNameForEdit"
                         name="roomName"
                         placeholder="Enter room here"
                         value="Roth Bldg."
@@ -145,7 +145,7 @@
                     <label for="building">Building</label>
                     <select 
                         name="building" 
-                        id="building" 
+                        id="buildingForEdit" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"

@@ -25,6 +25,7 @@ class Admin extends CI_Controller {
         'authors',
         'buildings',
         'copies',
+        'rooms',
         'publishers',
         'users'
     ];
@@ -121,8 +122,14 @@ class Admin extends CI_Controller {
 	}
 
     // Edit Material
-	public function edit_material() {
-        $this->load_views('Edit Material', 'Materials', [['edit_material']]);
+	public function edit_material($book_ID = NULL) {
+        if($book_ID == NULL) {
+            $this->Error_model->page_not_found();
+        } else {
+            $this->load_views('Material Details', 'Materials', [
+                ['edit_material'],
+            ]);
+        }
 	}
 
     // Genre

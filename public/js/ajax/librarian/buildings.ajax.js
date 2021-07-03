@@ -312,56 +312,57 @@ update_buildingAJAX = () => {
 
 /**
  * ===============================================================================
- * REMOVE AUTHORS AJAX
+ * REMOVE BUILDING AJAX
  * ===============================================================================
  */
 
-removeAuthor = (authorID) => {
-    setFormValues('#removeAuthorForm',[
+removeBuilding = (buildingID) => {
+    setFormValues('#removeBuildingForm',[
         {
-            name: 'authorID',
-            value: authorID
+            name: 'buildingID',
+            value: buildingID
         }
     ]);
 
-    $('#removeAuthorModal').modal('show')
+    $('#removeBuildingModal').modal('show')
 }
 
-$('#removeAuthorForm').validate(validateOptions({
+$('#removeBuildingForm').validate(validateOptions({
     rules: {},
     messages: {},
-    submitHandler: () => delete_authorAJAX()
+    submitHandler: () => delete_buildingAJAX()
 }))
 
-delete_authorAJAX = () => {
+delete_buildingAJAX = () => {
 
     // Get values from form to rawData
-    const rawData = new FormData($('#removeAuthorForm')[0]);
+    const rawData = new FormData($('#removeBuildingForm')[0]);
 
-    const authorID = rawData.get('authorID')
+    const buildingID = rawData.get('buildingID')
 
 
     $.ajax({
-        url: `${ BASE_URL_API }librarian/authors/${authorID}`,
+        url: `${ BASE_URL_API }librarian/buildings/${buildingID}`,
         type: 'DELETE',
         headers: AJAX_HEADERS,
         success: (result) => {
             if(result) {
                 // Refresh data table after delete
-                const dt = $('#authorsDT').DataTable();
+                const dt = $('#buildingsDT').DataTable();
                 dt.ajax.reload();
                 
                 showAlert('success','Success!','Record has been deleted');
 
                 // Hide model after delete
-                $('#removeAuthorModal').modal('hide');
+                $('#removeBuildingModal').modal('hide');
             } else {
                 console.log('No result');
             }
         }
     })
     .fail(() => {
-        console.log('Cannot delete this record')
+        // Hide model after delete
+        $('#removeBuildingModal').modal('hide');
         showAlert('danger','Failed','Cannot delete this record!');
     })
 }

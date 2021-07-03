@@ -4,13 +4,8 @@
     'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 ]); ?>
 
-<!-- Alert -->
-<div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-    <div><strong>Success!</strong> A new material has been added</div>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<!-- Show Alert -->
+<div id="alertContainer"></div>
 
 <?php $this->load->view('admin/components/summary_card', [
     'theme' => 'primary',
@@ -76,7 +71,7 @@
                                     </a>
                                     <a 
                                         class="dropdown-item"
-                                        href="<?= base_url() ?>admin/edit-material"
+                                        href="<?= base_url() ?>admin/edit-material/1"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>

@@ -4,6 +4,9 @@
     'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 ]); ?>
 
+<!-- Show Alert -->
+<div id="alertContainer"></div>
+
 <!-- Borrowers Summary -->
 <div class="form-row">
     

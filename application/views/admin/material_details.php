@@ -3,13 +3,8 @@
     <div class="text-secondary">Lorem ipsum dolor sit amet.</div>
 </div>
 
-<!-- Alert -->
-<div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-    <div><strong>Success!</strong> A new copy has been added</div>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<!-- Show Alert -->
+<div id="alertContainer"></div>
 
 <!-- Book Details Section -->
 <div class="row mb-4">

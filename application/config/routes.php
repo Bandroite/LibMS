@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller']   = 'home';
 $route['404_override']         = 'auth/page_not_found';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
 
 
 // Auth Routes
@@ -80,24 +80,24 @@ $route['me/logout']           = 'user/logout';
 
 
 // Admin Routes
-$route['admin']                         = 'admin/dashboard';
-$route['admin/transactions']            = 'admin/transactions';
-$route['admin/borrowed']                = 'admin/borrowed';
-$route['admin/borrowers']               = 'admin/borrowers';
-$route['admin/add-borrower']            = 'admin/add_borrower';
-$route['admin/returned']                = 'admin/returned';
-$route['admin/materials/(:book_ID)']    = 'admin/materials/$1'; 
-$route['admin/add-material']            = 'admin/add_material';
-$route['admin/edit-material']            = 'admin/edit_material';
-$route['admin/genres']                  = 'admin/genres';
-$route['admin/material-types']          = 'admin/material_types';
-$route['admin/authors']                 = 'admin/authors';
-$route['admin/publishers']              = 'admin/publishers';
-$route['admin/publication-countries']   = 'admin/publication_countries';
-$route['admin/languages']               = 'admin/languages';
-$route['admin/weeded-materials']        = 'admin/weeded_materials';
-$route['admin/buildings']               = 'admin/buildings';
-$route['admin/rooms']                   = 'admin/rooms';
-$route['admin/shelves']                 = 'admin/shelves';
-$route['admin/programs-and-sections']   = 'admin/programs_and_sections';
-$route['admin/logout']                  = 'admin/logout';
+$route['admin']                             = 'admin/dashboard';
+$route['admin/transactions']                = 'admin/transactions';
+$route['admin/borrowed']                    = 'admin/borrowed';
+$route['admin/borrowers']                   = 'admin/borrowers';
+$route['admin/add-borrower']                = 'admin/add_borrower';
+$route['admin/returned']                    = 'admin/returned';
+$route['admin/materials/(:book_ID)']        = 'admin/materials/$1'; 
+$route['admin/add-material']                = 'admin/add_material';
+$route['admin/edit-material/(:book_ID)']    = 'admin/edit_material/$1';
+$route['admin/genres']                      = 'admin/genres';
+$route['admin/material-types']              = 'admin/material_types';
+$route['admin/authors']                     = 'admin/authors';
+$route['admin/publishers']                  = 'admin/publishers';
+$route['admin/publication-countries']       = 'admin/publication_countries';
+$route['admin/languages']                   = 'admin/languages';
+$route['admin/weeded-materials']            = 'admin/weeded_materials';
+$route['admin/buildings']                   = 'admin/buildings';
+$route['admin/rooms']                       = 'admin/rooms';
+$route['admin/shelves']                     = 'admin/shelves';
+$route['admin/programs-and-sections']       = 'admin/programs_and_sections';
+$route['admin/logout']                      = 'admin/logout';

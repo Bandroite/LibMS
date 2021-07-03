@@ -64,7 +64,7 @@ const showAlert = (theme,alertTitle,message) => {
         </div>
     `)
 
-    setTimeout(() => $('#alert').alert('close'), 3000);
+    setTimeout(() => $('#alert').alert('close'), 5000);
 
 }
 

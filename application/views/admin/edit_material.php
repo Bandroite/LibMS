@@ -3,6 +3,9 @@
     <div class="text-secondary">Edit borrower here by filling up the required fields</div>
 </div>
 
+<!-- Show Alert -->
+<div id="alertContainer"></div>
+
 <form id="editMaterialsForm">
 
     <!-- Material Details -->

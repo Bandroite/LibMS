@@ -4,6 +4,9 @@
     'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 ]); ?>
 
+<!-- Show Alert -->
+<div id="alertContainer"></div>
+
 <!-- Rooms Summary -->
 <div class="card card-status card-primary mb-4">
     <div class="card-body">
@@ -40,7 +43,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="roomsDT">
+            <table class="table w-100" id="roomsDT">
                 <thead>
                     <tr>
                         <th>Room Name</th>
@@ -49,7 +52,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i=0;$i<55;$i++): ?>
+                    
                     
                     <!-- Active Room -->
                     <tr>
@@ -91,7 +94,6 @@
                         </td>
                     </tr>
                     
-                    <?php endfor ?>
                 </tbody>
             </table>
         </div>

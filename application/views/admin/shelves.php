@@ -4,6 +4,9 @@
     'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 ]); ?>
 
+<!-- Show Alert -->
+<div id="alertContainer"></div>
+
 <?php $this->load->view('admin/components/summary_card', [
     'theme' => 'primary',
     'icon'  => 'grip-vertical',
