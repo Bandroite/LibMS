@@ -41,14 +41,14 @@ loadCopiesDT = () => {
                 {
                     data: null,
                     render: (data) =>{
-                        if(data.status == 'Active'){
+                        if(data.status == 'Available'){
                             return `
-                                <div class="badge alert-success text-success p-2 w-100">Active</div>
+                                <div class="badge alert-success text-success p-2 w-100">Available</div>
                             `
                         }
                         else{
                             return `
-                                <div class="badge alert-danger text-danger p-2 w-100">Inactive</div>
+                                <div class="badge alert-secondary text-secondary p-2 w-100">Weeded</div>
                             `
                         }
                     }

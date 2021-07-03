@@ -33,11 +33,11 @@
                     <label for="availableStatus">Status</label>
                     <div class="form-control">
                         <label class="custom-control custom-radio custom-control-inline" for="availableStatus">
-                            <input type="radio" id="availableStatus" name="userStatus" class="custom-control-input">
+                            <input type="radio" id="availableStatus" name="status" class="custom-control-input" value="Available">
                             <div class="custom-control-label">Available</div>
                         </label>
                         <label class="custom-control custom-radio custom-control-inline" for="weededStatus">
-                            <input type="radio" id="weededStatus" name="userStatus" class="custom-control-input">
+                            <input type="radio" id="weededStatus" name="status" class="custom-control-input" value="Weeded">
                             <div class="custom-control-label">Weeded</div>
                         </label>
                     </div>
@@ -76,11 +76,11 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="custom-control custom-radio py-1" for="available">
-                        <input type="radio" id="available" name="customRadio" class="custom-control-input">
+                        <input type="radio" id="available" name="status" class="custom-control-input" value="Available">
                         <div class="custom-control-label">Available</div>
                     </label>
                     <label class="custom-control custom-radio py-1" for="weeded">
-                        <input type="radio" id="weeded" name="customRadio" class="custom-control-input">
+                        <input type="radio" id="weeded" name="status" class="custom-control-input" value="Weeded">
                         <label class="custom-control-label">Weeded</label>
                     </label>
                 </div>
