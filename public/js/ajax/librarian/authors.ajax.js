@@ -7,7 +7,8 @@
  */
 
 $(() => {
-    loadAuthorsDT()
+    loadAuthorsDT();
+    authors_countAJAX();
 })
 
 /**
@@ -16,6 +17,7 @@ $(() => {
  * ===============================================================================
  */
 
+// Load authors DataTable
 loadAuthorsDT = () => {
     const dt = $('#authorsDT');
     if(dt.length){
@@ -193,6 +195,7 @@ add_authorAJAX = () => {
  * ===============================================================================
  */
 
+// Edit author
 editAuthor = (authorID) => {
     $.ajax({
         url: `${ BASE_URL_API }librarian/authors/${authorID}`,
@@ -232,7 +235,6 @@ editAuthor = (authorID) => {
 }
 
 // Edit Author From Validation
-
 $('#editAuthorForm').validate(validateOptions({
     rules: {
         authorFirstName: {
@@ -259,7 +261,7 @@ $('#editAuthorForm').validate(validateOptions({
     submitHandler: () => update_authorAJAX()
 }))
 
-
+// Update Author AJAX
 update_authorAJAX = () => {
     // Get values from form to rawData
     const rawData = new FormData($('#editAuthorForm')[0]);
@@ -310,3 +312,32 @@ update_authorAJAX = () => {
     })
 }
 
+/**
+ * ===============================================================================
+ * AUTHORS COUNT
+ * ===============================================================================
+ */
+
+// Authors count AJAX
+authors_countAJAX = () => {
+    if($('#authorsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/authors/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => {
+                if(result) {
+                    const authorsCount = result.count;
+                    $('#authorsTotalCount').html(authorsCount.total);
+                    $('#authorsActiveCount').html(authorsCount.active);
+                    $('#authorsInactiveCount').html(authorsCount.inactive);
+                } else {
+                    console.log('No result was found');
+                }
+            }
+        })
+        .fail(() => {
+            console.error('There was an error in getting room count');
+        });
+    }
+}

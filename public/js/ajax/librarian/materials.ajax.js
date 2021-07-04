@@ -83,9 +83,37 @@ if($('#addMaterialForm').length || $('#editMaterialForm').length) {
         },
     });
 
-    // Fetch all languages for add and editing rooms and material
+    // Fetch all languages for add and editing material
     $.ajax({
         url: `${ BASE_URL_API }librarian/languages`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(language => options +=`
+                    <option value="${language.languageID}">${language.language}</option>
+                `);
+
+                // For add select in add material
+                $('#languageForAddMaterial').html(options).selectpicker('refresh');
+
+                // For edit select
+                $('#languageForEdit').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        },
+    });
+
+    // Fetch all material types for add and editing material
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_types`,
         type: 'GET',
         headers: AJAX_HEADERS,
         success: (result) => {
@@ -96,23 +124,104 @@ if($('#addMaterialForm').length || $('#editMaterialForm').length) {
     
                 // Populate select options
                 var options = '';
-                data.forEach(language => options +=`
-                    <option value="${language.languageID}">${language.language}</option>
+                data.forEach(mType => options +=`
+                    <option value="${mType.typeID}">${mType.typeName}</option>
                 `);
     
-                // For add select in add building
-                $('#languageForAdd').html(options).selectpicker('refresh');
-    
                 // For add select in add material
-                $('#languageForAddMaterial').html(options).selectpicker('refresh');
+                $('#materialTypeForAddMaterial').html(options).selectpicker('refresh');
     
                 // For edit select
-                $('#languageForEdit').html(options).selectpicker('refresh');
+                $('#materialTypeForEdit').html(options).selectpicker('refresh');
             } else {
                 console.log('No result');
             }
         },
-    })
+    });
+
+    // Fetch all publishers for add and editing material
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/publishers`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+    
+                // Get data from result
+                const data = result.data
+    
+                // Populate select options
+                var options = '';
+                data.forEach(publishers => options +=`
+                    <option value="${publishers.publisherID}">${publishers.publisherName}</option>
+                `);
+    
+                // For add select in add material
+                $('#publisherForAddMaterial').html(options).selectpicker('refresh');
+    
+                // For edit select
+                $('#publisherForEdit').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        },
+    });
+
+    // Fetch all genres for add and editing material
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/genres`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+    
+                // Get data from result
+                const data = result.data
+    
+                // Populate select options
+                var options = '';
+                data.forEach(genre => options +=`
+                    <option value="${genre.genreID}">${genre.genre}</option>
+                `);
+    
+                // For add select in add material
+                $('#genreForAddMaterial').html(options).selectpicker('refresh');
+    
+                // For edit select
+                $('#genreForEdit').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        },
+    });
+
+    // Fetch all authors for add and editing material
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/authors`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+    
+                // Get data from result
+                const data = result.data
+    
+                // Populate select options
+                var options = '';
+                data.forEach(authors => options +=`
+                    <option value="${authors.authorID}">${authors.authorFirstName} ${authors.authorLastName}</option>
+                `);
+    
+                // For add select in add material
+                $('#authorForAddMaterial').html(options).selectpicker('refresh');
+    
+                // For edit select
+                $('#authorForEdit').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        },
+    });
 }
 
 // When a building is selected

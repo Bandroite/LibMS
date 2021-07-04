@@ -24,7 +24,9 @@ class Admin extends CI_Controller {
     private Array $AJAX_Files = [
         'users',
         'materials',
+        'material_types',
         'authors',
+        'genres',
         'languages',
         'copies',
         'publishers',

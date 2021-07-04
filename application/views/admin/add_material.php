@@ -54,62 +54,54 @@
 
                     <!-- Authors -->
                     <div class="form-group">
-                        <label for="title">Authors</label>
-                        <input 
-                            type="text" 
-                            class="form-control"
-                            id="title"
-                            name="title"
-                            placeholder="Enter authors here"
-                        >
+                        <label for="authorForAddMaterial">Authors</label>
+                        <select 
+                            name="authors" 
+                            id="authorForAddMaterial" 
+                            class="selectpicker form-control border"
+                            data-style="form-control"
+                            data-live-search="true"
+                            data-size="5"
+                            title="Select select one or more authors here"
+                            multiple
+                        ></select>
                     </div>
 
                     <!-- Type -->
                     <div class="form-group">
-                        <label for="type">Type</label>
+                        <label for="materialTypeForAddMaterial">Type</label>
                         <select 
                             name="type" 
-                            id="type" 
+                            id="materialTypeForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
                             data-size="5"
                             title="Select type here"
-                        >
-                            <option value="Book">Book</option>
-                            <option value="Magazine">Magazine</option>
-                            <option value="Magazine">Article</option>
-                        </select>
+                        ></select>
                     </div>
 
                     <!-- Genre -->
                     <div class="form-group">
-                        <label for="genre">Genre</label>
+                        <label for="genreForAddMaterial">Genres</label>
                         <select 
-                            name="genre" 
-                            id="genre" 
+                            name="type" 
+                            id="genreForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
                             data-size="5"
-                            title="Select genre here"
-                        >
-                            <option value="Genre1">Genre1</option>
-                            <option value="Genre1">Genre1</option>
-                            <option value="Genre1">Genre1</option>
-                            <option value="Genre1">Genre1</option>
-                            <option value="Genre1">Genre1</option>
-                            <option value="Genre1">Genre1</option>
-                            <option value="Genre1">Genre1</option>
-                        </select>
+                            title="Select select one or more genres here"
+                            multiple
+                        ></select>
                     </div>
 
                     <!-- Language Field -->
                     <div class="form-group">
-                        <label for="languageForAdd">Language</label>
+                        <label for="languageForAddMaterial">Language</label>
                         <select 
                             name="language" 
-                            id="languageForAdd" 
+                            id="languageForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -201,14 +193,16 @@
                 <!-- Publisher Name Field -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="publisherName">Publisher Name</label>
-                        <input 
-                            type="text"
-                            class="form-control"
-                            id="publisherName"
-                            name="publisherName"
-                            placeholder="Enter publisher name here"
-                        >
+                        <label for="publisherForAddMaterial">Publisher</label>
+                        <select 
+                            name="type" 
+                            id="publisherForAddMaterial" 
+                            class="selectpicker form-control border"
+                            data-style="form-control"
+                            data-live-search="true"
+                            data-size="5"
+                            title="Select publisher here"
+                        ></select>
                     </div>
                 </div>
 
