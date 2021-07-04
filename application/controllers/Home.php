@@ -114,7 +114,12 @@ class Home extends CI_Controller {
 
     // Login
     public function login() {
-		$this->load_views('Login', [['login']]);
+        if($this->session->userType === 'Student' || $this->session->userType === 'Staff')
+            redirect();
+        if($this->session->userType === 'Librarian')
+            redirect('admin');
+        else
+            $this->load_views('Login', [['login']]);
     }
 
     // UI (for testing purposes)

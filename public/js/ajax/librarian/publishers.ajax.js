@@ -7,7 +7,8 @@
  */
 
 $(() => {
-    loadPublishersDT()
+    loadPublishersDT();
+    publishers_countAJAX();
 })
 
 /**
@@ -182,6 +183,7 @@ add_publisherAJAX = () => {
  * ===============================================================================
  */
 
+// Edit publisher
 editPublisher = (publisherID) => {
     $.ajax({
         url: `${ BASE_URL_API }librarian/publishers/${publisherID}`,
@@ -216,8 +218,7 @@ editPublisher = (publisherID) => {
     })
 }
 
-// Edit Publisher From Validation
-
+// Validate Edit Publisher Form
 $('#editPublisherForm').validate(validateOptions({
     rules: {
         publisherName: {
@@ -238,7 +239,7 @@ $('#editPublisherForm').validate(validateOptions({
     submitHandler: () => update_publisherAJAX()
 }))
 
-
+// Update Publisher
 update_publisherAJAX = () => {
     // Get values from form to rawData
     const rawData = new FormData($('#editPublisherForm')[0]);
@@ -290,11 +291,12 @@ update_publisherAJAX = () => {
 
 /**
  * ===============================================================================
- * REMOVE PUBLISHERS AJAX
+ * REMOVE PUBLISHER AJAX
  * ===============================================================================
  */
 
- removePublisher = (publisherID) => {
+// Remove publisher
+removePublisher = (publisherID) => {
     setFormValues('#removePublisherForm',[
         {
             name: 'publisherID',
@@ -305,12 +307,14 @@ update_publisherAJAX = () => {
     $('#removePublisherModal').modal('show')
 }
 
+// Validate Remove Publisher Form
 $('#removePublisherForm').validate(validateOptions({
     rules: {},
     messages: {},
     submitHandler: () => delete_publisherAJAX()
-}))
+}));
 
+// Delete publisher AJAX
 delete_publisherAJAX = () => {
 
     // Get values from form to rawData
@@ -342,4 +346,35 @@ delete_publisherAJAX = () => {
         console.log('Cannot delete this record')
         showAlert('danger','Failed','Cannot delete this record!');
     })
+}
+
+
+/**
+ * ===============================================================================
+ * PUBLISHERS COUNT
+ * ===============================================================================
+ */
+
+// publishers count AJAX
+publishers_countAJAX = () => {
+    if($('#publishersCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/publishers/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => {
+                if(result) {
+                    const publishersCount = result.count;
+                    $('#publishersTotalCount').html(publishersCount.total);
+                    $('#publishersActiveCount').html(publishersCount.active);
+                    $('#publishersInactiveCount').html(publishersCount.inactive);
+                } else {
+                    console.log('No result was found');
+                }
+            }
+        })
+        .fail(() => {
+            console.error('There was an error in getting publishers count');
+        });
+    }
 }

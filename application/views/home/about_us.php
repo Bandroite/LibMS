@@ -2,7 +2,7 @@
     <h1 class="text-primary font-weight-light">Who are we?</h1>
     <p class= "text-justify py-2 px-4">Founded in May of 2021 and based in Don Fabian, Quezon City. At LMS, we believe that searching, managing and issuing a book can be tough from time to time and there is always a better way to lessen any possible added work. LMS is a trusted community for any persons out there that are considered book lovers or even a person that has started his/her curiosity when it comes to books. This type of service is to help libraries specifically PUP QC to keep track their records of books and members, issue a book online, confirm a report/s and many more aiming to exclude heavy tasks of paperworks. We will put the needs of users first to provide satisfaction, less workload, consistency, and more effectiveness of the system.</p>
 
-<!-- Team Members -->
+    <!-- Team Members -->
     <section>
         <div class="container">
             <h1 class="text-center my-5 text-primary font-weight-light">Our Team</h1>

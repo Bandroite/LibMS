@@ -22,12 +22,15 @@ class Admin extends CI_Controller {
     private String $dir = "admin";
 
     private Array $AJAX_Files = [
+        'users',
+        'materials',
         'authors',
-        'buildings',
+        'languages',
         'copies',
-        'rooms',
         'publishers',
-        'users'
+        'buildings',
+        'rooms',
+        'shelves',
     ];
 
     // Load Views Method
@@ -118,7 +121,10 @@ class Admin extends CI_Controller {
 
     // Add Material
 	public function add_material() {
-        $this->load_views('Add Material', 'Materials', [['add_material']]);
+        $this->load_views('Add Material', 'Materials', [
+            ['components/modals/add_material_modals'],
+            ['add_material'],
+        ]);
 	}
 
     // Edit Material

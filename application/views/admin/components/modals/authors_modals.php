@@ -1,11 +1,5 @@
 <!-- Add Author Modal -->
-<div 
-    class         = "modal" 
-    id            = "addAuthorModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class= "modal" id= "addAuthorModal" data-backdrop= "static" data-keyboard= "false" tabindex= "-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="addAuthorForm" class="modal-content">
             <div class="modal-header">

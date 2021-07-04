@@ -7,15 +7,17 @@
  */
 
 $(() => {
-    loadRoomsDT()
+    loadRoomsDT();
+    rooms_countAJAX();
 })
 
 /**
  * ===============================================================================
- * GET ALL ROOMS AJAX
+ * GET ALL ROOMS
  * ===============================================================================
  */
 
+// Load Rooms DataTable
 loadRoomsDT = () => {
     const dt = $('#roomsDT');
     if(dt.length){
@@ -36,7 +38,33 @@ loadRoomsDT = () => {
             },
             columns: [
                 {
-                    data: 'roomName'
+                    data: null,
+                    render: data => {
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <div>${ data.roomName }</div>
+                            </div>
+                        `
+                    }
+                },
+                {
+                    data: null,
+                    render: data => {
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div>
+                                    <div>${ data.building.buildingName }</div>
+                                    <div class="small text-secondary font-italic">${ data.building.location }</div>
+                                </div>
+                            </div>
+                        `
+                    }
                 },
                 {
                     data: null,
@@ -72,14 +100,14 @@ loadRoomsDT = () => {
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "editCopy('${data.roomID}')"
+                                        onclick = "editRoom('${data.roomID}')"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
                                     </div>
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "removeCopy('${data.roomID}')"
+                                        onclick = "deleteRoom('${data.roomID}')"
                                     >
                                         <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
                                         <span>Remove</span>
@@ -88,19 +116,20 @@ loadRoomsDT = () => {
                             </div>
                         `
                     }
-                }
+                },
             ],
             columnDefs: [{
-                targets: [2],
+                targets: [3],
                 orderable: false,
             }]
         })
     }
 }
 
+
 /**
  * ===============================================================================
- * ADD ROOMS AJAX
+ * ADD ROOM
  * ===============================================================================
  */
 
@@ -131,31 +160,6 @@ $('#addRoomForm').validate(validateOptions({
     submitHandler: () => add_roomAJAX()
 }))
 
-//Fetch Buildings to be selected by Room
-
-$.ajax({
-    url: `${ BASE_URL_API }librarian/buildings`,
-    type: 'GET',
-    headers: AJAX_HEADERS,
-    success: (result) => {
-        if(result) {
-            const data = result.data
-            var options = '';
-            data.forEach(building => {
-                options +=`
-                    <option value="${building.buildingID}">${building.buildingName}</option>
-                `
-            });
-            $('#building').html(options).selectpicker('refresh')
-
-            console.log(data);
-            
-        } else {
-            console.log('No result');
-        }
-    },
-})
-
 // Add Room AJAX
 add_roomAJAX = () => {
 
@@ -179,20 +183,23 @@ add_roomAJAX = () => {
         success: (result) => {
             if(result) {
                 if(result.error) {
-                    console.log(result.message)
+                    showAlert('danger', 'Error: ', result.message)
                     $('#addRoomModal').modal('hide');
-
                     showAlert('danger','Failed!',result.message);
-
                 } else {
-                    console.log(result);
+
+                    // Hide Add Room Modal
                     $('#addRoomModal').modal('hide');
                     
+                    // Show success alert
                     showAlert('success','Success!',result.message);
 
                     // Refresh data table after add
                     const dt = $('#roomsDT').DataTable();
                     dt.ajax.reload();
+
+                    // Reload rooms count
+                    rooms_countAJAX();
                 }
             } else {
                 console.log('No result');
@@ -207,3 +214,146 @@ add_roomAJAX = () => {
     
 }
 
+/**
+ * ===============================================================================
+ * UPDATE ROOM
+ * ===============================================================================
+ */
+
+// Edit Room
+editRoom = (id) => {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/rooms/${ id }`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+
+                // Set the ID of the room
+                $('#roomIDForEdit').val(data.roomID);
+
+                // Set the name of the room
+                $('#roomNameForEdit').val(data.roomName);
+
+                // Set the selected building
+                $('#buildingForEdit').selectpicker('val', `${ data.building.buildingID }`);
+                
+                // Set the status of room
+                const radios = $(`input:radio[name="statusForEdit"]`);
+                if(data.status === 'Active') {
+                    radios.filter(`[value="Active"]`).prop('checked', true);
+                } else if(data.status === 'Inactive') {
+                    radios.filter(`[value="Inactive"]`).prop('checked', true);
+                }
+
+                // Show Edit Room Modal
+                $('#editRoomModal').modal('show');
+            } else {
+                showAlert('danger', 'Failed!', 'No result was found');
+            }
+        }
+    })
+    .fail(() => showAlert('danger', 'Failed!', 'There was an error in getting a room'));
+}
+
+// Validate Edit Room Form
+$('#editRoomForm').validate(validateOptions({
+    rules: {
+        roomName: {
+            required: true,
+        },
+        building: {
+            required: true,
+        },
+        statusForEdit: {
+            required: true
+        }
+    },
+    messages: {
+        roomName: {
+            required: 'Room name is required',
+        },
+        building: {
+            required: 'Please select the building where the room belongs to',
+        },
+        statusForEdit: {
+            required: 'Please select the status of the room'
+        }
+    },
+    submitHandler: () => update_roomAJAX()
+}));
+
+
+// Update Room AJAX
+update_roomAJAX = () => {
+    const rawData = new FormData($('#editRoomForm')[0]);
+
+    data = {
+        roomName:   rawData.get('roomName'),
+        buildingID: rawData.get('building'),
+        status:     rawData.get('statusForEdit'),
+        updatedAt:  moment().format()
+    }
+
+    const id = rawData.get('roomID');
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/rooms/${ id }`,
+        type: 'PUT',
+        data: data,
+        dataType: 'json',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            
+            if(result) {
+
+                // Reload DataTables
+                const dt = $('#roomsDT').DataTable();
+                dt.ajax.reload()
+
+                // Show success alert
+                showAlert('info', 'Success!', 'A room has been updated.');
+            } else {
+                showAlert('danger', 'Failed!', 'There was an error in updating a room. Please try again.');
+            }
+            
+            $('#editRoomModal').modal('hide');
+        }
+    })
+    .fail(() => {
+        $('#editRoomModal').modal('hide');
+        showAlert('danger', 'Failed!', 'There was an error in updating a room. Please try again.');
+    });
+}
+
+
+/**
+ * ===============================================================================
+ * ROOMS COUNT
+ * ===============================================================================
+ */
+
+// Rooms count AJAX
+rooms_countAJAX = () => {
+    if($('#roomsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/rooms/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => {
+                if(result) {
+                    const roomsCount = result.count;
+                    $('#roomsTotalCount').html(roomsCount.total);
+                    $('#roomsActiveCount').html(roomsCount.active);
+                    $('#roomsInactiveCount').html(roomsCount.inactive);
+                } else {
+                    console.log('No result was found');
+                }
+            }
+        })
+        .fail(() => {
+            console.error('There was an error in getting room count');
+        });
+    }
+}

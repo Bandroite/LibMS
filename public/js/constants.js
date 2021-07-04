@@ -54,7 +54,9 @@ const validateOptions = (validateOptions) => {
 }
 
 // Show alert box
-const showAlert = (theme,alertTitle,message) => {
+const showAlert = (theme, alertTitle, message) => {    
+    
+    // Show the alert
     $('#alertContainer').html(`
         <div class="alert alert-${theme} alert-dismissible fade show mb-4" role="alert" id="alert">
             <div><strong>${alertTitle}</strong> ${message}</div>
@@ -62,10 +64,13 @@ const showAlert = (theme,alertTitle,message) => {
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    `)
+    `);
 
+    // Close the alert after 5 seconds
     setTimeout(() => $('#alert').alert('close'), 5000);
 
+    // Scroll to top
+    window.scrollTo(0, 0);
 }
 
 // Set Form Values

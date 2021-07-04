@@ -1,11 +1,5 @@
 <!-- Add Room Modal -->
-<div 
-    class         = "modal" 
-    id            = "addRoomModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="addRoomModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="addRoomForm" class="modal-content">
             <div class="modal-header">
@@ -35,24 +29,16 @@
 
                 <!-- Building Field -->
                 <div class="form-group">
-                    <label for="building">Building</label>
+                    <label for="buildingsForAdd">Building</label>
                     <select 
                         name="building" 
-                        id="building" 
+                        id="buildingsForAdd" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"
                         data-size="5"
                         title="Select building here"
-                    >
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                    </select>
+                    ></select>
                 </div>
 
                 <!-- Status Field -->
@@ -100,13 +86,7 @@
 </div>
 
 <!-- Edit Room Modal -->
-<div 
-    class         = "modal" 
-    id            = "editRoomModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="editRoomModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="editRoomForm" class="modal-content">
             <div class="modal-header">
@@ -123,9 +103,7 @@
             <div class="modal-body">
 
                 <!-- Hide id in form -->
-                <div class ="form-group d-none">
-                    <input type="text" name="roomID">
-                </div>
+                <input type="hidden" name="roomID" id="roomIDForEdit">
 
                 <!-- Room Field -->
                 <div class="form-group">
@@ -142,7 +120,7 @@
 
                 <!-- Building Field -->
                 <div class="form-group">
-                    <label for="building">Building</label>
+                    <label for="buildingForEdit">Building</label>
                     <select 
                         name="building" 
                         id="buildingForEdit" 
@@ -151,15 +129,7 @@
                         data-live-search="true"
                         data-size="5"
                         title="Select building here"
-                    >
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                    </select>
+                    ></select>
                 </div>
 
                 <!-- Status Field -->
@@ -173,7 +143,7 @@
                             <input 
                                 type="radio" 
                                 id="activeForEdit" 
-                                name="status" 
+                                name="statusForEdit" 
                                 class="custom-control-input"
                                 value="Active"
                             >
@@ -186,7 +156,7 @@
                             <input 
                                 type="radio" 
                                 id="inactiveForEdit" 
-                                name="status" 
+                                name="statusForEdit" 
                                 class="custom-control-input"
                                 value="Inactive"
                             >
@@ -207,13 +177,7 @@
 </div>
 
 <!-- Remove Room Modal -->
-<div 
-    class         = "modal" 
-    id            = "removeRoomModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="removeRoomModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form  
             class="modal-content"
@@ -236,7 +200,7 @@
 
         <!-- Hide id in form -->
         <div class ="form-group d-none">
-                <input type="text" name="roomID">
+            <input type="hidden" name="roomID">
         </div>
 
         <div class="modal-footer">

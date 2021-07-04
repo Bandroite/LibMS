@@ -7,13 +7,51 @@
 <!-- Show Alert -->
 <div id="alertContainer"></div>
 
-<?php $this->load->view('admin/components/summary_card', [
-    'theme' => 'primary',
-    'icon'  => 'book',
-    'title' => 'Number of Languages',
-    'id'    => 'numberOfLanguages',
-    'value' => '56'
-]); ?>
+<!-- Languages Summary -->
+<div class="form-row" id="languagesCountContainer">
+    <div class="col-md-8 mb-4">
+        <div class="card card-status card-primary">
+            <div class="card-body">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div class="card-icon-container alert-primary text-primary">
+                        <i class="fas fa-book text-primary"></i>
+                    </div>
+                    <div class="text-right">
+                        <h6 class="m-0">Total number of Languages</h6>
+                        <h2 class="text-primary" id="languagesTotalCount">0</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card card-status card-primary">
+            <div class="card-body">
+                <h6>Summary</h6>
+                <table class="table table-sm border-bottom mb-0">
+                    <tr>
+                        <td class="d-flex align-items-center">
+                            <div style="font-size: 8px" class="mr-2">
+                                <i class="fas fa-circle text-success"></i>
+                            </div>
+                            <span>Active</span>
+                        </td>
+                        <td class="font-weight-bold text-right" id="languagesActiveCount">0</td>
+                    </tr>
+                    <tr>
+                        <td class="d-flex align-items-center">
+                            <div style="font-size: 8px" class="mr-2">
+                                <i class="fas fa-circle text-danger"></i>
+                            </div>
+                            <span>Inactive</span>
+                        </td>
+                        <td class="font-weight-bold text-right" id="languagesInactiveCount">0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Material Languages Table -->
 <div class="card">

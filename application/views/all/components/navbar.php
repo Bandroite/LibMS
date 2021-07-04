@@ -33,7 +33,7 @@
         </ul>
         <ul class="navbar-nav ml-auto">
 
-            <?php if($this->session->has_userdata('userType')) { ?>
+            <?php if($this->session->userType === 'Student' || $this->session->userType === 'Staff'): ?>
                 <li class="nav-item">
                     <div class="dropdown">
                         <div class="nav-link" data-toggle="dropdown" role="button">John</div>
@@ -96,7 +96,41 @@
                         </div>
                     </div>
                 </li>
-            <?php } else { ?>
+            <?php elseif($this->session->userType === "Librarian"): ?>
+                <li class="nav-item dropdown">
+                    <a 
+                        class="nav-link dropdown-toggle" 
+                        id="userDropdown" 
+                        href="#" 
+                        role="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                    >
+                        <i class="fas fa-user fa-fw mr-1"></i>
+                        <span id="librarianFullName"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="<?= base_url() ?>admin">
+                            <i class="fas fa-tachometer-alt dropdown-icon-item"></i>
+                            <span>Dashboard</span>                        
+                        </a> 
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="">
+                            <i class="fas fa-user-tie dropdown-icon-item"></i>
+                            <span>Profile</span>                        
+                        </a> 
+                        <a class="dropdown-item" href="">
+                            <i class="fas fa-user-cog dropdown-icon-item"></i>
+                            <span>Account Settings</span>                        
+                        </a> 
+                        <a class="dropdown-item" href="<?= base_url() ?>admin/logout">
+                            <i class="fas fa-sign-out-alt dropdown-icon-item"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </li>
+            <?php else: ?>
                 <li class="nav-item dropdown mr-0 mr-md-1 mb-1 mb-md-0">
                     <a class="btn btn-muted btn-block dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>Register</span>
@@ -109,7 +143,7 @@
                 <li class="nav-item">
                     <a class="btn btn-primary btn-block" href="<?= base_url() ?>login" tabindex="-1" aria-disabled="true">Login</a>
                 </li>
-            <?php } ?>
+            <?php endif ?>
         </ul>
     </div>
 </nav>

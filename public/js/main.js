@@ -12,6 +12,8 @@ $(() => {
     // Remove the preloader whe page has been loaded
     $('body').removeClass('modal-open');
     $('#preloader').removeClass('d-flex').addClass('d-none');
+    
+    bsCustomFileInput.init();
 });
 
 

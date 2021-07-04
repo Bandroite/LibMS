@@ -7,7 +7,8 @@
  */
 
 $(() => {
-    loadBuildingsDT()
+    loadBuildingsDT();
+    buildings_countAJAX();
 })
 
 /**
@@ -16,6 +17,8 @@ $(() => {
  * ===============================================================================
  */
 
+
+// Load Buidlings DataTable
 loadBuildingsDT = () => {
     const dt = $('#buildingsDT');
     if(dt.length){
@@ -36,10 +39,30 @@ loadBuildingsDT = () => {
             },
             columns: [
                 {
-                    data: 'buildingName'
+                    data: null,
+                    render: data => {
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                                <div>${ data.buildingName }</div>
+                            </div>
+                        `
+                    }
                 },
                 {
-                    data: 'location'
+                    data: null,
+                    render: data => {
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>${ data.location }</div>
+                            </div>
+                        `
+                    }
                 },
                 {
                     data: null,
@@ -160,18 +183,21 @@ add_buildingAJAX = () => {
                 if(result.error) {
                     console.log(result.message)
                     $('#addBuildingModal').modal('hide');
-
                     showAlert('danger','Failed!',result.message);
-
                 } else {
-                    console.log(result);
+
+                    // Hide Modal
                     $('#addBuildingModal').modal('hide');
                     
+                    // Show Alert
                     showAlert('success','Success!',result.message);
 
                     // Refresh data table after add
                     const dt = $('#buildingsDT').DataTable();
                     dt.ajax.reload();
+
+                    // Reload buildings count
+                    buildings_countAJAX();
                 }
             } else {
                 console.log('No result');
@@ -193,6 +219,7 @@ add_buildingAJAX = () => {
  * ===============================================================================
  */
 
+// Edit building
 editBuilding = (buildingID) => {
     $.ajax({
         url: `${ BASE_URL_API }librarian/buildings/${buildingID}`,
@@ -231,8 +258,7 @@ editBuilding = (buildingID) => {
     })
 }
 
-// Edit Building From Validation
-
+// Validate Edit Building Form
 $('#editBuildingForm').validate(validateOptions({
     rules: {
         buildingName: {
@@ -259,7 +285,7 @@ $('#editBuildingForm').validate(validateOptions({
     submitHandler: () => update_buildingAJAX()
 }))
 
-
+// Update Building AJAX
 update_buildingAJAX = () => {
     // Get values from form to rawData
     const rawData = new FormData($('#editBuildingForm')[0]);
@@ -310,12 +336,14 @@ update_buildingAJAX = () => {
     })
 }
 
+
 /**
  * ===============================================================================
  * REMOVE BUILDING AJAX
  * ===============================================================================
  */
 
+// Remove Building
 removeBuilding = (buildingID) => {
     setFormValues('#removeBuildingForm',[
         {
@@ -327,12 +355,14 @@ removeBuilding = (buildingID) => {
     $('#removeBuildingModal').modal('show')
 }
 
+// Validate Remove Building Form
 $('#removeBuildingForm').validate(validateOptions({
     rules: {},
     messages: {},
     submitHandler: () => delete_buildingAJAX()
 }))
 
+// Delete building AJAX
 delete_buildingAJAX = () => {
 
     // Get values from form to rawData
@@ -351,10 +381,14 @@ delete_buildingAJAX = () => {
                 const dt = $('#buildingsDT').DataTable();
                 dt.ajax.reload();
                 
+                // Show success alert
                 showAlert('success','Success!','Record has been deleted');
 
                 // Hide model after delete
                 $('#removeBuildingModal').modal('hide');
+
+                // Reload buildings count
+                buildings_countAJAX();
             } else {
                 console.log('No result');
             }
@@ -365,4 +399,34 @@ delete_buildingAJAX = () => {
         $('#removeBuildingModal').modal('hide');
         showAlert('danger','Failed','Cannot delete this record!');
     })
+}
+
+
+/**
+ * ===============================================================================
+ * BUILDINGS COUNT AJAX
+ * ===============================================================================
+ */
+
+buildings_countAJAX = () => {
+    if($('#buildingsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/buildings/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => {
+                if(result) {
+                    const buildingsCount = result.count;
+                    $('#buildingsTotalCount').html(buildingsCount.total);
+                    $('#buildingsActiveCount').html(buildingsCount.active);
+                    $('#buildingsInactiveCount').html(buildingsCount.inactive);
+                } else {
+                    console.log('No result was found');
+                }
+            }
+        })
+        .fail(() => {
+            console.error('There was an error in getting room count');
+        });
+    }
 }

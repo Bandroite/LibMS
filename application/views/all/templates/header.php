@@ -51,6 +51,12 @@
     <!-- jQuery Validation -->
     <script src="<?= base_url() ?>node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
 
+    <!-- Moment JS -->
+    <script src="<?= base_url() ?>node_modules/moment/min/moment.min.js"></script>
+
+    <!-- Bootstrap Custom File Input -->
+    <script src="<?= base_url() ?>node_modules/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+
     <!-- 
     | =======================================================================================
     | CUSTOM SCRIPTS

@@ -6,7 +6,7 @@
 <!-- Show Alert -->
 <div id="alertContainer"></div>
 
-<form id="addMaterialsForm">
+<form id="addMaterialForm">
 
     <!-- Material Details -->
     <div class="card mb-4">
@@ -23,15 +23,19 @@
                     <label for="image">Upload an image</label>
 
                     <!-- Material image -->
-                    <div class="flex-center mb-2">
-                        <div class="bg-muted flex-center text-secondary rounded-lg" style="width: 18rem; height: 25rem">
-                            <span>Material image will display here</span>
+                    <div class="d-flex justify-content-center mb-2">
+                        <div class="material-img-preview" id="materialImgContainer">
+                            <div class="bg-muted flex-center text-secondary rounded-lg" style="width: 18rem; height: 25rem">
+                                <span>Material image will display here</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image">
-                        <label class="custom-file-label" for="image">Choose file</label>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="uploadMaterialImg">
+                            <label class="custom-file-label" for="uploadMaterialImg">Choose file</label>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -102,14 +106,16 @@
 
                     <!-- Language Field -->
                     <div class="form-group">
-                        <label for="language">Language</label>
-                        <input 
-                            type="text" 
-                            class="form-control"
-                            id="language"
-                            name="language"
-                            placeholder="Enter language here"
-                        >
+                        <label for="languageForAdd">Language</label>
+                        <select 
+                            name="language" 
+                            id="languageForAdd" 
+                            class="selectpicker form-control border"
+                            data-style="form-control"
+                            data-live-search="true"
+                            data-size="5"
+                            title="Select language here"
+                        ></select>
                     </div>
                     
                     <!-- Format Field -->
@@ -276,72 +282,48 @@
                 <!-- Building -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="building">Building</label>
+                        <label for="buildingForAddMaterial">Building</label>
                         <select 
                             name="building" 
-                            id="building" 
+                            id="buildingForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
                             data-size="5"
                             title="Select building here"
-                        >
-                            <option value="Building1">Building1</option>
-                            <option value="Building1">Building1</option>
-                            <option value="Building1">Building1</option>
-                            <option value="Building1">Building1</option>
-                            <option value="Building1">Building1</option>
-                            <option value="Building1">Building1</option>
-                            <option value="Building1">Building1</option>
-                        </select>
+                        ></select>
                     </div>
                 </div>
 
                 <!-- Room -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="room">Room</label>
+                        <label for="roomForAddMaterial">Room</label>
                         <select 
                             name="room" 
-                            id="room" 
+                            id="roomForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
                             data-size="5"
                             title="Select room here"
-                        >
-                            <option value="Room1">Room1</option>
-                            <option value="Room1">Room1</option>
-                            <option value="Room1">Room1</option>
-                            <option value="Room1">Room1</option>
-                            <option value="Room1">Room1</option>
-                            <option value="Room1">Room1</option>
-                            <option value="Room1">Room1</option>
-                        </select>
+                        ></select>
                     </div>
                 </div>
 
                 <!-- Shelf -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="shelf">Shelf</label>
+                        <label for="shelfForAddMaterial">Shelf</label>
                         <select 
                             name="shelf" 
-                            id="shelf" 
+                            id="shelfForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
                             data-size="5"
                             title="Select shelf here"
-                        >
-                            <option value="Shelf1">Shelf1</option>
-                            <option value="Shelf1">Shelf1</option>
-                            <option value="Shelf1">Shelf1</option>
-                            <option value="Shelf1">Shelf1</option>
-                            <option value="Shelf1">Shelf1</option>
-                            <option value="Shelf1">Shelf1</option>
-                            <option value="Shelf1">Shelf1</option>
-                        </select>
+                        ></select>
                     </div>
                 </div>
             </div>
