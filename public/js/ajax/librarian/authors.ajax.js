@@ -312,6 +312,72 @@ update_authorAJAX = () => {
     })
 }
 
+
+/**
+ * ===============================================================================
+ * REMOVE AUTHORS AJAX
+ * ===============================================================================
+ */
+
+// Remove Author
+removeAuthor = (authorID) => {
+    setFormValues('#removeAuthorForm',[
+        {
+            name: 'authorID',
+            value: authorID
+        }
+    ]);
+
+    $('#removeAuthorModal').modal('show')
+}
+
+// Validate Remove Author Form
+$('#removeAuthorForm').validate(validateOptions({
+    rules: {},
+    messages: {},
+    submitHandler: () => delete_authorAJAX()
+}))
+
+// Delete Author AJAX
+delete_authorAJAX = () => {
+
+    // Get values from form to rawData
+    const rawData = new FormData($('#removeAuthorForm')[0]);
+
+    const authorID = rawData.get('authorID')
+
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/authors/${authorID}`,
+        type: 'DELETE',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+                // Refresh data table after delete
+                const dt = $('#authorsDT').DataTable();
+                dt.ajax.reload();
+                
+                // Show success alert
+                showAlert('success','Success!','Record has been deleted');
+
+                // Hide model after delete
+                $('#removeAuthorModal').modal('hide');
+
+                // Reload authors count
+                authors_countAJAX();
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        // Hide model after delete
+        $('#removeAuthorModal').modal('hide');
+        showAlert('danger','Failed','Cannot delete this record!');
+    })
+}
+
+
 /**
  * ===============================================================================
  * AUTHORS COUNT

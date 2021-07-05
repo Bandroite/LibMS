@@ -96,13 +96,21 @@
 
                                 <!-- User Dropdown Menu -->
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-item" data-toggle="tooltip" data-target="#">
+                                    <div 
+                                        class="dropdown-item"
+                                        data-toggle="modal"
+                                        data-target="#editPublicationCountryModal"
+                                    >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
                                     </div>
-                                    <div class="dropdown-item" data-toggle="tooltip" data-target="#">
+                                    <div 
+                                        class="dropdown-item"
+                                        data-toggle="modal"
+                                        data-target="#removePublicationCountryModal"
+                                    >
                                         <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Delete</span>
+                                        <span>Remove</span>
                                     </div>
                                 </div>
                             </div>

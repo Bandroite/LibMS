@@ -175,7 +175,9 @@ class Admin extends CI_Controller {
 
     // Publication Countries
 	public function publication_countries() {
-        $this->load_views('Publication Countries', 'Publication Countries', [['publication_countries']]);
+        $this->load_views('Publication Countries', 'Publication Countries', [
+            ['components/modals/publication_countries_modals'],
+            ['publication_countries']]);
 	}
 
     // Languages

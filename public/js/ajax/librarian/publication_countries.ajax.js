@@ -7,7 +7,7 @@
  */
 
 $(() => {
-	loadPublication_countriesDT();
+	loadPublicationCountriesDT();
     publication_countries_countAJAX();
 });
 
@@ -18,7 +18,7 @@ $(() => {
  */
 
 // Load publication countries DataTable
-loadPublication_countriesDT = () => {
+loadPublicationCountriesDT = () => {
 	const dt = $("#publicationCountriesDT");
 	if (dt.length) {
 		dt.DataTable({
@@ -73,14 +73,14 @@ loadPublication_countriesDT = () => {
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "editPublication_country('${data.pubCountryID}')"
+                                        onclick = "editPublicationCountry('${data.pubCountryID}')"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
                                     </div>
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "removePublication_country('${data.pubCountryID}')"
+                                        onclick = "removePublicationCountry('${data.pubCountryID}')"
                                     >
                                         <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
                                         <span>Remove</span>
@@ -162,7 +162,7 @@ add_publication_countryAJAX = () => {
 					showAlert("success", "Success!", result.message);
 
 					// Refresh data table after add
-					const dt = $("#publicationCountryDT").DataTable();
+					const dt = $("#publicationCountriesDT").DataTable();
 					dt.ajax.reload();
 				}
 			} else {
@@ -184,7 +184,7 @@ add_publication_countryAJAX = () => {
  */
 
 // Edit Publication Country
-editPublicationCountry = (authorID) => {
+editPublicationCountry = (pubCountryID) => {
 	$.ajax({
 		url: `${BASE_URL_API}librarian/publication_countries/${pubCountryID}`,
 		type: "GET",
@@ -196,7 +196,7 @@ editPublicationCountry = (authorID) => {
 
 				setFormValues("#editPublicationCountryForm", [
 					{
-						name: "pubcountryID",
+						name: "pubCountryID",
 						value: data.pubCountryID,
 					},
 					{
@@ -236,9 +236,124 @@ $("#editPublicationCountryForm").validate(
 				required: "Status is required",
 			},
 		},
-		submitHandler: () => update_publication_country(),
+		submitHandler: () => update_publication_countryAJAX(),
 	})
 );
+
+// Update Publication Country AJAX
+update_publication_countryAJAX = () => {
+    // Get values from form to rawData
+    const rawData = new FormData($('#editPublicationCountryForm')[0]);
+
+    // Get data from rawData
+    data = {
+        country: rawData.get("country"),
+		status: rawData.get("status"),
+    }
+
+    const pubCountryID = rawData.get('pubCountryID')
+
+    // Edit Publication Country via AJAX
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/publication_countries/${pubCountryID}`,
+        type: 'PUT',
+        headers: AJAX_HEADERS,
+        data: data,
+        dataType: 'json',
+        success: (result) => {
+            if(result) {
+                if(result.error) {
+                    console.log(result.message)
+                    $('#editPublicationCountryModal').modal('hide');
+
+                    showAlert('danger','Failed!',result.message);
+
+                } else {
+                    console.log(result);
+                    $('#editPublicationCountryModal').modal('hide');
+                    
+                    showAlert('success','Success!','Record has been updated');
+
+                    // Refresh data table after add
+                    const dt = $('#publicationCountriesDT').DataTable();
+                    dt.ajax.reload();
+                }
+            } else {
+                console.log('No result');
+            }
+        },
+        error: (err) => {
+            const response = err.responseJSON
+            $('#editPublicationCountryModal').modal('hide');
+            showAlert('danger','Failed!',response.message);
+        }
+    })
+}
+
+/**
+ * ===============================================================================
+ * REMOVE BUILDING AJAX
+ * ===============================================================================
+ */
+
+// Remove Building
+removePublicationCountry = (pubCountryID) => {
+    setFormValues('#removePublicationCountryForm',[
+        {
+            name: 'pubCountryID',
+            value: pubCountryID
+        }
+    ]);
+
+    $('#removePublicationCountryModal').modal('show')
+}
+
+// Validate Remove Building Form
+$('#removePublicationCountryForm').validate(validateOptions({
+    rules: {},
+    messages: {},
+    submitHandler: () => delete_publication_countryAJAX()
+}))
+
+// Delete Publication Country AJAX
+delete_publication_countryAJAX = () => {
+
+    // Get values from form to rawData
+    const rawData = new FormData($('#removePublicationCountryForm')[0]);
+
+    const pubCountryID = rawData.get('pubCountryID')
+
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/publication_countries/${pubCountryID}`,
+        type: 'DELETE',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+                // Refresh data table after delete
+                const dt = $('#publicationCountriesDT').DataTable();
+                dt.ajax.reload();
+                
+                // Show success alert
+                showAlert('success','Success!','Record has been deleted');
+
+                // Hide model after delete
+                $('#removePublicationCountryModal').modal('hide');
+
+                // Reload countries count
+                publication_countries_countAJAX();
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        // Hide model after delete
+        $('#removePublicationCountryModal').modal('hide');
+        showAlert('danger','Failed','Cannot delete this record!');
+    })
+}
+
 
 /**
  * ===============================================================================
