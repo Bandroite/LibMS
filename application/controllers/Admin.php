@@ -22,15 +22,16 @@ class Admin extends CI_Controller {
     private String $dir = "admin";
 
     private Array $AJAX_Files = [
-        'users',
-        'materials',
-        'material_types',
         'authors',
+        'buildings',
+        'copies',
+        'users',
         'genres',
         'languages',
-        'copies',
+        'materials',
+        'material_types',
+        'publication_countries',
         'publishers',
-        'buildings',
         'rooms',
         'shelves',
     ];
