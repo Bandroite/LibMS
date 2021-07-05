@@ -102,6 +102,70 @@ loadShelvesDT = () => {
     }
 }
 
+/**
+ * ===============================================================================
+ * REMOVE SHELVES AJAX
+ * ===============================================================================
+ */
+
+// Remove Shelf
+removeShelf = (shelfID) => {
+    setFormValues('#removeShelfForm',[
+        {
+            name: 'shelfID',
+            value: shelfID
+        }
+    ]);
+
+    $('#removeShelfModal').modal('show')
+}
+
+// Validate Remove Shelf Form
+$('#removeShelfForm').validate(validateOptions({
+    rules: {},
+    messages: {},
+    submitHandler: () => delete_shelfAJAX()
+}))
+
+// Delete Shelf AJAX
+delete_shelfAJAX = () => {
+
+    // Get values from form to rawData
+    const rawData = new FormData($('#removeShelfForm')[0]);
+
+    const shelfID = rawData.get('shelfID')
+
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/shelves/${shelfID}`,
+        type: 'DELETE',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+                // Refresh data table after delete
+                const dt = $('#shelvesDT').DataTable();
+                dt.ajax.reload();
+                
+                // Show success alert
+                showAlert('success','Success!','Record has been deleted');
+
+                // Hide model after delete
+                $('#removeShelfModal').modal('hide');
+
+                // Reload shelves count
+                shelves_countAJAX();
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        // Hide model after delete
+        $('#removeShelfModal').modal('hide');
+        showAlert('danger','Failed','Cannot delete this record!');
+    })
+}
+
 
 /**
  * ===============================================================================
