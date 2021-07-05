@@ -6,7 +6,7 @@
 <!-- Show Alert -->
 <div id="alertContainer"></div>
 
-<form id="addMaterialForm">
+<form id="addMaterialForm" enctype="multipart/form-data">
 
     <!-- Material Details -->
     <div class="card mb-4">
@@ -31,9 +31,10 @@
                         </div>
                     </div>
 
+                    <!-- File Input for Image -->
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="uploadMaterialImg">
+                            <input type="file" class="custom-file-input" id="uploadMaterialImg" name="materialImg">
                             <label class="custom-file-label" for="uploadMaterialImg">Choose file</label>
                         </div>
                     </div>
@@ -54,15 +55,16 @@
 
                     <!-- Authors -->
                     <div class="form-group">
-                        <label for="authorForAddMaterial">Authors</label>
+                        <label for="authorsForAddMaterial">Authors</label>
                         <select 
                             name="authors" 
-                            id="authorForAddMaterial" 
+                            id="authorsForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
+                            data-header="Select one or more authors here"
                             data-size="5"
-                            title="Select select one or more authors here"
+                            title="Select one or more authors here"
                             multiple
                         ></select>
                     </div>
@@ -71,8 +73,8 @@
                     <div class="form-group">
                         <label for="materialTypeForAddMaterial">Type</label>
                         <select 
-                            name="type" 
-                            id="materialTypeForAddMaterial" 
+                            name="type"
+                            id="materialTypeForAddMaterial"
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -83,20 +85,21 @@
 
                     <!-- Genre -->
                     <div class="form-group">
-                        <label for="genreForAddMaterial">Genres</label>
+                        <label for="genresForAddMaterial">Genres</label>
                         <select 
-                            name="type" 
-                            id="genreForAddMaterial" 
+                            name="genre" 
+                            id="genresForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
                             data-size="5"
-                            title="Select select one or more genres here"
+                            data-header="Select one or more genres here"
+                            title="Select one or more genres here"
                             multiple
                         ></select>
                     </div>
 
-                    <!-- Language Field -->
+                    <!-- Language -->
                     <div class="form-group">
                         <label for="languageForAddMaterial">Language</label>
                         <select 
@@ -110,7 +113,7 @@
                         ></select>
                     </div>
                     
-                    <!-- Format Field -->
+                    <!-- Format -->
                     <div class="form-group">
                         <label for="format">Format</label>
                         <input 
@@ -150,8 +153,8 @@
                             data-style="form-control"
                             title="Select standard type here"
                         >
-                            <option value="Genre1">ISBN</option>
-                            <option value="Genre1">ISSN</option>
+                            <option value="ISBN">ISBN</option>
+                            <option value="ISSN">ISSN</option>
                         </select>
                     </div>
 
@@ -195,7 +198,7 @@
                     <div class="form-group">
                         <label for="publisherForAddMaterial">Publisher</label>
                         <select 
-                            name="type" 
+                            name="publisherName" 
                             id="publisherForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
@@ -220,17 +223,19 @@
                     </div>
                 </div>
 
-                <!-- Publisher Country Field -->
+                <!-- Publication Country Field -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="publishingCountry">Publishing Country</label>
-                        <input 
-                            type="text"
-                            class="form-control"
-                            id="publishingCountry"
-                            name="publishingCountry"
-                            placeholder="Enter publishing country here"
-                        >
+                        <label for="pubCountryForAddMaterial">Publication Country</label>
+                        <select 
+                            name="publisherName" 
+                            id="pubCountryForAddMaterial" 
+                            class="selectpicker form-control border"
+                            data-style="form-control"
+                            data-live-search="true"
+                            data-size="5"
+                            title="Select publisher here"
+                        ></select>
                     </div>
                 </div>
             </div>

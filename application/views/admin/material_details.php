@@ -7,7 +7,7 @@
 <div id="alertContainer"></div>
 
 <!-- Book Details Section -->
-<div class="row mb-4">
+<div class="row mb-4" id="materialDetails">
 
     <!-- Image Subsection -->
     <div class="col-md-4 mb-3 mb-md-0">
@@ -21,9 +21,9 @@
     <!-- Material Details Subsection -->
     <div class="col-md-8">
         <div class="mb-3">
-            <h1>Multimedia Computing</h1>
-            <h5 class="text-secondary mb-1">Educational</h5>
-            <div>Authors: Gerald Friedland, Ramesh Jain</div>
+            <h1 id="title">Multimedia Computing</h1>
+            <h5 id="genre" class="text-secondary mb-1">Educational</h5>
+            <div id="authors">Authors: Gerald Friedland, Ramesh Jain</div>
         </div>
         
         <!-- Tabs -->
@@ -35,7 +35,8 @@
                     class           = "nav-link active" 
                     data-toggle     = "tab" 
                     href            = "#description" 
-                    role            = "tab"  
+                    role            = "tab"
+                    draggable       = "false"
                 >
                     <i class="fas fa-info-circle mr-1"></i>
                     <span>Description</span>
@@ -48,7 +49,8 @@
                     class           = "nav-link" 
                     data-toggle     = "tab" 
                     href            = "#details" 
-                    role            = "tab" 
+                    role            = "tab"
+                    draggable       = "false"
                 >
                     <i class="fas fa-list mr-1"></i>
                     <span>Details</span>
@@ -61,7 +63,8 @@
                     class           = "nav-link" 
                     data-toggle     = "tab" 
                     href            = "#location" 
-                    role            = "tab" 
+                    role            = "tab"
+                    draggable       = "false"
                 >
                     <i class="fas fa-map-marker-alt mr-1"></i>
                     <span>Location</span>
@@ -89,68 +92,64 @@
             >
                 <table class="table">
                     <tr>
-                        <th>ISBN/ISSN</th>
-                        <td>1234-ANBDJS-3435</td>
+                        <th>Standard Number</th>
+                        <td id="standardNumber">1234-ANBDJS-3435</td>
                     </tr>
                     <tr>
                         <th>Authors</th>
-                        <td>
+                        <td id="detailedAuthors">
                             <div>Gerald Friedland</div>
                             <div>Ramesh Jain</div>
                         </td>
                     </tr>
                     <tr>
                         <th>Format</th>
-                        <td>Lorem Format</td>
+                        <td id="format">Lorem Format</td>
                     </tr>
                     <tr>
                         <th>Genre</th>
-                        <td>Educational</td>
+                        <td id="detailedGenres">Educational</td>
                     </tr>
                     <tr>
                         <th>Language</th>
-                        <td>English</td>
+                        <td id="language">English</td>
                     </tr>
                     <tr>
                         <th>Publication</th>
                         <td>
-                            <div>Publication Name</div>
-                            <div>Publication Date</div>
-                            <div>Publication Country</div>
+                            <div id="pubName">Publication Name</div>
+                            <div id="pubDate">Publication Date</div>
+                            <div id="pubCountry">Publication Country</div>
                         </td>
                     </tr>
                     <tr>
                         <th>Edition</th>
                         <td>
-                            <div>Second Edition</div>
-                            <div>1995</div>
+                            <div id="edition">Second Edition</div>
+                            <div id="editionYear">1995</div>
                         </td>
                     </tr>
                     <tr>
                         <th>Series Year</th>
-                        <td>1995</td>
+                        <td id="seriesYear">1995</td>
                     </tr>
                 </table>
             </div>
 
             <!-- Location Pane -->
-            <div 
-                class           = "tab-pane fade" 
-                id              = "location" 
-                role            = "tabpanel"
-            >
+            <div class="tab-pane fade" id="location" role="tabpanel">
                 <table class="table">
                     <tr>
                         <th>Shelf</th>
-                        <td>ROTH-1A-S01</td>
+                        <td id="shelf">ROTH-1A-S01</td>
                     </tr>
                     <tr>
                         <th>Room</th>
-                        <td>ROTH-A1</td>
+                        <td id="room">ROTH-A1</td>
                     </tr>
                     <tr>
                         <th>Building</th>
-                        <td>Roth Bldg.</td>
+                        <td id="building">Roth Bldg.</td>
                     </tr>
                 </table>
             </div>
@@ -158,8 +157,8 @@
 
         <!-- User Actions -->
         <div class="form-group">
-            <a href="<?= base_url() ?>admin/materials" class="btn btn-muted">Close</a>
-            <button class="btn btn-blue">
+            <button type="button" class="btn btn-muted" onclick="history.back()">Close</button>
+            <button class="btn btn-blue" id="editMaterialBtn">
                 <i class="fas fa-edit mr-1"></i>
                 <span>Edit</span>
             </button>

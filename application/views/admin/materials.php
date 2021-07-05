@@ -31,65 +31,19 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="materialsDT">
+            <table class="table w-100 small" id="materialsDT">
                 <thead>
                     <tr>
                         <th>Standard Number</th>
-                        <th>Title</th>
+                        <th>Material</th>
+                        <th>Genres</th>
+                        <th>Language</th>
+                        <th>Publisher</th>
                         <th>Copies</th>
-                        <th>Actions</th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php for($i=0;$i<7;$i++): ?>
-                    <tr>
-                        <td>ISBN xxx-xxxx-xxxx</td>
-                        <td>Life of Juan</td>
-                        <td>3</td>
-                        <td class="text-center">
-                            <div class="dropdown d-inline-block">
-
-                                <!-- Dropdown Toggler -->
-                                <div data-toggle="dropdown">
-                                    <div 
-                                        class       = "btn btn-sm btn-muted"
-                                        data-toggle = "tooltip"
-                                        title       = "More"
-                                    >
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </div>
-                                </div>
-
-                                <!-- User Dropdown Menu -->
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a
-                                        class="dropdown-item"
-                                        href="<?= base_url() ?>admin/materials/1"
-                                    >
-                                        <i class="fas fa-eye dropdown-icon-item text-info"></i>
-                                        <span>View Details</span>
-                                    </a>
-                                    <a 
-                                        class="dropdown-item"
-                                        href="<?= base_url() ?>admin/edit-material/1"
-                                    >
-                                        <i class="fas fa-edit dropdown-icon-item text-blue"></i>
-                                        <span>Edit</span>
-                                    </a>
-                                    <div 
-                                        class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#removeMaterialModal"
-                                    >
-                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Remove</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endfor ?>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>

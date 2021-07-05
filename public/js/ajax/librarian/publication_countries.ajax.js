@@ -8,6 +8,7 @@
 
 $(() => {
 	loadPublication_countriesDT();
+    publication_countries_countAJAX();
 });
 
 /**
@@ -239,3 +240,30 @@ $("#editPublicationCountryForm").validate(
 	})
 );
 
+/**
+ * ===============================================================================
+ * PUBLICATION COUNTRIES COUNT
+ * ===============================================================================
+ */
+
+// Publication countries count AJAX
+publication_countries_countAJAX = () => {
+    if($('#pubCountriesCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/publication_countries/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => {
+                if(result) {
+                    const pubCountriesCount = result.count;
+                    $('#pubCountriesTotalCount').html(pubCountriesCount.total);
+                    $('#pubCountriesActiveCount').html(pubCountriesCount.active);
+                    $('#pubCountriesInactiveCount').html(pubCountriesCount.inactive);
+                } else {
+                    console.log('No result was found');
+                }
+            }
+        })
+        .fail(() => showAlert('danger', 'Error:', 'There was an error in getting room count'));
+    }
+}
