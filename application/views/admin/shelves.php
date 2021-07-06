@@ -61,7 +61,7 @@
             <span>Shelves</span>
         </div>
         <div>
-        <button 
+            <button 
                 type="button" 
                 class="btn btn-sm btn-primary"
                 data-toggle="modal"
@@ -74,7 +74,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="shelvesDT">
+            <table class="table w-100" id="shelvesDT" width="100%">
                 <thead>
                     <tr>
                         <th>Shelf Name</th>
@@ -82,45 +82,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>ROTH-1A-S01</td>
-                        <td>
-                            <div class="badge alert-success text-success p-2 w-100">Active</div>
-                        </td>
-                        <td>
-                        <div class="dropdown d-inline-block">
-                                <div data-toggle="dropdown">
-                                    <div 
-                                        class       = "btn btn-sm btn-muted"
-                                        data-toggle = "tooltip"
-                                        title       = "More"
-                                    >
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </div>
-                                </div>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <div 
-                                        class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#editShelfModal"
-                                    >
-                                        <i class="fas fa-edit dropdown-icon-item text-blue"></i>
-                                        <span>Edit</span>
-                                    </div>
-                                    <div 
-                                        class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#removeShelfModal"
-                                    >
-                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Remove</span>
-                                    </div>
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>

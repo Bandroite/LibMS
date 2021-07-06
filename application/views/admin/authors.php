@@ -75,7 +75,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="authorsDT">
+            <table class="table w-100" id="authorsDT" width="100%">
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -84,46 +84,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Dela Cruz, Juan</td>
-                        <td>
-                            <div class="badge alert-success text-success p-2 w-100">Active</div>
-                        </td>
-                        <td class="text-center">
-                            <div class="dropdown d-inline-block">
-                                <div data-toggle="dropdown">
-                                    <div 
-                                        class       = "btn btn-sm btn-muted"
-                                        data-toggle = "tooltip"
-                                        title       = "More"
-                                    >
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </div>
-                                </div>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <div 
-                                        class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#editAuthorModal"
-                                    >
-                                        <i class="fas fa-edit dropdown-icon-item text-blue"></i>
-                                        <span>Edit</span>
-                                    </div>
-                                    <div 
-                                        class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#removeAuthorModal"
-                                    >
-                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Remove</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>

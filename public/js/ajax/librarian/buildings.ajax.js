@@ -11,12 +11,12 @@ $(() => {
     buildings_countAJAX();
 })
 
+
 /**
  * ===============================================================================
  * GET ALL BUILDINGS AJAX
  * ===============================================================================
  */
-
 
 // Load Buidlings DataTable
 loadBuildingsDT = () => {
@@ -156,7 +156,7 @@ $('#addBuildingForm').validate(validateOptions({
         }
     },
     submitHandler: () => add_buildingAJAX()
-}))
+}));
 
 // Add Building AJAX
 add_buildingAJAX = () => {
@@ -211,6 +211,9 @@ add_buildingAJAX = () => {
     })
     
 }
+
+// When add building modal is hidden, reset form
+$('#addBuildingModal').on('hide.bs.modal', () => $('#addBuildingForm').trigger('reset'))
 
 
 /**

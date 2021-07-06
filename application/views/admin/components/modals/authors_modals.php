@@ -21,7 +21,7 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="authorFirstName"
+                        id="authorFirstNameForAdd"
                         name="authorFirstName"
                         placeholder="Enter first name here"
                     >
@@ -33,7 +33,7 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="authorMiddleName"
+                        id="authorMiddleNameForAdd"
                         name="authorMiddleName"
                         placeholder="Enter middle name here"
                     >
@@ -45,7 +45,7 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="authorLastName"
+                        id="authorLastNameForAdd"
                         name="authorLastName"
                         placeholder="Enter last name here"
                     >
@@ -133,10 +133,9 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="authorFirstName"
+                        id="authorFirstNameForEdit"
                         name="authorFirstName"
                         placeholder="Enter first name here"
-                        value="Martin"
                     >
                 </div>
 
@@ -146,10 +145,9 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="authorMiddleName"
+                        id="authorMiddleNameForEdit"
                         name="authorMiddleName"
                         placeholder="Enter middle name here"
-                        value="Luther"
                     >
                 </div>
 
@@ -159,10 +157,9 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="authorLastName"
+                        id="authorLastNameForEdit"
                         name="authorLastName"
                         placeholder="Enter last name here"
-                        value="King"
                     >
                 </div>
 

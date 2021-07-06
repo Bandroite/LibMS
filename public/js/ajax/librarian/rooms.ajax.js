@@ -133,6 +133,37 @@ loadRoomsDT = () => {
  * ===============================================================================
  */
 
+// When add room modal is shown
+$('#addRoomModal').on('show.bs.modal', () => {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/buildings`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(building => options +=`
+                    <option value="${building.buildingID}">${building.buildingName}</option>
+                `);
+
+                // For add select in add material
+                $('#buildingsForAddRoom').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        $('#addRoomModal').modal('hide');
+        showAlert('danger', 'Error:', 'There was an error while trying to get buildings')
+    })
+});
+
 // Add Room From Validation
 $('#addRoomForm').validate(validateOptions({
     rules: {
@@ -200,6 +231,9 @@ add_roomAJAX = () => {
 
                     // Reload rooms count
                     rooms_countAJAX();
+
+                    // Reset add form
+                    $('#addRoomForm').trigger('reset')
                 }
             } else {
                 console.log('No result');
@@ -214,6 +248,10 @@ add_roomAJAX = () => {
     
 }
 
+// When add room modal is hidden
+$('#addRoomModal').on('hide.bs.modal', () => $('#addRoomForm').trigger('reset'));
+
+
 /**
  * ===============================================================================
  * UPDATE ROOM
@@ -222,6 +260,37 @@ add_roomAJAX = () => {
 
 // Edit Room
 editRoom = (id) => {
+    
+    // Get all buildings for select
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/buildings`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(building => options +=`
+                    <option value="${building.buildingID}">${building.buildingName}</option>
+                `);
+
+                // For edit select in edit material
+                $('#buildingForEditRoom').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        $('#editRoomModal').modal('hide');
+        showAlert('danger', 'Failed!', 'There was an error in getting buildings');
+    });
+
+    // Get the details of room for editing
     $.ajax({
         url: `${ BASE_URL_API }librarian/rooms/${ id }`,
         type: 'GET',
@@ -237,7 +306,7 @@ editRoom = (id) => {
                 $('#roomNameForEdit').val(data.roomName);
 
                 // Set the selected building
-                $('#buildingForEdit').selectpicker('val', `${ data.building.buildingID }`);
+                $('#buildingForEditRoom').selectpicker('val', `${ data.building.buildingID }`);
                 
                 // Set the status of room
                 const radios = $(`input:radio[name="statusForEdit"]`);

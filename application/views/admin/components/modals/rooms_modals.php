@@ -32,7 +32,7 @@
                     <label for="buildingsForAdd">Building</label>
                     <select 
                         name="building" 
-                        id="buildingsForAdd" 
+                        id="buildingsForAddRoom" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"
@@ -123,7 +123,7 @@
                     <label for="buildingForEdit">Building</label>
                     <select 
                         name="building" 
-                        id="buildingForEdit" 
+                        id="buildingForEditRoom" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"

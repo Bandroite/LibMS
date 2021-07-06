@@ -220,9 +220,6 @@ if($('#addMaterialForm').length || $('#editMaterialForm').length) {
                     <option value="${building.buildingID}">${building.buildingName}</option>
                 `);
 
-                // For add select in add building
-                $('#buildingForAdd').html(options).selectpicker('refresh');
-
                 // For add select in add material
                 $('#buildingForAddMaterial').html(options).selectpicker('refresh');
 

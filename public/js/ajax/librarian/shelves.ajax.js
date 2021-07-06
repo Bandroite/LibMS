@@ -102,6 +102,144 @@ loadShelvesDT = () => {
     }
 }
 
+
+/**
+ * ===============================================================================
+ * ADD SHELF
+ * ===============================================================================
+ */
+
+// When add shelf modal is showned
+$('#addShelfModal').on('show.bs.modal', () => {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/buildings`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(building => options +=`
+                    <option value="${building.buildingID}">${building.buildingName}</option>
+                `);
+
+                // For add select in add material
+                $('#buildingsForAddShelf').html(options).selectpicker('refresh');
+
+                // Reset rooms for add select
+                $('#roomsForAddShelf').html('').selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        }
+    });
+});
+
+// When a building is selected
+$('#buildingsForAddShelf').on('change.bs.select', () => {
+    const buildingID = $('#buildingsForAddShelf').val();
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/buildings/${ buildingID }/rooms`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(room => options +=`
+                    <option value="${room.roomID}">${room.roomName}</option>
+                `);
+
+                // For add select in add material
+                $('#roomsForAddShelf').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        }
+    });
+})
+
+// Validate add shelf form
+$('#addShelfForm').validate(validateOptions({
+    rules: {
+        shelf: {
+            required: true
+        },
+        building: {
+            required: true
+        },
+        room: {
+            required: true
+        },
+        status: {
+            required: true
+        }
+    },
+    messages: {
+        shelf: {
+            required: 'Shelf name is required'
+        },
+        building: {
+            required: 'Please select what building the shelf is located'
+        },
+        room: {
+            required: 'Please select what room the shelf is located'
+        },
+        status: {
+            required: 'Please select the status of the shelf'
+        }
+    },
+    submitHandler: () => add_shelfAJAX()
+}));
+
+// Add shelf AJAX
+add_shelfAJAX = () => {
+    const rawData = new FormData($('#addShelfForm')[0]);
+
+    data = {
+        shelfName: rawData.get('shelf'),
+        roomID:    rawData.get('room'),
+        status:    rawData.get('status')
+    }
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/shelves`,
+        type: 'POST',
+        headers: AJAX_HEADERS,
+        data: data,
+        dataType: 'json',
+        success: result => {
+            if(result) {
+                // Hide modal
+                $('#addShelfModal').modal('hide');
+
+                // Show success alert
+                showAlert('success', 'Success!', 'A new shelf has been added');
+
+                // Reload shelves DataTable
+                const dt = $('#shelvesDT').DataTable();
+                dt.ajax.reload();
+
+                // Reload shelves count
+                shelves_countAJAX();
+            }
+        }
+    })
+}
+
+// When add shelf modal is hidden
+$('#addShelfModal').on('show.bs.modal', () => $('#addShelfForm').trigger('reset'));
+
+
+
 /**
  * ===============================================================================
  * REMOVE SHELVES AJAX

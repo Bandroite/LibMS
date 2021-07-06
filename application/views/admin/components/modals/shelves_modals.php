@@ -23,36 +23,14 @@
 
                 <!-- Shelf Name Field -->
                 <div class="form-group">
-                    <label for="shelfName">Shelf Name</label>
+                    <label for="shelf">Shelf Name</label>
                     <input 
                         type="text" 
                         class="form-control"
-                        id="shelfName"
-                        name="shelfName"
+                        id="shelf"
+                        name="shelf"
                         placeholder="Enter shelf here"
                     >
-                </div>
-
-                <!-- Room Field -->
-                <div class="form-group">
-                    <label for="room">Room</label>
-                    <select 
-                        name="room" 
-                        id="room" 
-                        class="selectpicker form-control border"
-                        data-style="form-control"
-                        data-live-search="true"
-                        data-size="5"
-                        title="Select room here"
-                    >
-                        <option value="Room1">Room1</option>
-                        <option value="Room1">Room1</option>
-                        <option value="Room1">Room1</option>
-                        <option value="Room1">Room1</option>
-                        <option value="Room1">Room1</option>
-                        <option value="Room1">Room1</option>
-                        <option value="Room1">Room1</option>
-                    </select>
                 </div>
 
                 <!-- Building Field -->
@@ -60,21 +38,27 @@
                     <label for="building">Building</label>
                     <select 
                         name="building" 
-                        id="building" 
+                        id="buildingsForAddShelf" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"
                         data-size="5"
                         title="Select building here"
-                    >
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                        <option value="Building1">Building1</option>
-                    </select>
+                    ></select>
+                </div>
+
+                <!-- Room Field -->
+                <div class="form-group">
+                    <label for="room">Room</label>
+                    <select 
+                        name="room" 
+                        id="roomsForAddShelf" 
+                        class="selectpicker form-control border"
+                        data-style="form-control"
+                        data-live-search="true"
+                        data-size="5"
+                        title="Select room here"
+                    ></select>
                 </div>
 
                 <!-- Status Field -->
