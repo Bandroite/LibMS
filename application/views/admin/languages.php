@@ -75,7 +75,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="langaugesDT">
+            <table class="table" id="languagesDT">
                 <thead>
                     <tr>
                         <th>Material Languages</th>

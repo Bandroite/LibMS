@@ -7,7 +7,7 @@
     tabindex      = "-1"
 >
     <div class="modal-dialog modal-dialog-centered">
-        <form id="addGenreForm" class="modal-content">
+        <form id="addLanguageForm" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     <i class="fas fa-plus mr-1 text-blue"></i>
@@ -86,7 +86,7 @@
     tabindex      = "-1"
 >
     <div class="modal-dialog modal-dialog-centered">
-        <form id="editLanguageModal" class="modal-content">
+        <form id="editLanguageForm" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     <i class="fas fa-edit mr-1 text-blue"></i>
