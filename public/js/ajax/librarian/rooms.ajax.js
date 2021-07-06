@@ -327,6 +327,70 @@ update_roomAJAX = () => {
     });
 }
 
+/**
+ * ===============================================================================
+ * REMOVE ROOMS AJAX
+ * ===============================================================================
+ */
+
+// Remove Room
+removeRoom = (roomID) => {
+    setFormValues('#removeRoomForm',[
+        {
+            name: 'roomID',
+            value: roomID
+        }
+    ]);
+
+    $('#removeRoomModal').modal('show')
+}
+
+// Validate Remove Room Form
+$('#removeRoomForm').validate(validateOptions({
+    rules: {},
+    messages: {},
+    submitHandler: () => delete_roomAJAX()
+}))
+
+// Delete Room AJAX
+delete_roomAJAX = () => {
+
+    // Get values from form to rawData
+    const rawData = new FormData($('#removeRoomForm')[0]);
+
+    const roomID = rawData.get('roomID')
+
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/rooms/${roomID}`,
+        type: 'DELETE',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+                // Refresh data table after delete
+                const dt = $('#roomsDT').DataTable();
+                dt.ajax.reload();
+                
+                // Show success alert
+                showAlert('success','Success!','Record has been deleted');
+
+                // Hide model after delete
+                $('#removeRoomModal').modal('hide');
+
+                // Reload rooms count
+                rooms_countAJAX();
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        // Hide model after delete
+        $('#removeRoomModal').modal('hide');
+        showAlert('danger','Failed','Cannot delete this record!');
+    })
+}
+
 
 /**
  * ===============================================================================
