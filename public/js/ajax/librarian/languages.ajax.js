@@ -256,7 +256,7 @@ update_languageAJAX = () => {
 
     // Edit Language via AJAX
     $.ajax({
-        url: `${ BASE_URL_API }librarian/language/${languageID}`,
+        url: `${ BASE_URL_API }librarian/languages/${languageID}`,
         type: 'PUT',
         headers: AJAX_HEADERS,
         data: data,
