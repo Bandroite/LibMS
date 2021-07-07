@@ -118,7 +118,6 @@
                         id="typeName"
                         name="typeName"
                         placeholder="Enter material type here"
-                        value="Book"
                     >
                 </div>
 
@@ -128,7 +127,7 @@
                     <div class="form-control">
                         <label 
                             class="custom-control custom-radio custom-control-inline" 
-                            for="activeForAdd"
+                            for="activeForEdit"
                         >
                             <input 
                                 type="radio" 

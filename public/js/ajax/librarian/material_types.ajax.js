@@ -161,6 +161,12 @@ add_material_typeAJAX = () => {
                     
                     showAlert('success','Success!',result.message);
 
+                    //Reset form values
+                    $('#addMaterialTypeForm').trigger("reset");
+
+                    // Reload material types count
+                    material_types_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#materialTypesDT').DataTable();
                     dt.ajax.reload();
@@ -273,6 +279,9 @@ update_material_typeAJAX = () => {
                     $('#editMaterialTypeModal').modal('hide');
                     
                     showAlert('success','Success!','Record has been updated');
+
+                    // Reload material types count
+                    material_types_countAJAX();
 
                     // Refresh data table after add
                     const dt = $('#materialTypesDT').DataTable();
