@@ -13,7 +13,7 @@ $(() => {
 
 /**
  * ===============================================================================
- * GET ALL ROOMS
+ * GET ALL ROOMS AJAX
  * ===============================================================================
  */
 
@@ -107,7 +107,7 @@ loadRoomsDT = () => {
                                     </div>
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "deleteRoom('${data.roomID}')"
+                                        onclick = "removeRoom('${data.roomID}')"
                                     >
                                         <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
                                         <span>Remove</span>

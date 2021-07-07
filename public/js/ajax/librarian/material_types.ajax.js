@@ -7,6 +7,7 @@
  */
 
 $(() => {
+    loadMaterialTypesDT();
     material_types_countAJAX();
 })
 
@@ -16,8 +17,8 @@ $(() => {
  * ===============================================================================
  */
 
-// Load material types DataTable
-loadmaterialTypesDT = () => {
+// Load Material Types DataTable
+loadMaterialTypesDT = () => {
     const dt = $('#materialTypesDT');
     if(dt.length){
         dt.DataTable({
@@ -73,14 +74,14 @@ loadmaterialTypesDT = () => {
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "editmaterialType('${data.typeID}')"
+                                        onclick = "editMaterialType('${data.typeID}')"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
                                     </div>
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "removematerialType('${data.typeID}')"
+                                        onclick = "removeMaterialType('${data.typeID}')"
                                     >
                                         <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
                                         <span>Remove</span>
@@ -99,14 +100,15 @@ loadmaterialTypesDT = () => {
     }
 }
 
+
 /**
  * ===============================================================================
  * ADD MATERIAL TYPES AJAX
  * ===============================================================================
  */
 
-// Add Material Types From Validation
-$('#addmaterialTypeForm').validate(validateOptions({
+// Add Material Type From Validation
+$('#addMaterialTypeForm').validate(validateOptions({
     rules: {
         typeName: {
             required: true
@@ -123,14 +125,14 @@ $('#addmaterialTypeForm').validate(validateOptions({
             required: 'Status is required'
         }
     },
-    submitHandler: () => add_materialTypeAJAX()
+    submitHandler: () => add_material_typeAJAX()
 }))
 
 // Add Material Type AJAX
-add_materialTypeAJAX = () => {
+add_material_typeAJAX = () => {
 
     // Get values from form to rawData
-    const rawData = new FormData($('#addmaterialTypeForm')[0]);
+    const rawData = new FormData($('#addMaterialTypeForm')[0]);
 
     // Get data from rawData
     data = {
@@ -138,7 +140,7 @@ add_materialTypeAJAX = () => {
         status: rawData.get('status'),
     }
 
-    // Add Material type via AJAX
+    // Add Material Type via AJAX
     $.ajax({
         url: `${ BASE_URL_API }librarian/material_types`,
         type: 'POST',
@@ -149,13 +151,13 @@ add_materialTypeAJAX = () => {
             if(result) {
                 if(result.error) {
                     console.log(result.message)
-                    $('#addmaterialTypeModal').modal('hide');
+                    $('#addMaterialTypeModal').modal('hide');
 
                     showAlert('danger','Failed!',result.message);
 
                 } else {
                     console.log(result);
-                    $('#addmaterialTypeModal').modal('hide');
+                    $('#addMaterialTypeModal').modal('hide');
                     
                     showAlert('success','Success!',result.message);
 
@@ -169,11 +171,187 @@ add_materialTypeAJAX = () => {
         },
         error: (err) => {
             const response = err.responseJSON
-            $('#addmaterialTypeModal').modal('hide');
+            $('#addMaterialTypeModal').modal('hide');
             showAlert('danger','Failed!',response.message);
         }
     })
     
+}
+
+/**
+ * ===============================================================================
+ * EDIT MATERIAL TYPES AJAX
+ * ===============================================================================
+ */
+
+// Edit material type
+editMaterialType = (typeID) => {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_types/${typeID}`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result){
+                const data = result.data;
+                console.log(data);
+
+                setFormValues('#editMaterialTypeForm',[
+                    {
+                        name: 'typeID',
+                        value: data.typeID
+                    },
+                    {
+                        name: 'typeName',
+                        value: data.typeName
+                    },
+                    {
+                        name: 'status',
+                        value: data.status
+                    }
+                ])
+                
+                $('#editMaterialTypeModal').modal('show')
+            }
+            else{
+                console.log('No result');
+            }
+        } 
+    })
+}
+
+// Edit Material Type From Validation
+$('#editMaterialTypeForm').validate(validateOptions({
+    rules: {
+        typeName: {
+            required: true
+        },
+        status: {
+            required: true
+        }
+    },
+    messages: {
+        typeName: {
+            required: 'Type Name is required'
+        },
+        status: {
+            required: 'Status is required'
+        }
+    },
+    submitHandler: () => update_material_typeAJAX()
+}))
+
+// Update Material Type AJAX
+update_material_typeAJAX = () => {
+    // Get values from form to rawData
+    const rawData = new FormData($('#editMaterialTypeForm')[0]);
+
+    // Get data from rawData
+    data = {
+        typeName: rawData.get('typeName'),
+        status: rawData.get('status')
+    }
+
+    const typeID = rawData.get('typeID')
+
+    // Edit Material type via AJAX
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_types/${typeID}`,
+        type: 'PUT',
+        headers: AJAX_HEADERS,
+        data: data,
+        dataType: 'json',
+        success: (result) => {
+            if(result) {
+                if(result.error) {
+                    console.log(result.message)
+                    $('#editMaterialTypeModal').modal('hide');
+
+                    showAlert('danger','Failed!',result.message);
+
+                } else {
+                    console.log(result);
+                    $('#editMaterialTypeModal').modal('hide');
+                    
+                    showAlert('success','Success!','Record has been updated');
+
+                    // Refresh data table after add
+                    const dt = $('#materialTypesDT').DataTable();
+                    dt.ajax.reload();
+                }
+            } else {
+                console.log('No result');
+            }
+        },
+        error: (err) => {
+            const response = err.responseJSON
+            $('#editMaterialTypeModal').modal('hide');
+            showAlert('danger','Failed!',response.message);
+        }
+    })
+}
+
+/**
+ * ===============================================================================
+ * REMOVE MATERIAL TYPES AJAX
+ * ===============================================================================
+ */
+
+// Remove Material Type
+removeMaterialType = (typeID) => {
+    setFormValues('#removeMaterialTypeForm',[
+        {
+            name: 'typeID',
+            value: typeID
+        }
+    ]);
+
+    $('#removeMaterialTypeModal').modal('show')
+}
+
+// Validate Remove Material Type Form
+$('#removeMaterialTypeForm').validate(validateOptions({
+    rules: {},
+    messages: {},
+    submitHandler: () => delete_material_typeAJAX()
+}))
+
+// Delete Material Type AJAX
+delete_material_typeAJAX = () => {
+
+    // Get values from form to rawData
+    const rawData = new FormData($('#removeMaterialTypeForm')[0]);
+
+    const typeID = rawData.get('typeID')
+
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_types/${typeID}`,
+        type: 'DELETE',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result) {
+                // Refresh data table after delete
+                const dt = $('#materialTypesDT').DataTable();
+                dt.ajax.reload();
+                
+                // Show success alert
+                showAlert('success','Success!','Record has been deleted');
+
+                // Hide model after delete
+                $('#removeMaterialTypeModal').modal('hide');
+
+                // Reload material types count
+                material_types_countAJAX();
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        // Hide model after delete
+        $('#removeMaterialTypeModal').modal('hide');
+        showAlert('danger','Failed','Cannot delete this record!');
+    })
 }
 
 /**
