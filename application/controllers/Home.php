@@ -127,4 +127,19 @@ class Home extends CI_Controller {
 		$this->load_views('UI', [['_ui']]);
     }
 
+    // Alert
+    public function alert() {
+        if($this->input->is_ajax_request()) {
+            $theme = $this->input->post('theme');
+            $title = $this->input->post('title');
+            $message = $this->input->post('message');
+
+            $this->session->set_flashdata('alert', true);
+            $this->session->set_flashdata('alertTheme', $theme);
+            $this->session->set_flashdata('alertTitle', $title);
+            $this->session->set_flashdata('alertMessage', $message);
+        } else {
+            $this->Auth_model->page_not_found();
+        }
+    }
 }

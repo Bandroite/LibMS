@@ -5,15 +5,33 @@
 ]); ?>
 
 <!-- Show Alert -->
-<div id="alertContainer"></div>
+<div id="alertContainer">
+    
+</div>
 
-<?php $this->load->view('admin/components/summary_card', [
-    'theme' => 'primary',
-    'icon'  => 'book',
-    'title' => 'Number of Materials',
-    'id'    => 'numberOfMaterials',
-    'value' => '234'
-]); ?>
+<!-- Alert -->
+<?php if($this->session->has_userdata('alert')): ?>
+    <div class="alert alert-<?= $this->session->alertTheme ?> alert-dismissible fade show mb-4" role="alert" id="alert">
+        <div><b><?= $this->session->alertTitle ?></b> <?= $this->session->alertMessage ?></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif ?>
+
+<div class="card card-status card-primary mb-4" id="materialsCountContainer">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-between">
+            <div class="card-icon-container alert-primary text-primary">
+                <i class="fas fa-book text-primary"></i>
+            </div>
+            <div class="text-right">
+                <h6 class="m-0">Number of materials</h6>
+                <h2 class="text-primary" id="materialsCount">0</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Materials Table -->
 <div class="card">
@@ -34,8 +52,10 @@
             <table class="table w-100 small" id="materialsDT">
                 <thead>
                     <tr>
+                        <th>Added At (Hidden)</th>
                         <th>Standard Number</th>
                         <th>Material</th>
+                        <th>Authors</th>
                         <th>Genres</th>
                         <th>Language</th>
                         <th>Publisher</th>

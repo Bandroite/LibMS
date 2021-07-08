@@ -7,7 +7,7 @@
  */
 
 $(() => {
-    loadCopiesDT()
+    loadMaterialCopiesDT();
 })
 
 /**
@@ -16,12 +16,15 @@ $(() => {
  * ===============================================================================
  */
 
-loadCopiesDT = () => {
+loadMaterialCopiesDT = () => {
     const dt = $('#copiesDT');
     if(dt.length){
+        const URLParams = location.pathname.split('/');
+        materialID = URLParams[URLParams.length-1];
+
         dt.DataTable({
             ajax: {
-                url: `${ BASE_URL_API }librarian/copies`,
+                url: `${ BASE_URL_API }librarian/materials/${materialID}/copies`,
                 type: 'GET',
                 headers: AJAX_HEADERS,
                 // success: (result) => {
@@ -35,9 +38,14 @@ loadCopiesDT = () => {
                 // }
             },
             columns: [
-                {
-                    data: 'copyNumber'
-                },
+
+                // Added At (hidden for default sort)
+                { data: 'addedAt', visible: false },
+                
+                // Copy Number
+                { data: 'copyNumber' },
+
+                // Status
                 {
                     data: null,
                     render: (data) =>{
@@ -58,6 +66,32 @@ loadCopiesDT = () => {
                         }
                     }
                 },
+                
+                // Copy Number
+                {
+                    data: null,
+                    render: data => {
+                        const addedAt = data.addedAt;
+                        return `
+                            <div>${moment(addedAt).format('MMMM d, YYYY; hh:mm A')}</div>
+                            <div class="small font-italic text-secondary">${moment(addedAt).fromNow()}</div>
+                        `
+                    }
+                },
+
+                // Copy Number
+                {
+                    data: null,
+                    render: data => {
+                        const updatedAt = data.updatedAt;
+                        return `
+                            <div>${moment(updatedAt).format('MMMM d, YYYY; hh:mm A')}</div>
+                            <div class="small font-italic text-secondary">${moment(updatedAt).fromNow()}</div>
+                        `
+                    }
+                },
+
+                // Actions
                 {
                     data: null,
                     class: 'text-center',
@@ -103,9 +137,10 @@ loadCopiesDT = () => {
                 },
             ],
             columnDefs: [{
-                targets: [2],
+                targets: [5],
                 orderable: false,
-            }]
+            }],
+            order: [[0, 'desc']]
         })
     }
 }

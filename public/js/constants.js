@@ -73,6 +73,18 @@ const showAlert = (theme, alertTitle, message) => {
     $("html, body").animate({ scrollTop: 0 }, 500);
 }
 
+// Hide Alert with Delay (Use for Sessioned Alert)
+const hideAlertWithDelay = () => {
+    if($('#alert').length) {
+
+        // Close the alert after 5 seconds
+        setTimeout(() => $('#alert').alert('close'), 5000);
+    
+        // Scroll to top
+        $("html, body").animate({ scrollTop: 0 }, 500);
+    }
+}
+
 // Set Form Values
 const setFormValues = (formElement = '', formFieldNamesAndValues = []) => {
 

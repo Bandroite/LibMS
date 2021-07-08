@@ -1,12 +1,12 @@
 <div class="mb-4">
     <h2 class="mb-0">Edit material</h2>
-    <div class="text-secondary">Edit borrower here by filling up the required fields</div>
+    <div class="text-secondary">Updated the details of material here by filling up the required fields</div>
 </div>
 
 <!-- Show Alert -->
 <div id="alertContainer"></div>
 
-<form id="editMaterialForm">
+<form id="editMaterialForm" enctype="multipart/form-data">
 
     <!-- Material Details -->
     <div class="card mb-4">
@@ -15,6 +15,8 @@
             <span>Material Details</span>
         </div>
         <div class="card-body">
+
+            <!-- Image and Generation Information of Material -->
             <div class="row">
 
                 <!-- Image Field -->
@@ -24,7 +26,7 @@
 
                     <!-- Material image -->
                     <div class="d-flex justify-content-center mb-2">
-                        <div class="material-img-preview" id="materialImgContainer">
+                        <div class="material-img-preview user-select-none" id="materialImgContainer">
                             <div class="bg-muted flex-center text-secondary rounded-lg" style="width: 18rem; height: 25rem">
                                 <span>Material image will display here</span>
                             </div>
@@ -34,11 +36,13 @@
                     <!-- File Input for Image -->
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="uploadMaterialImg">
+                            <input type="file" class="custom-file-input" id="uploadMaterialImg" name="image">
                             <label class="custom-file-label" for="uploadMaterialImg">Choose file</label>
                         </div>
                     </div>
                 </div>
+
+                <!-- General Information -->
                 <div class="col-md-8">
                     
                     <!-- Title Field -->
@@ -73,8 +77,8 @@
                     <div class="form-group">
                         <label for="materialTypeForEditMaterial">Type</label>
                         <select 
-                            name="type" 
-                            id="materialTypeForEditMaterial" 
+                            name="typeID"
+                            id="materialTypeForEditMaterial"
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -87,7 +91,7 @@
                     <div class="form-group">
                         <label for="genresForEditMaterial">Genres</label>
                         <select 
-                            name="genre" 
+                            name="genres" 
                             id="genresForEditMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
@@ -101,10 +105,10 @@
 
                     <!-- Language -->
                     <div class="form-group">
-                        <label for="languageForEditMaterial">Language</label>
+                        <label for="languageForAddMaterial">Language</label>
                         <select 
-                            name="language" 
-                            id="languageForEditMaterial" 
+                            name="languageID" 
+                            id="languageForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -127,9 +131,14 @@
 
                 </div>
             </div>
+
+            <div class="dropdown-divider border-primary mb-4"></div>
             
-            <div class="row my-md-3">
-                <div class="col-md-6">
+            <!-- Standard Number, Type, Volume, and No. of pages -->
+            <div class="form-row">
+
+                <!-- Standard Number and Type -->
+                <div class="col-md-4">
 
                     <!-- Standard Number -->
                     <div class="form-group">
@@ -145,10 +154,10 @@
 
                     <!-- Standard Type -->
                     <div class="form-group">
-                        <label for="standardType">Standard Type</label>
+                        <label for="standardTypeForEditMaterial">Standard Type</label>
                         <select 
-                            name="genre" 
-                            id="genre" 
+                            name="standardType" 
+                            id="standardTypeForEditMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             title="Select standard type here"
@@ -160,7 +169,8 @@
 
                 </div>
 
-                <div class="col-md-6">
+                <!-- Edition and its Year -->
+                <div class="col-md-4">
 
                     <!-- Edition Field -->
                     <div class="form-group">
@@ -189,33 +199,69 @@
                     </div>
 
                 </div>
+                
+                <!-- Volume & No. of Pages -->
+                <div class="col-md-4">
+
+                    <!-- Volume No. -->
+                    <div class="form-group">
+                        <label for="volumeNo">Volume No.</label>
+                        <input 
+                            type="number" 
+                            class="form-control"
+                            id="volumeNo"
+                            name="volumeNo"
+                            min="1"
+                            placeholder="Enter volume no. here"
+                        >
+                    </div>
+                    
+                    <!-- No. of Pages-->
+                    <div class="form-group">
+                        <label for="pageNo">No. of Pages</label>
+                        <input 
+                            type="number" 
+                            class="form-control"
+                            id="pageNo"
+                            name="pageNo"
+                            min="1"
+                            placeholder="Enter no. of pages here"
+                        >
+                    </div>
+
+                </div>
             </div>
 
-            <div class="form-row my-md-3">
+            <div class="dropdown-divider border-primary mb-4"></div>
+            
+            <!-- Publishing Details -->
+            <div class="form-row">
 
                 <!-- Publisher Name Field -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="publisherName">Publisher Name</label>
-                        <input 
-                            type="text"
-                            class="form-control"
-                            id="publisherName"
-                            name="publisherName"
-                            placeholder="Enter publisher name here"
-                        >
+                        <label for="publisherForEditMaterial">Publisher</label>
+                        <select 
+                            name="publisherID" 
+                            id="publisherForEditMaterial" 
+                            class="selectpicker form-control border"
+                            data-style="form-control"
+                            data-live-search="true"
+                            data-size="5"
+                            title="Select publisher here"
+                        ></select>
                     </div>
                 </div>
 
-                <!-- Publisher Year Field -->
+                <!-- Date of Publication Field -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="publisherYear">Publisher Year</label>
+                        <label for="dateOfPublication">Date of Publication</label>
                         <input 
-                            type="text"
+                            type="date"
                             class="form-control"
-                            id="publisherYear"
-                            name="publisherYear"
+                            id="dateOfPublication"
+                            name="dateOfPublication"
                             placeholder="Enter publisher year here"
                         >
                     </div>
@@ -226,7 +272,7 @@
                     <div class="form-group">
                         <label for="pubCountryForEditMaterial">Publication Country</label>
                         <select 
-                            name="publisherName" 
+                            name="pubCountryID" 
                             id="pubCountryForEditMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
@@ -237,6 +283,8 @@
                     </div>
                 </div>
             </div>
+
+            <div class="dropdown-divider border-primary mb-4"></div>
             
             <!-- Series Year Field -->
             <div class="form-group">
@@ -251,6 +299,8 @@
                     placeholder="Enter series year here"
                 >
             </div>
+
+            <div class="dropdown-divider border-primary mb-4"></div>
 
             <!-- Description Field -->
             <div class="form-group">
@@ -279,10 +329,10 @@
                 <!-- Building -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="buildingForEditMaterial">Building</label>
+                        <label for="buildingForAddMaterial">Building</label>
                         <select 
                             name="building" 
-                            id="buildingForEditMaterial" 
+                            id="buildingForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -295,10 +345,10 @@
                 <!-- Room -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="roomForEditMaterial">Room</label>
+                        <label for="roomForAddMaterial">Room</label>
                         <select 
                             name="room" 
-                            id="roomForEditMaterial" 
+                            id="roomForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -311,10 +361,10 @@
                 <!-- Shelf -->
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="shelfForEditMaterial">Shelf</label>
+                        <label for="shelfForAddMaterial">Shelf</label>
                         <select 
-                            name="shelf" 
-                            id="shelfForEditMaterial" 
+                            name="shelfID" 
+                            id="shelfForAddMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -330,9 +380,9 @@
     <!-- User Action -->
     <div class="form-group text-center mb-4">
         <button type="button" class="btn btn-muted" onclick="history.back()">Cancel</button>
-        <button type="submit" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue" id="addMaterialBtn">
             <i class="fas fa-plus mr-1"></i>
-            <span>Save</span>
+            <span>Add</span>
         </button>
     </div>
 </form>

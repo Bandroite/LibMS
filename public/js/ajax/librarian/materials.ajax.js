@@ -8,6 +8,7 @@
 
 $(() => {
     loadMaterialsDT();
+    materials_countAJAX();
 });
 
 /**
@@ -82,6 +83,9 @@ loadMaterialsDT = () => {
             },
             columns: [
 
+                // Date Created (hidden for default sort)
+                { data: 'addedAt', visible: false },
+
                 // Standard Number
                 {
                     data: null,
@@ -109,6 +113,32 @@ loadMaterialsDT = () => {
                     }
                 },
 
+                // Authors
+                {
+                    data: null,
+                    render: data => {
+                        const authors = data.authors;
+
+                        var authorsBlade = `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container">
+                                    <i class="fas fa-users text-primary"></i>
+                                </div>
+                                <div>
+                        `;
+
+                        authors.forEach((author, i) => {
+                            authorsFullName = author.authorFirstName + ' ' + author.authorLastName;
+                            authorsBlade += authorsFullName;
+                            if(i != authors.length-1) authorsBlade += ', ';
+                        });
+
+                        authorsBlade += '</div></div>';
+
+                        return authorsBlade;
+                    }
+                },
+
                 // Genres
                 {
                     data: null,
@@ -127,14 +157,10 @@ loadMaterialsDT = () => {
                 },
 
                 // language
-                {
-                    data: 'language.language'
-                },
+                { data: 'language.language' },
 
                 // Publisher
-                {
-                    data: 'publisher.publisherName'
-                },
+                { data: 'publisher.publisherName' },
 
                 // Copies
                 {
@@ -195,9 +221,10 @@ loadMaterialsDT = () => {
                 },
             ],
             columnDefs: [{
-                targets: [6],
+                targets: [7],
                 orderable: false
-            }]
+            }],
+            order: [[0, 'desc']]
         });
     }
 }
@@ -482,6 +509,9 @@ $('#roomForAddMaterial, #roomForEditMaterial').on('changed.bs.select', () => {
 // Vadlidate add material form
 $('#addMaterialForm').validate(validateOptions({
     rules: {
+        image: {
+            required: true,
+        },
         title: {
             required: true,
         },
@@ -548,6 +578,9 @@ $('#addMaterialForm').validate(validateOptions({
         }
     },
     messages: {
+        image: {
+            required: 'Please select a cover image'
+        },
         title: {
             required: 'Title is required',
         },
@@ -619,7 +652,6 @@ $('#addMaterialForm').validate(validateOptions({
 // Add Material AJAX
 add_materialAJAX = () => {
     const rawData = new FormData($('#addMaterialForm')[0]);
-
     $.ajax({
         url: `${ BASE_URL_API }librarian/materials`,
         type: 'POST',
@@ -631,7 +663,25 @@ add_materialAJAX = () => {
         cache: false,
         success: result => {
             if(result) {
-                console.log('success!')
+                $('#addMaterialBtn').html(`
+                    <div class="px-4">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                `);
+                $('#addMaterialBtn').attr('disabled', true);
+
+                $.ajax({
+                    url: `${ BASE_URL_WEB }alert`,
+                    type: 'POST',
+                    data: {
+                        theme: 'success',
+                        title: 'Success!',
+                        message: 'A new material is added'
+                    },
+                    success: () => location.replace(`${ BASE_URL_WEB }admin/materials`)
+                });
             }
         }
     })
@@ -796,10 +846,41 @@ edit_materialAJAX = () => {
 
 /**
  * ===============================================================================
- * FOR MATERIAL DETAILS
+ * MATERIALS COUNT
  * ===============================================================================
  */
 
+// Materials count AJAX
+materials_countAJAX = () => {
+    if($('#materialsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/materials/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => {
+                if(result) {
+                    const count = result.count;
+
+                    $('#materialsCount').html(count);
+                } else {
+                    console.log('No result was found');
+                }
+            }
+        })
+        .fail(() => {
+            console.error('There was an error in getting room count');
+        });
+    }
+}
+
+
+/**
+ * ===============================================================================
+ * FOR EDIT MATERIAL
+ * ===============================================================================
+ */
+
+// Get details when material details is loaded
 if($('#materialDetails').length) {
     const params = window.location.pathname.split('/');
     const materialID = params[params.length-1];
@@ -822,7 +903,7 @@ if($('#materialDetails').length) {
                         // Render image if exist
                         $('#materialImgContainer').html(`
                             <img 
-                                class="w-100 shadow-lg border rounded-lg" 
+                                class="w-100 border rounded-lg" 
                                 id="image"
                                 src="${ BASE_URL_API }materials/${ data.image }"
                                 draggable="false"
@@ -906,8 +987,49 @@ if($('#materialDetails').length) {
     .fail(() => location.replace(`${ BASE_URL_WEB }page-not-found`));
 }
 
+// When edit material button is clicked
 $('#editMaterialBtn').on('click', () => {
     const params = window.location.pathname.split('/');
     const materialID = params[params.length-1];
     location.assign(`${ BASE_URL_WEB }admin/edit-material/${ materialID }`)
 });
+
+// Get material details when material form is loaded
+if($('#editMaterialForm').length) {
+    const params = window.location.pathname.split('/');
+    const materialID = params[params.length-1];
+
+    $.ajax({
+        url: `${BASE_URL_API}librarian/materials/${materialID}`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                console.log(data);
+
+                $('#title').val(data.title);
+                $('#materialTypeForEditMaterial').selectpicker('val', data.material_type.typeID);
+
+                $('#format').val(data.format);
+                $('#standardNumber').val(data.standardNumber);
+                $('#standardTypeForEditMaterial').selectpicker('val', data.standardType);
+
+                $('#edition').val(data.edition);
+                $('#editionYear').val(moment(data.editionYear).format('YYYY'));
+
+                $('#volumeNo').val(data.volumeNo);
+                $('#pageNo').val(data.pageNo);
+
+                $('#publisherForEditMaterial').selectpicker('val', data.publisher.publisherID);
+                $('#dateOfPublication').val(data.dateOfPublication);
+                $('#pubCountryForEditMaterial').selectpicker('val', data.publication_country.pubCountryID);
+
+                $('#seriesYear').val(moment(data.seriesYear).format('YYYY'));
+
+                $('#description').val(data.description);
+            }
+        }
+    })
+    .fail(() => console.error('There was an error in getting material details'));
+}

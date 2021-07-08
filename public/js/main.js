@@ -9,13 +9,20 @@
 
 $(() => {
 
-    checkServerConnection_AJAX();
+    const livecheck = false;
+
+    if(livecheck) checkServerConnection_AJAX();
 
     // Remove the preloader whe page has been loaded
     $('body').removeClass('modal-open');
     $('#preloader').removeClass('d-flex').addClass('d-none');
     
+    // Initialize bootstrap custom file input
     bsCustomFileInput.init();
+
+    // Always hide alert if exists (for sessioned alert)
+    hideAlertWithDelay();
+
 });
 
 

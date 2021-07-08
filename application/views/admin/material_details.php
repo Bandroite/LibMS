@@ -269,8 +269,11 @@
         <div class="table-responsive">
             <table class="table w-100" id="copiesDT">
                 <thead>
+                    <th>Added at (hidden)</th>
                     <th>Copy Number</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center">Added At</th>
+                    <th class="text-center">Updated At</th>
                     <th class="text-center">Action</th>
                 </thead>
                 <tbody>

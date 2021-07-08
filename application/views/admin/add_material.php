@@ -380,7 +380,7 @@
     <!-- User Action -->
     <div class="form-group text-center mb-4">
         <button type="button" class="btn btn-muted" onclick="history.back()">Cancel</button>
-        <button type="submit" class="btn btn-blue">
+        <button type="submit" class="btn btn-blue" id="addMaterialBtn">
             <i class="fas fa-plus mr-1"></i>
             <span>Add</span>
         </button>
