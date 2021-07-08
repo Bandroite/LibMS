@@ -18,37 +18,46 @@ $(() => {
 
 // When upload material image input is changed (or has input)
 $('#uploadMaterialImg').on('change', (e) => {
-    
-    // Get the file
-    var file = e.target.files[0];
 
-    // Check if file is an image type
-    validImageType = 
-        file.type === 'image/png'  ||
-        file.type === 'image/PNG'  ||
-        file.type === 'image/gif'  ||
-        file.type === 'image/GIF'  ||
-        file.type === 'image/jpg'  ||
-        file.type === 'image/JPG'  ||
-        file.type === 'image/jpeg' ||
-        file.type === 'image/JPEG';
-
-    if(validImageType) {
-
-        // Render the image to an image container if valid image type
-        var x = URL.createObjectURL(file);
-        $('#materialImgContainer').html(`<img id="materialImgPreview">`);
-        $('#materialImgPreview').attr('src', x);
-    } else {
-
-        // Reset the input and the preview if not
+    // Reset the input and the preview if not
+    const resetImagePreview = () => {
         $('#uploadMaterialImg').val('');
         $('#materialImgContainer').html(`
-            <div class="bg-muted flex-center text-secondary rounded-lg" style="width: 18rem; height: 25rem">
+            <div class="bg-muted flex-center text-secondary rounded-lg user-select-none" style="width: 18rem; height: 25rem">
                 <span>Material image will display here</span>
             </div>
         `);
-        showAlert('danger', 'Oops!', 'The file must be an image type');
+    }
+
+    // Check if file input has value
+    if($('#uploadMaterialImg').val()) {
+
+        // Get the file
+        var file = e.target.files[0];
+    
+        // Check if file is an image type
+        validImageType = 
+            file.type === 'image/png'  ||
+            file.type === 'image/PNG'  ||
+            file.type === 'image/gif'  ||
+            file.type === 'image/GIF'  ||
+            file.type === 'image/jpg'  ||
+            file.type === 'image/JPG'  ||
+            file.type === 'image/jpeg' ||
+            file.type === 'image/JPEG';
+    
+        if(validImageType) {
+    
+            // Render the image to an image container if valid image type
+            var x = URL.createObjectURL(file);
+            $('#materialImgContainer').html(`<img id="materialImgPreview">`);
+            $('#materialImgPreview').attr('src', x);
+        } else {
+            resetImagePreview();
+            showAlert('danger', 'Oops!', 'The file must be an image type');
+        }
+    } else {
+        resetImagePreview();
     }
 });
 
@@ -473,116 +482,136 @@ $('#roomForAddMaterial, #roomForEditMaterial').on('changed.bs.select', () => {
 // Vadlidate add material form
 $('#addMaterialForm').validate(validateOptions({
     rules: {
-        // title: {
-        //     required: true,
-        // },
-        // authors: {
-        //     required: true,
-        // },
-        // type: {
-        //     required: true,
-        // },
-        // genre: {
-        //     required: true,
-        // },
-        // language: {
-        //     required: true,
-        // },
-        // format: {
-        //     required: true,
-        // },
-        // standardNumber: {
-        //     required: true,
-        // },
-        // standardType: {
-        //     required: true,
-        // },
-        // edition: {
-        //     required: true,
-        // },
-        // editionYear: {
-        //     required: true,
-        // },
-        // publisherName: {
-        //     required: true,
-        // },
-        // publisherYear: {
-        //     required: true,
-        // },
-        // publishingCountry: {
-        //     required: true
-        // },
-        // seriesYear: {
-        //     required: true,
-        // },
-        // description: {
-        //     required: true,
-        // },
-        // building: {
-        //     required: true,
-        // },
-        // room: {
-        //     required: true,
-        // },
-        // shelf: {
-        //     required: true,
-        // }
+        title: {
+            required: true,
+        },
+        authors: {
+            required: true,
+        },
+        typeID: {
+            required: true,
+        },
+        genres: {
+            required: true,
+        },
+        languageID: {
+            required: true,
+        },
+        format: {
+            required: true,
+        },
+        standardNumber: {
+            required: true,
+        },
+        standardType: {
+            required: true,
+        },
+        edition: {
+            required: true,
+        },
+        editionYear: {
+            required: true,
+            min: 1100,
+            max: 9999,
+        },
+        volumeNo: {
+            required: true,
+        },
+        pageNo: {
+            required: true,
+        },
+        publisherID: {
+            required: true,
+        },
+        dateOfPublication: {
+            required: true,
+        },
+        pubCountryID: {
+            required: true
+        },
+        seriesYear: {
+            required: true,
+            min: 1100,
+            max: 9999,
+        },
+        description: {
+            required: true,
+        },
+        building: {
+            required: true,
+        },
+        room: {
+            required: true,
+        },
+        shelfID: {
+            required: true,
+        }
     },
     messages: {
-        // title: {
-        //     required: 'Title is required',
-        // },
-        // authors: {
-        //     required: 'Please select atleast one author',
-        // },
-        // type: {
-        //     required: 'Please select a type of material',
-        // },
-        // genre: {
-        //     required: 'Please select atleast one genre',
-        // },
-        // language: {
-        //     required: 'Please select a language',
-        // },
-        // format: {
-        //     required: 'Material format is required',
-        // },
-        // standardNumber: {
-        //     required: 'Standard Number is required',
-        // },
-        // standardType: {
-        //     required: 'Please select a standard type',
-        // },
-        // edition: {
-        //     required: 'Edition is required',
-        // },
-        // editionYear: {
-        //     required: 'Edition year is required',
-        // },
-        // publisherName: {
-        //     required: 'Publisher Name is required',
-        // },
-        // publisherYear: {
-        //     required: 'Publisher Year is required',
-        // },
-        // publishingCountry: {
-        //     required: 'Publishing Country is required'
-        // },
-        // seriesYear: {
-        //     required: 'Series year is required',
-        // },
-        // description: {
-        //     required: 'Description is required',
-        // },
-        // building: {
-        //     required: 'Please select a builidng',
-        // },
-        // room: {
-        //     required: 'Please select a room',
-        // },
-        // shelf: {
-        //     required: 'Please select a shelf',
-        // }
+        title: {
+            required: 'Title is required',
+        },
+        authors: {
+            required: 'Please select atleast one author',
+        },
+        typeID: {
+            required: 'Please select the type of material',
+        },
+        genres: {
+            required: 'Please select atleast one genre',
+        },
+        languageID: {
+            required: 'Please select a language',
+        },
+        format: {
+            required: 'Material format is required',
+        },
+        standardNumber: {
+            required: 'Standard number is required',
+        },
+        standardType: {
+            required: 'Please select the standard type',
+        },
+        edition: {
+            required: 'Edition is required',
+        },
+        editionYear: {
+            required: 'Edition year is required',
+            min: 'It must be a valid year', 
+            max: 'It must be a valid year', 
+        },
+        volumeNo: {
+            required: 'Volume number is required',
+        },
+        pageNo: {
+            required: 'Page number is required',
+        },
+        publisherID: {
+            required: 'Please select a publisher',
+        },
+        dateOfPublication: {
+            required: 'Please select the date of publication',
+        },
+        pubCountryID: {
+            required: 'Please select the publication country'
+        },
+        seriesYear: {
+            required: 'Series year is required',
+            min: 'It must be a valid year', 
+            max: 'It must be a valid year', 
+        },
+        description: {
+            required: 'Description is required',
+        },
+        building: {
+            required: 'Please select a building where the material is located',
+        },
+        room: {
+            required: 'Please select the room where the material is located',
+        },
+        shelfID: {
+            required: 'Please select the shelf where the material is located',
+        }
     },
     submitHandler: () => add_materialAJAX()
 }));
@@ -590,28 +619,6 @@ $('#addMaterialForm').validate(validateOptions({
 // Add Material AJAX
 add_materialAJAX = () => {
     const rawData = new FormData($('#addMaterialForm')[0]);
-
-    data = {
-        image:            rawData.get('materialImg'),
-        title:            rawData.get('title'),
-        authors:          $('#authorsForAddMaterial').val(),
-        typeID:           rawData.get('type'),
-        genres:           $('#genresForAddMaterial').val(),
-        languageID:       rawData.get('language'),
-        format:           rawData.get('format'),
-        standardNumber:   rawData.get('standardNumber'),
-        standardType:     rawData.get('standardType'),
-        edition:          rawData.get('edition'),
-        editionYear:      rawData.get('editionYear'),
-        publisherID:      rawData.get('publisher'),
-        publisherYear:    rawData.get('publisherYear'),
-        publisherCountry: rawData.get('publisherCountry'),
-        seriesYear:       rawData.get('seriesYear'),
-        description:      rawData.get('description'),
-        shelfID:          rawData.get('shelf')
-    }
-
-    console.log(data);
 
     $.ajax({
         url: `${ BASE_URL_API }librarian/materials`,
@@ -634,116 +641,128 @@ add_materialAJAX = () => {
 // Vadlidate edit material form
 $('#editMaterialForm').validate(validateOptions({
     rules: {
-        // title: {
-        //     required: true,
-        // },
-        // authors: {
-        //     required: true,
-        // },
-        // type: {
-        //     required: true,
-        // },
-        // genre: {
-        //     required: true,
-        // },
-        // language: {
-        //     required: true,
-        // },
-        // format: {
-        //     required: true,
-        // },
-        // standardNumber: {
-        //     required: true,
-        // },
-        // standardType: {
-        //     required: true,
-        // },
-        // edition: {
-        //     required: true,
-        // },
-        // editionYear: {
-        //     required: true,
-        // },
-        // publisherName: {
-        //     required: true,
-        // },
-        // publisherYear: {
-        //     required: true,
-        // },
-        // publishingCountry: {
-        //     required: true
-        // },
-        // seriesYear: {
-        //     required: true,
-        // },
-        // description: {
-        //     required: true,
-        // },
-        // building: {
-        //     required: true,
-        // },
-        // room: {
-        //     required: true,
-        // },
-        // shelf: {
-        //     required: true,
-        // }
+        title: {
+            required: true,
+        },
+        authors: {
+            required: true,
+        },
+        typeID: {
+            required: true,
+        },
+        genres: {
+            required: true,
+        },
+        languageID: {
+            required: true,
+        },
+        format: {
+            required: true,
+        },
+        standardNumber: {
+            required: true,
+        },
+        standardType: {
+            required: true,
+        },
+        edition: {
+            required: true,
+        },
+        editionYear: {
+            required: true,
+        },
+        volumeNo: {
+            required: true,
+        },
+        pageNo: {
+            required: true,
+        },
+        publisherID: {
+            required: true,
+        },
+        dateOfPublication: {
+            required: true,
+        },
+        pubCountryID: {
+            required: true
+        },
+        seriesYear: {
+            required: true,
+        },
+        description: {
+            required: true,
+        },
+        building: {
+            required: true,
+        },
+        room: {
+            required: true,
+        },
+        shelf: {
+            required: true,
+        }
     },
     messages: {
-        // title: {
-        //     required: 'Title is required',
-        // },
-        // authors: {
-        //     required: 'Please select atleast one author',
-        // },
-        // type: {
-        //     required: 'Please select a type of material',
-        // },
-        // genre: {
-        //     required: 'Please select atleast one genre',
-        // },
-        // language: {
-        //     required: 'Please select a language',
-        // },
-        // format: {
-        //     required: 'Material format is required',
-        // },
-        // standardNumber: {
-        //     required: 'Standard Number is required',
-        // },
-        // standardType: {
-        //     required: 'Please select a standard type',
-        // },
-        // edition: {
-        //     required: 'Edition is required',
-        // },
-        // editionYear: {
-        //     required: 'Edition year is required',
-        // },
-        // publisherName: {
-        //     required: 'Publisher Name is required',
-        // },
-        // publisherYear: {
-        //     required: 'Publisher Year is required',
-        // },
-        // publishingCountry: {
-        //     required: 'Publishing Country is required'
-        // },
-        // seriesYear: {
-        //     required: 'Series year is required',
-        // },
-        // description: {
-        //     required: 'Description is required',
-        // },
-        // building: {
-        //     required: 'Please select a builidng',
-        // },
-        // room: {
-        //     required: 'Please select a room',
-        // },
-        // shelf: {
-        //     required: 'Please select a shelf',
-        // }
+        title: {
+            required: 'Title is required',
+        },
+        authors: {
+            required: 'Please select atleast one author',
+        },
+        typeID: {
+            required: 'Please select the type of material',
+        },
+        genres: {
+            required: 'Please select atleast one genre',
+        },
+        languageID: {
+            required: 'Please select a language',
+        },
+        format: {
+            required: 'Material format is required',
+        },
+        standardNumber: {
+            required: 'Standard number is required',
+        },
+        standardType: {
+            required: 'Please select the standard type',
+        },
+        edition: {
+            required: 'Edition is required',
+        },
+        editionYear: {
+            required: 'Edition year is required',
+        },
+        volumeNo: {
+            required: 'Volume number is required',
+        },
+        pageNo: {
+            required: 'Page number is required',
+        },
+        publisherID: {
+            required: 'Please select a publisher',
+        },
+        dateOfPublication: {
+            required: 'Please select the date of publication',
+        },
+        pubCountryID: {
+            required: 'Please select the publication country'
+        },
+        seriesYear: {
+            required: 'Series year is required',
+        },
+        description: {
+            required: 'Description is required',
+        },
+        building: {
+            required: 'Please select a building where the material is located',
+        },
+        room: {
+            required: 'Please select the room where the material is located',
+        },
+        shelf: {
+            required: 'Please select the shelf where the material is located',
+        }
     },
     submitHandler: () => edit_materialAJAX()
 }));
@@ -795,19 +814,85 @@ if($('#materialDetails').length) {
                 
                 console.log(data);
 
+                // Check if file is existing
+                $.ajax({
+                    url: `${ BASE_URL_API }materials/${ data.image }`,
+                    type: 'HEAD',
+                    success: () => {
+                        // Render image if exist
+                        $('#materialImgContainer').html(`
+                            <img 
+                                class="w-100 shadow-lg border rounded-lg" 
+                                id="image"
+                                src="${ BASE_URL_API }materials/${ data.image }"
+                                draggable="false"
+                            ></img>
+                        `);
+                    },
+                    error: () => {
+                        // Render blank image if not
+                        $('#materialImgContainer').html(`
+                            <div class="bg-muted flex-center text-secondary rounded-lg" style="width: 18rem; height: 25rem">
+                                <span>No image</span>
+                            </div>
+                        `);
+                    }
+                })
+
                 $('#title').html(data.title);
-                $('#description').html(data.description);
+
+                genres = data.genres;
+                var genresBlade = '';
+                var detailedGenresBlade = '';
+                genres.forEach((g, i) => {
+                    genresBlade += g.genre;
+                    if(i !== genres.length-1) genresBlade += ', ';
+                    
+                    detailedGenresBlade += `<div>${ g.genre }</div>`
+                });
+                $('#genres').html(genresBlade);
+                $('#detailedGenres').html(detailedGenresBlade);
+
+                authors = data.authors;
+                var authorsBlade = '';
+                var detailedAuthorsBlade = '';
+                authors.forEach((a, i) => {
+                    authorsFullName = a.authorFirstName + ' ' + a.authorLastName;
+                    authorsBlade += authorsFullName;
+                    if(i !== authors.length-1) authorsBlade += ', ';
+                    
+                    detailedAuthorsBlade += `<div>${ authorsFullName }</div>`
+                });
+                $('#authors').html(authorsBlade);
+                $('#detailedAuthors').html(detailedAuthorsBlade);
+
+                $('#descriptionDetails').html(data.description);
 
                 $('#standardNumber').html(data.standardType + ' ' + data.standardNumber);
                 $('#format').html(data.format);
                 $('#language').html(data.language.language);
 
+                $('#volume').html(data.volumeNo);
+                $('#numOfPages').html(data.pageNo);
+
                 $('#pubName').html(data.publisher.publisherName);
+                $('#pubDate').html(moment(data.dateOfPublication).format('MMMM d, YYYY'));
                 $('#pubCountry').html(data.publication_country.country);
 
-                $('#edition').html(data.edition);
-                $('#editionYear').html(moment(data.editionYear).format("YYYY"));
-                $('#seriesYear').html(moment(data.seriesYear).format("YYYY"));
+                const edition = data.edition;
+                if(edition) {
+                    $('#edition').html(edition);
+                }
+
+                const editionYear = data.editionYear;
+                if(editionYear) {
+                    $('#editionYear').html(moment(editionYear).format("YYYY"));
+                }
+
+                const seriesYear = data.seriesYear;
+                if(seriesYear) {
+                    $('#seriesYear').html(moment(seriesYear).format("YYYY"));
+                }
 
                 $('#shelf').html(data.shelf.shelfName);
                 $('#room').html(data.shelf.room.roomName);

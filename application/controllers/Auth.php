@@ -75,4 +75,9 @@ class Auth extends CI_Controller {
     public function page_not_found() {
         $this->Error_model->page_not_found();
     }
+
+    // 404 Page Not Found
+    public function server_down() {
+        $this->Error_model->server_down();
+    }
 }

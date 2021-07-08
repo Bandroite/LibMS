@@ -55,10 +55,11 @@ $route['translate_uri_dashes'] = TRUE;
 
 
 // Auth Routes
-$route['oAuth']             = 'auth/oAuth';
-$route['logout']            = 'auth/logout';
-$route['forbidden']         = 'auth/forbidden';
-$route['page-not-found']    = 'auth/page-not-found';
+$route['oAuth']          = 'auth/oAuth';
+$route['logout']         = 'auth/logout';
+$route['forbidden']      = 'auth/forbidden';
+$route['page-not-found'] = 'auth/page_not_found';
+$route['server-down']    = 'auth/server_down';
 
 
 // Main Routes

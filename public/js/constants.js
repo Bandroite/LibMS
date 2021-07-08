@@ -70,7 +70,7 @@ const showAlert = (theme, alertTitle, message) => {
     setTimeout(() => $('#alert').alert('close'), 5000);
 
     // Scroll to top
-    window.scrollTo(0, 0);
+    $("html, body").animate({ scrollTop: 0 }, 500);
 }
 
 // Set Form Values

@@ -9,6 +9,8 @@
 
 $(() => {
 
+    checkServerConnection_AJAX();
+
     // Remove the preloader whe page has been loaded
     $('body').removeClass('modal-open');
     $('#preloader').removeClass('d-flex').addClass('d-none');
@@ -32,6 +34,26 @@ $('#sidebarToggle').on('click', (e) => {
 });
 
 // Prevent images to right click
-$('img').bind('contextmenu', (e) => {
-    return false;
-});
+$('img').bind('contextmenu', (e) => { return false });
+
+checkServerConnection_AJAX = () => {
+    const url = location.pathname;
+    const redirectTo500Page = () => {
+        if(url !== '/LibMS/server-down') location.assign(`${ BASE_URL_WEB }server-down`);
+    }
+    setInterval(() => {
+        $.ajax({
+            url: `${ BASE_URL_API }`,
+            type: 'GET',
+            timeout: 1000,
+            success: result => {
+                if(!result.status === 'Connected') {
+                    redirectTo500Page()
+                } else if(result.status === 'Connected' && url === '/LibMS/server-down') {
+                    history.back();
+                }
+            }
+        })
+        .fail(() => redirectTo500Page());
+    }, 1000);
+} 

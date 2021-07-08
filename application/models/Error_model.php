@@ -21,4 +21,14 @@ class Error_model extends CI_Model {
         $this->load->view('all/errors/404');
         $this->load->view('all/templates/footer');
 	}
+
+    // 500: Internal Server Error
+	public function server_down() {
+        set_status_header(500);
+        $this->load->view('all/templates/header', [
+            'title' => '500 Internal Server Error'
+        ]);
+        $this->load->view('all/errors/500');
+        $this->load->view('all/templates/footer');
+	}
 }
