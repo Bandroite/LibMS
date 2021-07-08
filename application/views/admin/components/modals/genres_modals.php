@@ -144,7 +144,7 @@
                             <input 
                                 type="radio" 
                                 id="inactiveForEdit" 
-                                name="genreStatusForAdd" 
+                                name="status" 
                                 class="custom-control-input"
                                 value="Inactive"
                             >

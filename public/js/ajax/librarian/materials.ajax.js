@@ -507,15 +507,15 @@ $('#addMaterialForm').validate(validateOptions({
             required: true,
         },
         edition: {
-            required: true,
+            required: false,
         },
         editionYear: {
-            required: true,
+            required: false,
             min: 1100,
             max: 9999,
         },
         volumeNo: {
-            required: true,
+            required: false,
         },
         pageNo: {
             required: true,
@@ -530,7 +530,7 @@ $('#addMaterialForm').validate(validateOptions({
             required: true
         },
         seriesYear: {
-            required: true,
+            required: false,
             min: 1100,
             max: 9999,
         },
