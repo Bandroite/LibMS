@@ -28,7 +28,7 @@
                                 class="nav-link active" 
                                 id="home-tab" 
                                 data-toggle="tab" 
-                                href="#materialDetails" 
+                                href="#materialDetailsTab" 
                                 role="tab" 
                             >
                                 <i class="fas fa-book mr-1"></i>
@@ -40,7 +40,7 @@
                                 class="nav-link" 
                                 id="home-tab" 
                                 data-toggle="tab" 
-                                href="#borrowerDetails" 
+                                href="#borrowerDetailsTab" 
                                 role="tab" 
                             >
                                 <i class="fas fa-book-reader mr-1"></i>
@@ -53,7 +53,7 @@
                         <!-- Material Details Tab Panel -->
                         <div 
                             class = "tab-pane py-3 fade show active" 
-                            id    = "materialDetails" 
+                            id    = "materialDetailsTab" 
                             role  = "tabpanel" 
                         >
                             <table class="table border-bottom">
@@ -85,7 +85,7 @@
                         <!-- Borrower Details Tab Panel -->
                         <div 
                             class = "tab-pane py-3 fade" 
-                            id    = "borrowerDetails" 
+                            id    = "borrowerDetailsTab" 
                             role  = "tabpanel" 
                         >
                             <table class="table border-bottom">

@@ -231,6 +231,7 @@ loadMaterialsDT = () => {
  */
 
 fetchMaterialDetails_AJAXes = () => {
+
     // Fetch buildings for add and editing rooms and material
     $.ajax({
         url: `${ BASE_URL_API }librarian/buildings-with-rooms-and-shelves`,
@@ -913,6 +914,7 @@ edit_materialAJAX = () => {
 
 // Get details when material details is loaded
 if($('#materialDetails').length) {
+
     const params = window.location.pathname.split('/');
     const materialID = params[params.length-1];
 
@@ -923,8 +925,6 @@ if($('#materialDetails').length) {
         success: (result) => {
             if(result) {
                 const data = result.data
-                
-                console.log(data);
 
                 // Check if file is existing
                 $.ajax({

@@ -30,6 +30,7 @@ class Admin extends CI_Controller {
         'languages',
         'materials',
         'material_types',
+        'material_borrow_records',
         'publication_countries',
         'publishers',
         'rooms',

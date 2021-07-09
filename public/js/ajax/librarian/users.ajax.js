@@ -8,8 +8,6 @@
 
 $(() => {
     find_userAJAX();
-    // console.log(localStorage.getItem('token'));
-    // console.log(localStorage.getItem('userType'));
 });
 
 /**

@@ -315,7 +315,7 @@ $('#removeLanguageForm').validate(validateOptions({
     rules: {},
     messages: {},
     submitHandler: () => delete_languageAJAX()
-}))
+}));
 
 // Delete Language AJAX
 delete_languageAJAX = () => {

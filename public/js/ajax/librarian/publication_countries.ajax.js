@@ -24,17 +24,7 @@ loadPublicationCountriesDT = () => {
 		dt.DataTable({
 			ajax: {
 				url: `${BASE_URL_API}librarian/publication_countries`,
-				type: "GET",
 				headers: AJAX_HEADERS,
-				// success: (result) => {
-				//     if(result){
-				//         const data = result.data;
-				//         console.log(data);
-				//     }
-				//     else{
-				//         console.log('No result');
-				//     }
-				// }
 			},
 			columns: [
 
@@ -320,11 +310,11 @@ update_publication_countryAJAX = () => {
 
 /**
  * ===============================================================================
- * REMOVE BUILDING AJAX
+ * REMOVE PUBLICATION COUNTRY AJAX
  * ===============================================================================
  */
 
-// Remove Building
+// Remove Publication Country
 removePublicationCountry = (pubCountryID) => {
     setFormValues('#removePublicationCountryForm',[
         {
@@ -336,7 +326,7 @@ removePublicationCountry = (pubCountryID) => {
     $('#removePublicationCountryModal').modal('show')
 }
 
-// Validate Remove Building Form
+// Validate Remove Publication Country Form
 $('#removePublicationCountryForm').validate(validateOptions({
     rules: {},
     messages: {},

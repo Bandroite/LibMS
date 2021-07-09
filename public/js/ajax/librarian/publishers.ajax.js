@@ -237,7 +237,7 @@ $('#editPublisherForm').validate(validateOptions({
         }
     },
     submitHandler: () => update_publisherAJAX()
-}))
+}));
 
 // Update Publisher
 update_publisherAJAX = () => {
@@ -319,9 +319,7 @@ delete_publisherAJAX = () => {
 
     // Get values from form to rawData
     const rawData = new FormData($('#removePublisherForm')[0]);
-
     const publisherID = rawData.get('publisherID')
-
 
     $.ajax({
         url: `${ BASE_URL_API }librarian/publishers/${publisherID}`,
@@ -329,10 +327,12 @@ delete_publisherAJAX = () => {
         headers: AJAX_HEADERS,
         success: (result) => {
             if(result) {
+
                 // Refresh data table after delete
                 const dt = $('#publishersDT').DataTable();
                 dt.ajax.reload();
                 
+                // Show success alert
                 showAlert('success','Success!','Record has been deleted');
 
                 // Hide model after delete
@@ -373,8 +373,6 @@ publishers_countAJAX = () => {
                 }
             }
         })
-        .fail(() => {
-            console.error('There was an error in getting publishers count');
-        });
+        .fail(() => console.error('There was an error in getting publishers count'));
     }
 }

@@ -126,7 +126,7 @@ $('#addGenreForm').validate(validateOptions({
         }
     },
     submitHandler: () => add_genreAJAX()
-}))
+}));
 
 // Add Genre AJAX
 add_genreAJAX = () => {
@@ -239,7 +239,7 @@ $('#editGenreForm').validate(validateOptions({
         }
     },
     submitHandler: () => update_genreAJAX()
-}))
+}));
 
 // Update Genre AJAX
 update_genreAJAX = () => {
@@ -324,7 +324,6 @@ delete_genreAJAX = () => {
     const rawData = new FormData($('#removeGenreForm')[0]);
 
     const genreID = rawData.get('genreID')
-
 
     $.ajax({
         url: `${ BASE_URL_API }librarian/genres/${genreID}`,

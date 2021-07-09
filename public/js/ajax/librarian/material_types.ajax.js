@@ -365,11 +365,11 @@ delete_material_typeAJAX = () => {
 
 /**
  * ===============================================================================
- * SHELVES COUNT
+ * MATERIAL TYPES COUNT
  * ===============================================================================
  */
 
-// Shelves count AJAX
+// Material Types count AJAX
 material_types_countAJAX = () => {
     if($('#materialTypesCountContainer').length) {
         $.ajax({

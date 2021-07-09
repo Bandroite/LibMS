@@ -45,8 +45,8 @@
     </div>
 </div>
 
-<!-- Borrowers Lists -->
-<div class="card shadow mb-4">
+<!-- Students and Staffs Table -->
+<div class="card mb-4">
     <div class="card-header flex-h-separated">
         <div>
             <i class="fas fa-book-reader mr-1 text-primary"></i>
@@ -60,46 +60,125 @@
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table id="borrowersDT" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>BorrowerId</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Sex</th>
-                        <th>ContactNo</th>
-                        <th>Course/Year</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php for($i=0;$i<53;$i++): ?>
-                    <tr>
-                        <td>119</td>
-                        <td>jom baron lozada</td>
-                        <td>ilog</td>
-                        <td>Female</td>
-                        <td>0920</td>
-                        <td>BEED</td>
-                        <td class="text-center">
-                            <div class="dropdown">
-                                <div data-toggle="dropdown">
-                                    <div 
-                                        class       = "btn btn-sm btn-muted"
-                                        data-toggle = "tooltip"
-                                        title       = "More" 
-                                    >
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endfor ?>
-                </tbody>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-            </table>
+            <!-- Students Tab -->
+            <li class="nav-item" role="presentation">
+                <a 
+                    class       = "nav-link active" 
+                    id          = "students-tab" 
+                    data-toggle = "tab" 
+                    href        = "#students" 
+                    role        = "tab"
+                >
+                    <i class="fas fa-users mr-1"></i>
+                    <span>Students</span>
+                </a>
+            </li>
+
+            <!-- Staffs Tab -->
+            <li class="nav-item" role="presentation">
+                <a 
+                    class       = "nav-link" 
+                    id          = "staffs-tab" 
+                    data-toggle = "tab" 
+                    href        = "#staffs" 
+                    role        = "tab"
+                >
+                    <i class="fas fa-users mr-1"></i>
+                    <span>Staffs</span>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            
+            <!-- Students Tab Panel -->
+            <div class="tab-pane fade show active py-3" id="students" role="tabpanel">
+
+                <!-- Students Table -->
+                <div class="table-responsive">
+                    <table class="table small" id="studentBorrowersDT">
+                        <thead>
+                            <tr>
+                                <th>Student No.</th>
+                                <th>Student Name</th>
+                                <th>Program, Year/Section</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2018-00001-CM-0</td>
+                                <td>
+                                    <div class="d-flex align-items-baseline">
+                                        <div class="icon-container">
+                                            <i class="fas fa-user text-primary"></i>
+                                        </div>
+                                        <div>Juan Dela Cruz</div>
+                                    </div>
+                                </td>
+                                <td>BSIT 3-1</td>
+                                <td>
+                                    <div class="badge alert-success text-success p-2 w-100">Active</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <div>
+                                            <div class="btn btn-sm btn-muted">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Sections Tab Panel -->
+            <div class="tab-pane fade py-3" id="staffs" role="tabpanel">
+
+                <!-- Staff Table -->
+                <div class="table-responsive">
+                    <table class="table small" id="sectionsDT">
+                        <thead>
+                            <tr>
+                                <th>ID Number</th>
+                                <th>Staff Name</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>STAFFID-00001</td>
+                                <td>
+                                    <div class="d-flex align-items-baseline">
+                                        <div class="icon-container">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div>Juan Dela Cruz</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="badge alert-success text-success p-2 w-100">Active</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <div>
+                                            <div class="btn btn-sm btn-muted">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -10,8 +10,8 @@
 <?php $this->load->view('admin/components/summary_card', [
     'theme' => 'danger',
     'icon'  => 'undo',
-    'title' => 'Returned Books',
-    'id'    => 'returnedBooks',
+    'title' => 'Returned Materials',
+    'id'    => 'returnedMaterials',
     'value' => '234'
 ]); ?>
 
@@ -22,36 +22,58 @@
         <span>List of Returned Books</span>
     </div>
     <div class="card-body">
-    <div class="table-responsive">
-            <table id="materialsBorrowRecordsDT" class="table table-hover" cellspacing="0">
-
+        <div class="table-responsive">
+            <table id="returnedMaterialsDT" class="table small w-100" cellspacing="0" width="100%">
                 <thead>
-                    <tr role="row">
+                    <tr>
                         <th>Standard No.</th>
-                        <th>Title</th>
-                        <th>Type</th>
+                        <th>Material</th>
+                        <th>Copy No.</th>
                         <th>Borrower</th>
-                        <th>Date Borrowed</th>
+                        <th>Borrowed At</th>
                         <th>Due Date</th>
-                        <th>Actions</th>
+                        <th>Status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i=0;$i<50;$i++): ?>
                     
                     <!-- Returned -->
                     <tr>
-                        <td>ISBN 134567364</td>
-                        <td>Life of Juan</td>
-                        <td>History and Geography</td>
-                        <td>John Craig Palacios Nillos</td>
+                        <td>ISBN 99-9999-9999-99-99</td>
                         <td>
-                            <div>March 2, 2021</div>
-                            <div>11:00 AM</div>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container">
+                                    <i class="fas fa-book text-primary"></i>
+                                </div>
+                                <div>
+                                    <div>Life of Juan</div>
+                                    <div class="text-secondary small font-italic">Book</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>COPY-0001</td>
+                        <td>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container">
+                                    <i class="fas fa-user text-primary"></i>
+                                </div>
+                                <div>
+                                    <div>Ricardo Dalisay</div>
+                                    <div class="text-secondary small font-italic">Student</div>
+                                </div>
+                            </div>
                         </td>
                         <td>
-                            <div>March 2, 2021</div>
-                            <div>11:00 AM</div>
+                            <div>Apr. 14, 2021</div>
+                            <div class="small text-secondary font-italic">a few months ago</div>
+                        </td>
+                        <td>
+                            <div>Jun. 20, 2021</div>
+                            <div class="small text-secondary font-italic">a few months ago</div>
+                        </td>
+                        <td>
+                            <div class="badge alert-success text-success p-2 w-100">Returned</div>
                         </td>
                         <td>
                             <div class="dropdown">
@@ -70,17 +92,34 @@
                                         class       = "dropdown-item"
                                         role        = "button"
                                         data-toggle = "modal"
-                                        data-target = "#returnedMaterialDetailsModal"
+                                        data-target = "#borrowedMaterialDetailsModal"
                                     >
-                                        <i class="fas fa-eye dropdown-icon-item text-blue"></i>
+                                        <i class="fas fa-eye dropdown-icon-item text-info"></i>
                                         <span>View details</span>
+                                    </div>
+                                    <div 
+                                        class       = "dropdown-item"
+                                        role        = "button"
+                                        data-toggle = "modal"
+                                        data-target = "#markedAsReturnedModal"
+                                    >
+                                        <i class="fas fa-check dropdown-icon-item text-primary"></i>
+                                        <span>Marked as return</span>
+                                    </div>
+                                    <div 
+                                        class       = "dropdown-item" 
+                                        role        = "button"
+                                        data-toggle = "modal" 
+                                        data-target = "#removeBorrowedRecordModal"
+                                    >
+                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
+                                        <span>Remove</span>
                                     </div>
                                 </div>
                             </div>
                         </td>
                     </tr>
-
-                    <?php endfor ?>
+                    
                 </tbody>
             </table>
         </div>
