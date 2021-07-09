@@ -57,8 +57,6 @@
                         <th>Material</th>
                         <th>Authors</th>
                         <th>Genres</th>
-                        <th>Language</th>
-                        <th>Publisher</th>
                         <th>Copies</th>
                         <th></th>
                     </tr>

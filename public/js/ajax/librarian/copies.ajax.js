@@ -67,7 +67,7 @@ loadMaterialCopiesDT = () => {
                     }
                 },
                 
-                // Copy Number
+                // Added At
                 {
                     data: null,
                     render: data => {
@@ -79,7 +79,7 @@ loadMaterialCopiesDT = () => {
                     }
                 },
 
-                // Copy Number
+                // Updated At
                 {
                     data: null,
                     render: data => {

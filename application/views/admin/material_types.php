@@ -73,7 +73,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="materialTypesDT">
+            <table class="table w-100" id="materialTypesDT" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Material Type</th>

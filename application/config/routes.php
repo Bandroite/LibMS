@@ -68,6 +68,7 @@ $route['advance-search']            = 'home/advance_search';
 $route['about-us']                  = 'home/about_us';
 $route['terms-and-conditions']      = 'home/terms_and_conditions';
 $route['login']                     = 'home/login';
+$route['register/(:any)']           = 'home/register/$1';
 $route['materials/(:any)']          = 'home/materials/$1';
 $route['alert']                     = 'home/alert';
 

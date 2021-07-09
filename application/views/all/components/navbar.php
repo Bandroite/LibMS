@@ -136,8 +136,8 @@
                         <span>Register</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Student</a>
-                        <a class="dropdown-item" href="#">Staff</a>
+                        <a class="dropdown-item" href="<?= base_url() ?>register/student">Student</a>
+                        <a class="dropdown-item" href="<?= base_url() ?>register/staff">Staff</a>
                     </div>
                 </li>
                 <li class="nav-item">

@@ -122,6 +122,22 @@ class Home extends CI_Controller {
             $this->load_views('Login', [['login']]);
     }
 
+    // Register
+    public function register($user) {
+        if($this->session->userType === 'Student' || $this->session->userType === 'Librarian')
+            redirect();
+        else if($this->session->userType === 'Librarian')
+            redirect('admin');
+        else {
+            if($user == 'student')
+                $this->load_views('Register as Student', [['register_student']]);
+            else if($user == 'staff')
+                $this->load_views('Register as Staff', [['register_staff']]);
+            else
+                $this->Error_model->page_not_found();
+        }
+    }
+
     // UI (for testing purposes)
     public function ui() {
 		$this->load_views('UI', [['_ui']]);

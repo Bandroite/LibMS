@@ -17,7 +17,7 @@ $(() => {
  * ===============================================================================
  */
 
-// When upload material image input is changed (or has input)
+// When upload material image input is changed
 $('#uploadMaterialImg').on('change', (e) => {
 
     // Reset the input and the preview if not
@@ -156,12 +156,6 @@ loadMaterialsDT = () => {
                     }
                 },
 
-                // language
-                { data: 'language.language' },
-
-                // Publisher
-                { data: 'publisher.publisherName' },
-
                 // Copies
                 {
                     data: null,
@@ -221,7 +215,7 @@ loadMaterialsDT = () => {
                 },
             ],
             columnDefs: [{
-                targets: [7],
+                targets: [6],
                 orderable: false
             }],
             order: [[0, 'desc']]
@@ -236,9 +230,7 @@ loadMaterialsDT = () => {
  * ===============================================================================
  */
 
-// If add/edit material form is rendered, send AJAX request for inputs
-if($('#addMaterialForm').length || $('#editMaterialForm').length) {
-    
+fetchMaterialDetails_AJAXes = () => {
     // Fetch buildings for add and editing rooms and material
     $.ajax({
         url: `${ BASE_URL_API }librarian/buildings-with-rooms-and-shelves`,
@@ -434,7 +426,10 @@ if($('#addMaterialForm').length || $('#editMaterialForm').length) {
             }
         },
     });
-}
+} 
+
+// If add/edit material form is rendered, send AJAX request for inputs
+if($('#addMaterialForm').length || $('#editMaterialForm').length) fetchMaterialDetails_AJAXes();
 
 // When a building is selected
 $('#buildingForAddMaterial, #buildingForEditMaterial').on('changed.bs.select', () => {
@@ -651,27 +646,35 @@ $('#addMaterialForm').validate(validateOptions({
 
 // Add Material AJAX
 add_materialAJAX = () => {
-    const rawData = new FormData($('#addMaterialForm')[0]);
+
+    // Make the button disabled
+    $('#addMaterialBtn').html(`
+        <div class="px-4">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    `);
+    $('#addMaterialBtn').attr('disabled', true);
+
+    // Get the data from the form
+    const data = new FormData($('#addMaterialForm')[0]);
+
+    // Add material
     $.ajax({
         url: `${ BASE_URL_API }librarian/materials`,
         type: 'POST',
         headers: AJAX_HEADERS,
-        data: rawData,
+        data: data,
         dataType: 'json',
         contentType: false,
         processData: false,
         cache: false,
         success: result => {
             if(result) {
-                $('#addMaterialBtn').html(`
-                    <div class="px-4">
-                        <div class="spinner-border" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                `);
-                $('#addMaterialBtn').attr('disabled', true);
 
+                // Request a temporary sessioned alert
+                // (for next page alerts)
                 $.ajax({
                     url: `${ BASE_URL_WEB }alert`,
                     type: 'POST',
@@ -686,6 +689,65 @@ add_materialAJAX = () => {
         }
     })
     .fail(() => showAlert('danger', 'Error', 'There was an error in reading file'));
+}
+
+// When edit material button is clicked
+$('#editMaterialBtn').on('click', () => {
+    const params = window.location.pathname.split('/');
+    const materialID = params[params.length-1];
+    location.assign(`${ BASE_URL_WEB }admin/edit-material/${ materialID }`)
+});
+
+// Get material details when material form is loaded
+if($('#editMaterialForm').length) {
+    const params = window.location.pathname.split('/');
+    const materialID = params[params.length-1];
+
+    $.ajax({
+        url: `${BASE_URL_API}librarian/materials/${materialID}`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                console.log(data);
+
+                $('#title').val(data.title);
+                
+                const authors = data.authors;
+                let selectedAuthors = []
+                authors.forEach(a => selectedAuthors.push(a.authorID));
+                $('#authorsForEditMaterial').selectpicker('val', selectedAuthors);
+
+                const genres = data.genres;
+                let selectedGenres = []
+                genres.forEach(g => selectedGenres.push(g.genreID));
+                $('#genresForEditMaterial').selectpicker('val', selectedGenres);
+
+                $('#languageForEditMaterial').selectpicker('val', data.language.languageID);
+                $('#materialTypeForEditMaterial').selectpicker('val', data.material_type.typeID);
+                
+                $('#format').val(data.format);
+                $('#standardNumber').val(data.standardNumber);
+                $('#standardTypeForEditMaterial').selectpicker('val', data.standardType);
+
+                $('#edition').val(data.edition);
+                $('#editionYear').val(moment(data.editionYear).format('YYYY'));
+
+                $('#volumeNo').val(data.volumeNo);
+                $('#pageNo').val(data.pageNo);
+
+                $('#publisherForEditMaterial').selectpicker('val', data.publisher.publisherID);
+                $('#dateOfPublication').val(data.dateOfPublication);
+                $('#pubCountryForEditMaterial').selectpicker('val', data.publication_country.pubCountryID);
+
+                $('#seriesYear').val(moment(data.seriesYear).format('YYYY'));
+
+                $('#description').val(data.description);
+            }
+        }
+    })
+    .fail(() => console.error('There was an error in getting material details'));
 }
 
 // Vadlidate edit material form
@@ -822,61 +884,30 @@ edit_materialAJAX = () => {
     const rawData = new FormData($('#addMaterialForm')[0]);
 
     data = {
-        title:              rawData.get('title'),
-        authors:            $('#authorsForAddMaterial').val(),
-        typeID:             rawData.get('type'),
-        genres:             $('#genresForAddMaterial').val(),
-        languageID:         rawData.get('language'),
-        format:             rawData.get('format'),
-        standardNumber:     rawData.get('standardNumber'),
-        standardType:       rawData.get('standardType'),
-        edition:            rawData.get('edition'),
-        editionYear:        rawData.get('editionYear'),
-        publisherID:        rawData.get('publisher'),
-        publisherYear:      rawData.get('publisherYear'),
-        publisherCountry:   rawData.get('publisherCountry'),
-        seriesYear:         rawData.get('seriesYear'),
-        description:        rawData.get('description'),
-        shelfID:            rawData.get('shelf')
+        title:            rawData.get('title'),
+        authors:          $('#authorsForAddMaterial').val(),
+        typeID:           rawData.get('type'),
+        genres:           $('#genresForAddMaterial').val(),
+        languageID:       rawData.get('language'),
+        format:           rawData.get('format'),
+        standardNumber:   rawData.get('standardNumber'),
+        standardType:     rawData.get('standardType'),
+        edition:          rawData.get('edition'),
+        editionYear:      rawData.get('editionYear'),
+        publisherID:      rawData.get('publisher'),
+        publisherYear:    rawData.get('publisherYear'),
+        publisherCountry: rawData.get('publisherCountry'),
+        seriesYear:       rawData.get('seriesYear'),
+        description:      rawData.get('description'),
+        shelfID:          rawData.get('shelf')
     }
 
     console.log(data);
 }
 
-
 /**
  * ===============================================================================
- * MATERIALS COUNT
- * ===============================================================================
- */
-
-// Materials count AJAX
-materials_countAJAX = () => {
-    if($('#materialsCountContainer').length) {
-        $.ajax({
-            url: `${ BASE_URL_API }librarian/materials/count`,
-            type: 'GET',
-            headers: AJAX_HEADERS,
-            success: result => {
-                if(result) {
-                    const count = result.count;
-
-                    $('#materialsCount').html(count);
-                } else {
-                    console.log('No result was found');
-                }
-            }
-        })
-        .fail(() => {
-            console.error('There was an error in getting room count');
-        });
-    }
-}
-
-
-/**
- * ===============================================================================
- * FOR EDIT MATERIAL
+ * GET MATERIAl DETAILS
  * ===============================================================================
  */
 
@@ -920,20 +951,22 @@ if($('#materialDetails').length) {
                     }
                 })
 
+                // Get title
                 $('#title').html(data.title);
-
+                
+                // Get genres
                 genres = data.genres;
                 var genresBlade = '';
                 var detailedGenresBlade = '';
                 genres.forEach((g, i) => {
                     genresBlade += g.genre;
                     if(i !== genres.length-1) genresBlade += ', ';
-                    
                     detailedGenresBlade += `<div>${ g.genre }</div>`
                 });
                 $('#genres').html(genresBlade);
                 $('#detailedGenres').html(detailedGenresBlade);
 
+                // Get authors
                 authors = data.authors;
                 var authorsBlade = '';
                 var detailedAuthorsBlade = '';
@@ -941,40 +974,34 @@ if($('#materialDetails').length) {
                     authorsFullName = a.authorFirstName + ' ' + a.authorLastName;
                     authorsBlade += authorsFullName;
                     if(i !== authors.length-1) authorsBlade += ', ';
-                    
                     detailedAuthorsBlade += `<div>${ authorsFullName }</div>`
                 });
                 $('#authors').html(authorsBlade);
                 $('#detailedAuthors').html(detailedAuthorsBlade);
 
+                // Get Description
                 $('#descriptionDetails').html(data.description);
 
+                // Get Material Details
                 $('#standardNumber').html(data.standardType + ' ' + data.standardNumber);
                 $('#format').html(data.format);
                 $('#language').html(data.language.language);
-
                 $('#volume').html(data.volumeNo);
                 $('#numOfPages').html(data.pageNo);
-
                 $('#pubName').html(data.publisher.publisherName);
                 $('#pubDate').html(moment(data.dateOfPublication).format('MMMM d, YYYY'));
                 $('#pubCountry').html(data.publication_country.country);
 
                 const edition = data.edition;
-                if(edition) {
-                    $('#edition').html(edition);
-                }
+                if(edition) $('#edition').html(edition);
 
                 const editionYear = data.editionYear;
-                if(editionYear) {
-                    $('#editionYear').html(moment(editionYear).format("YYYY"));
-                }
+                if(editionYear) $('#editionYear').html(moment(editionYear).format("YYYY"));
 
                 const seriesYear = data.seriesYear;
-                if(seriesYear) {
-                    $('#seriesYear').html(moment(seriesYear).format("YYYY"));
-                }
-
+                if(seriesYear) $('#seriesYear').html(moment(seriesYear).format("YYYY"));
+                
+                // Get Material Location
                 $('#shelf').html(data.shelf.shelfName);
                 $('#room').html(data.shelf.room.roomName);
                 $('#building').html(data.shelf.room.building.buildingName);
@@ -987,49 +1014,23 @@ if($('#materialDetails').length) {
     .fail(() => location.replace(`${ BASE_URL_WEB }page-not-found`));
 }
 
-// When edit material button is clicked
-$('#editMaterialBtn').on('click', () => {
-    const params = window.location.pathname.split('/');
-    const materialID = params[params.length-1];
-    location.assign(`${ BASE_URL_WEB }admin/edit-material/${ materialID }`)
-});
 
-// Get material details when material form is loaded
-if($('#editMaterialForm').length) {
-    const params = window.location.pathname.split('/');
-    const materialID = params[params.length-1];
 
-    $.ajax({
-        url: `${BASE_URL_API}librarian/materials/${materialID}`,
-        type: 'GET',
-        headers: AJAX_HEADERS,
-        success: result => {
-            if(result) {
-                const data = result.data;
-                console.log(data);
+/**
+ * ===============================================================================
+ * MATERIALS COUNT
+ * ===============================================================================
+ */
 
-                $('#title').val(data.title);
-                $('#materialTypeForEditMaterial').selectpicker('val', data.material_type.typeID);
-
-                $('#format').val(data.format);
-                $('#standardNumber').val(data.standardNumber);
-                $('#standardTypeForEditMaterial').selectpicker('val', data.standardType);
-
-                $('#edition').val(data.edition);
-                $('#editionYear').val(moment(data.editionYear).format('YYYY'));
-
-                $('#volumeNo').val(data.volumeNo);
-                $('#pageNo').val(data.pageNo);
-
-                $('#publisherForEditMaterial').selectpicker('val', data.publisher.publisherID);
-                $('#dateOfPublication').val(data.dateOfPublication);
-                $('#pubCountryForEditMaterial').selectpicker('val', data.publication_country.pubCountryID);
-
-                $('#seriesYear').val(moment(data.seriesYear).format('YYYY'));
-
-                $('#description').val(data.description);
-            }
-        }
-    })
-    .fail(() => console.error('There was an error in getting material details'));
+// Materials count AJAX
+materials_countAJAX = () => {
+    if($('#materialsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/materials/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => $('#materialsCount').html(result.count)
+        })
+        .fail(() => console.error('There was an error in getting room count'));
+    }
 }

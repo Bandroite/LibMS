@@ -10,7 +10,6 @@
 $(() => {
 
     const livecheck = false;
-
     if(livecheck) checkServerConnection_AJAX();
 
     // Remove the preloader whe page has been loaded

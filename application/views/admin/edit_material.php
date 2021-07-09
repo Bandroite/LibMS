@@ -105,10 +105,10 @@
 
                     <!-- Language -->
                     <div class="form-group">
-                        <label for="languageForAddMaterial">Language</label>
+                        <label for="languageForEditMaterial">Language</label>
                         <select 
                             name="languageID" 
-                            id="languageForAddMaterial" 
+                            id="languageForEditMaterial" 
                             class="selectpicker form-control border"
                             data-style="form-control"
                             data-live-search="true"
@@ -381,8 +381,8 @@
     <div class="form-group text-center mb-4">
         <button type="button" class="btn btn-muted" onclick="history.back()">Cancel</button>
         <button type="submit" class="btn btn-blue" id="addMaterialBtn">
-            <i class="fas fa-plus mr-1"></i>
-            <span>Add</span>
+            <i class="fas fa-check mr-1"></i>
+            <span>Save</span>
         </button>
     </div>
 </form>

@@ -37,9 +37,11 @@ loadPublicationCountriesDT = () => {
 				// }
 			},
 			columns: [
-				{
-					data: "country",
-				},
+
+				// Country
+				{ data: "country" },
+
+				// Status
 				{
 					data: null,
 					render: (data) => {
@@ -54,6 +56,32 @@ loadPublicationCountriesDT = () => {
 						}
 					},
 				},
+
+				// Added At
+                {
+                    data: null,
+                    render: data => {
+                        const addedAt = data.addedAt;
+                        return `
+                            <div>${moment(addedAt).format('MMMM d, YYYY; hh:mm A')}</div>
+                            <div class="small font-italic text-secondary">${moment(addedAt).fromNow()}</div>
+                        `
+                    }
+                },
+
+                // Updated At
+                {
+                    data: null,
+                    render: data => {
+                        const updatedAt = data.updatedAt;
+                        return `
+                            <div>${moment(updatedAt).format('MMMM d, YYYY; hh:mm A')}</div>
+                            <div class="small font-italic text-secondary">${moment(updatedAt).fromNow()}</div>
+                        `
+                    }
+                },
+
+				// Actions
 				{
 					data: null,
 					class: "text-center",
