@@ -21,9 +21,11 @@ class Admin extends CI_Controller {
 	// Directory Folder of Views
     private String $dir = "admin";
 
+    // AJAX Files
     private Array $AJAX_Files = [
         'authors',
         'buildings',
+        'transactions',
         'copies',
         'users',
         'genres',
@@ -80,6 +82,11 @@ class Admin extends CI_Controller {
     // Transactions
     public function transactions() {
         $this->load_views('Transaction List', 'Transaction List', [['transactions']]);
+    }
+
+    // Add borrow Record
+    public function add_borrow_record() {
+        $this->load_views('Add Borrow Record', 'Add Borrow Record', [['add_borrow_record']]);
     }
 
     // Borrowed

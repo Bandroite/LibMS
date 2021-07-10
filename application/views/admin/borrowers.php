@@ -20,7 +20,7 @@
                     </div>
                     <div class="text-right">
                         <h6 class="m-0">Students</h6>
-                        <h2 class="text-warning">4</h2>
+                        <h2 class="text-warning" id="studentsCount">0</h2>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="text-right">
                         <h6 class="m-0">Staffs</h6>
-                        <h2 class="text-warning">4</h2>
+                        <h2 class="text-warning" id="staffsCount">0</h2>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     class       = "nav-link active" 
                     id          = "students-tab" 
                     data-toggle = "tab" 
-                    href        = "#students" 
+                    href        = "#studentsPanel" 
                     role        = "tab"
                 >
                     <i class="fas fa-users mr-1"></i>
@@ -82,7 +82,7 @@
                     class       = "nav-link" 
                     id          = "staffs-tab" 
                     data-toggle = "tab" 
-                    href        = "#staffs" 
+                    href        = "#staffsPanel" 
                     role        = "tab"
                 >
                     <i class="fas fa-users mr-1"></i>
@@ -93,13 +93,14 @@
         <div class="tab-content" id="myTabContent">
             
             <!-- Students Tab Panel -->
-            <div class="tab-pane fade show active py-3" id="students" role="tabpanel">
+            <div class="tab-pane fade show active py-3" id="studentsPanel" role="tabpanel">
 
                 <!-- Students Table -->
                 <div class="table-responsive">
-                    <table class="table small" id="studentBorrowersDT">
+                    <table class="table small w-100" id="studentBorrowersDT" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Added At (hidden)</th>
                                 <th>Student No.</th>
                                 <th>Student Name</th>
                                 <th>Program, Year/Section</th>
@@ -107,75 +108,27 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>2018-00001-CM-0</td>
-                                <td>
-                                    <div class="d-flex align-items-baseline">
-                                        <div class="icon-container">
-                                            <i class="fas fa-user text-primary"></i>
-                                        </div>
-                                        <div>Juan Dela Cruz</div>
-                                    </div>
-                                </td>
-                                <td>BSIT 3-1</td>
-                                <td>
-                                    <div class="badge alert-success text-success p-2 w-100">Active</div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="dropdown">
-                                        <div>
-                                            <div class="btn btn-sm btn-muted">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Sections Tab Panel -->
-            <div class="tab-pane fade py-3" id="staffs" role="tabpanel">
+            <!-- Staff Tab Panel -->
+            <div class="tab-pane fade py-3" id="staffsPanel" role="tabpanel">
 
                 <!-- Staff Table -->
                 <div class="table-responsive">
-                    <table class="table small" id="sectionsDT">
+                    <table class="table small w-100" id="staffBorrowersDT" width="100%">
                         <thead>
                             <tr>
+                                <th>Added At (hidden)</th>
                                 <th>ID Number</th>
                                 <th>Staff Name</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>STAFFID-00001</td>
-                                <td>
-                                    <div class="d-flex align-items-baseline">
-                                        <div class="icon-container">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                        <div>Juan Dela Cruz</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="badge alert-success text-success p-2 w-100">Active</div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="dropdown">
-                                        <div>
-                                            <div class="btn btn-sm btn-muted">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
