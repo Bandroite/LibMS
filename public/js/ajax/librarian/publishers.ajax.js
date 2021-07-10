@@ -160,6 +160,9 @@ add_publisherAJAX = () => {
                     
                     showAlert('success','Success!',result.message);
 
+                    // Reload publishers count
+                    publishers_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#publishersDT').DataTable();
                     dt.ajax.reload();
@@ -273,6 +276,9 @@ update_publisherAJAX = () => {
                     
                     showAlert('success','Success!','Record has been updated');
 
+                    // Reload publishers count
+                    publishers_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#publishersDT').DataTable();
                     dt.ajax.reload();
@@ -337,6 +343,9 @@ delete_publisherAJAX = () => {
 
                 // Hide model after delete
                 $('#removePublisherModal').modal('hide');
+
+                // Reload publishers count
+                publishers_countAJAX();
             } else {
                 console.log('No result');
             }

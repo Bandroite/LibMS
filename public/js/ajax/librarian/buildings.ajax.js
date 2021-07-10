@@ -192,12 +192,12 @@ add_buildingAJAX = () => {
                     // Show Alert
                     showAlert('success','Success!',result.message);
 
+                    // Reload buildings count
+                    buildings_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#buildingsDT').DataTable();
                     dt.ajax.reload();
-
-                    // Reload buildings count
-                    buildings_countAJAX();
                 }
             } else {
                 console.log('No result');
@@ -322,6 +322,9 @@ update_buildingAJAX = () => {
                     $('#editBuildingModal').modal('hide');
                     
                     showAlert('success','Success!','Record has been updated');
+
+                    // Reload buildings count
+                    buildings_countAJAX();
 
                     // Refresh data table after add
                     const dt = $('#buildingsDT').DataTable();

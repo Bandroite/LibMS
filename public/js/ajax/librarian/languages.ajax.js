@@ -161,6 +161,9 @@ add_languageAJAX = () => {
                     
                     showAlert('success','Success!',result.message);
 
+                    // Reload languages count
+                    languages_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#languagesDT').DataTable();
                     dt.ajax.reload();
@@ -274,6 +277,9 @@ update_languageAJAX = () => {
                     $('#editLanguageModal').modal('hide');
                     
                     showAlert('success','Success!','Record has been updated');
+                    
+                    // Reload languages count
+                    languages_countAJAX();
 
                     // Refresh data table after add
                     const dt = $('#languagesDT').DataTable();

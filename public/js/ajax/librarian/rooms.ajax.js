@@ -376,7 +376,9 @@ update_roomAJAX = () => {
         success: (result) => {
             
             if(result) {
-
+                // Reload rooms count
+                rooms_countAJAX();
+                
                 // Reload DataTables
                 const dt = $('#roomsDT').DataTable();
                 dt.ajax.reload()

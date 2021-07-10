@@ -148,7 +148,7 @@ $("#addPublicationCountryForm").validate(
 	})
 );
 
-// Add Author AJAX
+// Add Publication Country AJAX
 add_publication_countryAJAX = () => {
 	// Get values from form to rawData
 	const rawData = new FormData($("#addPublicationCountryForm")[0]);
@@ -178,6 +178,9 @@ add_publication_countryAJAX = () => {
 					$("#addPublicationCountryModal").modal("hide");
 
 					showAlert("success", "Success!", result.message);
+
+                    // Reload countries count
+                    publication_countries_countAJAX();
 
 					// Refresh data table after add
 					const dt = $("#publicationCountriesDT").DataTable();
@@ -291,6 +294,9 @@ update_publication_countryAJAX = () => {
                     $('#editPublicationCountryModal').modal('hide');
                     
                     showAlert('success','Success!','Record has been updated');
+
+                    // Reload countries count
+                    publication_countries_countAJAX();
 
                     // Refresh data table after add
                     const dt = $('#publicationCountriesDT').DataTable();

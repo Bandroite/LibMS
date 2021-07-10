@@ -171,6 +171,9 @@ add_authorAJAX = () => {
                     
                     showAlert('success','Success!',result.message);
 
+                    // Reload authors count
+                    authors_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#authorsDT').DataTable();
                     dt.ajax.reload();
@@ -295,7 +298,10 @@ update_authorAJAX = () => {
                     $('#editAuthorModal').modal('hide');
                     
                     showAlert('success','Success!','Record has been updated');
-
+                    
+                    // Reload authors count
+                    authors_countAJAX();
+                    
                     // Refresh data table after add
                     const dt = $('#authorsDT').DataTable();
                     dt.ajax.reload();

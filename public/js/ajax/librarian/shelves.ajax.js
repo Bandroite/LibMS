@@ -224,12 +224,12 @@ add_shelfAJAX = () => {
                 // Show success alert
                 showAlert('success', 'Success!', 'A new shelf has been added');
 
+                // Reload shelves count
+                shelves_countAJAX();
+                
                 // Reload shelves DataTable
                 const dt = $('#shelvesDT').DataTable();
                 dt.ajax.reload();
-
-                // Reload shelves count
-                shelves_countAJAX();
             }
         }
     })

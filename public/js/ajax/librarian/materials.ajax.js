@@ -193,6 +193,14 @@ loadMaterialsDT = () => {
                                         <i class="fas fa-eye dropdown-icon-item text-info"></i>
                                         <span>View Details</span>
                                     </a>
+                                    <div
+                                        class="dropdown-item"
+                                        data-toggle="modal"
+                                        data-target="#addCopyModal"
+                                    >
+                                        <i class="fas fa-plus mr-1 text-primary"></i>
+                                        <span>Add copy of this material</span>
+                                    </div>
                                     <a 
                                         class="dropdown-item"
                                         href="${ BASE_URL_WEB }admin/edit-material/${ id }"
@@ -882,13 +890,13 @@ $('#editMaterialForm').validate(validateOptions({
 
 // Edit Material AJAX
 edit_materialAJAX = () => {
-    const rawData = new FormData($('#addMaterialForm')[0]);
+    const rawData = new FormData($('#editMaterialForm')[0]);
 
     data = {
         title:            rawData.get('title'),
-        authors:          $('#authorsForAddMaterial').val(),
+        authors:          $('#authorsForEditMaterial').val(),
         typeID:           rawData.get('type'),
-        genres:           $('#genresForAddMaterial').val(),
+        genres:           $('#genresForEditMaterial').val(),
         languageID:       rawData.get('language'),
         format:           rawData.get('format'),
         standardNumber:   rawData.get('standardNumber'),

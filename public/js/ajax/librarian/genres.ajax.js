@@ -161,6 +161,9 @@ add_genreAJAX = () => {
                     
                     showAlert('success','Success!',result.message);
 
+                    // Reload genres count
+                    genres_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#genresDT').DataTable();
                     dt.ajax.reload();
@@ -275,6 +278,9 @@ update_genreAJAX = () => {
                     
                     showAlert('success','Success!','Record has been updated');
 
+                    // Reload genres count
+                    genres_countAJAX();
+
                     // Refresh data table after add
                     const dt = $('#genresDT').DataTable();
                     dt.ajax.reload();
@@ -341,7 +347,7 @@ delete_genreAJAX = () => {
                 // Hide model after delete
                 $('#removeGenreModal').modal('hide');
 
-                // Reload authors count
+                // Reload genres count
                 genres_countAJAX();
             } else {
                 console.log('No result');
