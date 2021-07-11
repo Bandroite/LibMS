@@ -23,7 +23,8 @@ class Home extends CI_Controller {
 
     // AJAX Files
     private Array $AJAX_files = [
-        'login'
+        'login',
+        'user'
     ];
     
     // Load Views Method

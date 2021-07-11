@@ -5,23 +5,23 @@
         <div class="col-lg-8 min-h-100 d-flex justify-content-between align-items-center">
             <div class="container-fluid py-5">
     
-                <!-- Login Form -->
-                <form id="loginForm">
+                <!-- Registration Form -->
+                <form id="registerStaffForm">
                     <div class="mb-5">
                         <h1 class="text-center display-4 m0-5">Register as Staff</h1>
                         <div class="text-secondary text-center">Create your account by filling up the field below</div>
                     </div>
                     
-                    <!-- Error Login Alert -->
-                    <div id="errorLoginContainer"></div>
+                    <!-- Error Registration Alert -->
+                    <div id="errorRegisterContainer"></div>
                     
                     <!-- ID Number field -->
                     <div class="form-group">
-                        <label for="staffNo">ID Number</label>
+                        <label for="idNumber">ID Number</label>
                         <input 
                             type="text" 
-                            name="staffNo" 
-                            id="staffNo" 
+                            name="idNumber" 
+                            id="idNumber" 
                             class="form-control" 
                             placeholder="Type your ID number here"
                         >
@@ -38,7 +38,7 @@
                                     name="firstName" 
                                     id="firstName" 
                                     class="form-control" 
-                                    placeholder="Type first password here"
+                                    placeholder="Type first name here"
                                 >
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                     name="middleName" 
                                     id="middleName" 
                                     class="form-control" 
-                                    placeholder="Type your first name here"
+                                    placeholder="Type your middle name here"
                                 >
                             </div>
                         </div>
@@ -72,6 +72,42 @@
                         </div>
                     </div>
                     
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <!-- Gender Field -->
+                            <div class="form-group">
+                                <label for="buildingsForAdd">Gender</label>
+                                <select 
+                                    name="gender" 
+                                    id="gender" 
+                                    class="selectpicker form-control border"
+                                    data-style="form-control"
+                                    data-live-search="true"
+                                    data-size="5"
+                                    title="Select your gender here"
+                                >
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <!-- Contact Number field -->
+                            <div class="form-group">
+                                <label for="contactNumber">Contact Number</label>
+                                <input 
+                                    type="text" 
+                                    name="contactNumber" 
+                                    id="contactNumber" 
+                                    class="form-control" 
+                                    placeholder="Type your contact number here"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Email field -->
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -95,7 +131,19 @@
                             placeholder="Type your password here"
                         >
                     </div>
-    
+
+                    <!-- Re-type Password Field -->
+                    <div class="form-group">
+                        <label for="retypePassword">Confirm Password</label>
+                        <input 
+                            type="password" 
+                            name="retypePassword" 
+                            id="retypePassword" 
+                            class="form-control" 
+                            placeholder="Re-type your password here"
+                        >
+                    </div>
+
                     <!-- User Actions -->
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">
