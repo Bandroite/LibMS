@@ -26,7 +26,8 @@
                             placeholder="Type your student number here"
                         >
                     </div>
-
+                    
+                    <!-- Student Name Field -->
                     <div class="form-row">
 
                         <!-- First Name Field -->
@@ -72,6 +73,7 @@
                         </div>
                     </div>
 
+                    <!-- Course, year, and section field -->
                     <div class="form-row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -111,9 +113,11 @@
                         </div>
                     </div>
                     
+                    <!-- Gender & Contact Number Field -->
                     <div class="form-row">
+
+                        <!-- Gender Field -->
                         <div class="col-md-6">
-                            <!-- Gender Field -->
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <select 
@@ -131,9 +135,9 @@
                                 </select>
                             </div>
                         </div>
-
+                        
+                        <!-- Contact Number field -->
                         <div class="col-md-6">
-                            <!-- Contact Number field -->
                             <div class="form-group">
                                 <label for="contactNumber">Contact Number</label>
                                 <input 

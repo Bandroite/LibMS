@@ -165,14 +165,22 @@ $('#standardNumberForAddCopy').on('change', () => {
         success: result => {
             if(result) {
                 const data = result.data;
-                console.log(data);
 
                 copiesForAddCopyOptions = '';
                 data.forEach(c => {
-                    copiesForAddCopyOptions += `
-                        <option value="${ c.copyID }">${ c.copyNumber }</option>
-                    `;
+                    let selected = false;
+                    copies.forEach(copy => { if(copy.copyID === c.copyID) selected = true });
+                    if(!selected && c.status == 'Available') {
+                        copiesForAddCopyOptions += `
+                            <option value="${ c.copyID }">${ c.copyNumber }</option>
+                        `;
+                    }
                 });
+                if(copiesForAddCopyOptions === '') {
+                    copiesForAddCopyOptions += `
+                        <option class="text-center small" disabled>Oops! We think you've selected all the available copies for this material</option>
+                    `;
+                }
 
                 $('#copiesForAddCopy').html(copiesForAddCopyOptions);
                 $('#copiesForAddCopy').selectpicker('refresh');

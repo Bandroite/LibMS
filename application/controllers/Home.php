@@ -47,14 +47,11 @@ class Home extends CI_Controller {
         // This load the footer components
         $this->load->view('all/components/footer');
 
-        // This load all the AJAX files
-        $this->load->view('all/templates/scripts', [
+        // This load the footer templates
+        $this->load->view('all/templates/footer', [
             'dir_path'   => $this->dir,
             'AJAX_Files' => $this->AJAX_files
         ]);
-
-        // This load the footer templates
-        $this->load->view('all/templates/footer');
     }
 
     /**

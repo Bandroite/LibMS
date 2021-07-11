@@ -47,9 +47,6 @@ class User extends CI_Controller {
                 $viewData = isset($view[1]) ? $view[1] : NULL;
                 $this->load->view($viewPath, $viewData);
             }
-    
-            // This load the footer components
-            $this->load->view('all/components/footer');
             
             // This load the footer templates
             $this->load->view('all/templates/footer', [
