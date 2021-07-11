@@ -5,11 +5,9 @@
 ]); ?>
 
 <!-- Show Alert -->
-<div id="alertContainer">
-    
-</div>
+<div id="alertContainer"></div>
 
-<!-- Alert -->
+<!-- Show Sessioned Alert -->
 <?php if($this->session->has_userdata('alert')): ?>
     <div class="alert alert-<?= $this->session->alertTheme ?> alert-dismissible fade show mb-4" role="alert" id="alert">
         <div><b><?= $this->session->alertTitle ?></b> <?= $this->session->alertMessage ?></div>

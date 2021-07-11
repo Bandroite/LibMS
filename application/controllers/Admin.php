@@ -86,7 +86,10 @@ class Admin extends CI_Controller {
 
     // Add borrow Record
     public function add_borrow_record() {
-        $this->load_views('Add Borrow Record', 'Add Borrow Record', [['add_borrow_record']]);
+        $this->load_views('Add Borrow Record', 'Add Borrow Record', [
+            ['components/modals/add_borrow_record_modals'],
+            ['add_borrow_record']
+        ]);
     }
 
     // Borrowed
@@ -133,7 +136,6 @@ class Admin extends CI_Controller {
     // Add Material
 	public function add_material() {
         $this->load_views('Add Material', 'Materials', [
-            ['components/modals/add_material_modals'],
             ['add_material'],
         ]);
 	}

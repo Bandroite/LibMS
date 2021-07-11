@@ -3,6 +3,8 @@
     <div class="text-secondary">Add borrow record here by filling up the required fields</div>
 </div>
 
+<div id="alertContainer"></div>
+
 <form id="addBorrowRecordForm">
 
     <!-- Fields -->
@@ -23,15 +25,20 @@
 
                         <div class="form-group">
                             <label for="borrowerIDNumberInput">Student Number/Staff ID</label>
-                            <input 
+                            <select 
                                 type="text" 
-                                class="form-control" 
+                                class="selectpicker form-control" 
                                 id="borrowerIDNumberInput" 
-                                name="borrowerIDNumberInput"
+                                data-style="form-control border"
+                                data-live-search="true"
+                                data-size="2"
+                                title="Please select a borrower"
                             >
+                                <option disabled class="text-center small">No data</option>
+                            </select>
                         </div>
                         <div class="form-group text-center">
-                            <button type="button" class="btn btn-blue" id="saveBorrowerIDNumberBtn" disabled>
+                            <button type="button" class="btn btn-success" id="saveBorrowerIDNumberBtn" disabled>
                                 <span>Save</span>
                                 <i class="fas fa-check ml-1"></i>
                             </button>
@@ -42,12 +49,15 @@
                     <div id="borrowerDetails" style="display: none">
                         <div class="d-flex mb-3">
                             <div class="mr-3">
-                                <h1><i class="fas fa-book-reader text-primary"></i></h1>
+                                <div style="width: 4.5rem; height: 4.5rem" class="rounded-lg alert-primary flex-center">
+                                    <h2><i class="fas fa-book-reader text-primary"></i></h2>
+                                </div>
                             </div>
                             <div>
-                                <div class="small" id="borrowerIDNumber">2018-00137-CM-0</div>
-                                <h3 class="mb-1" id="borrowerFullName">Vanessah Buenaventura</h3>
-                                <h6 class="text-secondary" id="borrowerUserType">Student</h6>
+                                <input type="hidden" name="userID" id="borrowerIDNumber">
+                                <div class="small" id="borrowerIDNumberForDisplay"></div>
+                                <h3 class="mb-1" id="borrowerFullName"></h3>
+                                <h6 class="text-secondary" id="borrowerUserType"></h6>
                             </div>
                         </div>
                     
@@ -82,9 +92,9 @@
                                 data-style="form-control form-control-sm border"
                                 data-live-search="true"
                                 data-size="5"
-                                title="Please select the standard number"
+                                title="Please select the material"
                             >
-                                <option disabled class="text-center">No data</option>
+                                <option disabled class="text-center small">No data</option>
                             </select>
                         </div>
 
@@ -99,7 +109,7 @@
                                 data-size="5"
                                 title="Please select the copy number"
                             >
-                                <option disabled class="text-center">Please select standard number first</option>
+                                <option disabled class="text-center small">Please select a material first</option>
                             </select>
                         </div>
 
@@ -162,7 +172,12 @@
                 </table>
             </div>
             <div class="form-group text-center">
-                <button class="btn btn-blue" type="submit">Submit</button>
+                <button 
+                    class="btn btn-blue" 
+                    id="submitCopiesForBorrowBtn"
+                    type="submit"
+                    disabled
+                >Submit</button>
             </div>
         </div>
     </div>
