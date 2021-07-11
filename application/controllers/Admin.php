@@ -86,7 +86,7 @@ class Admin extends CI_Controller {
 
     // Add borrow Record
     public function add_borrow_record() {
-        $this->load_views('Add Borrow Record', 'Add Borrow Record', [
+        $this->load_views('Add Borrow Record', 'Transaction List', [
             ['components/modals/add_borrow_record_modals'],
             ['add_borrow_record']
         ]);

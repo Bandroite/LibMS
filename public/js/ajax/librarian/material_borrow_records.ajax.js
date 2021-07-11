@@ -10,6 +10,7 @@
 $(() => {
     loadBorrowedMaterialsDT();
     loadReturnedMaterialsDT();
+    material_borrow_records_countAJAX();
 })
 
 /**
@@ -86,7 +87,7 @@ loadBorrowedMaterialsDT = () => {
                     render: data => {
                         const createdAt = data.createdAt;
                         return `
-                            <div>${ moment(createdAt).format('MMM. d, YYYY') }</div>
+                            <div>${ moment(createdAt).format('MMM. D, YYYY') }</div>
                             <div class="small text-secondary font-italic">${ moment(createdAt).fromNow() }</div>
                         `;
                     }
@@ -98,7 +99,7 @@ loadBorrowedMaterialsDT = () => {
                     render: data => {
                         const dueDate = data.dueDate;
                         return `
-                            <div>${ moment(dueDate).format('MMM. d, YYYY') }</div>
+                            <div>${ moment(dueDate).format('MMM. D, YYYY') }</div>
                             <div class="small text-secondary font-italic">${ moment(dueDate).fromNow() }</div>
                         `;
                     }
@@ -124,7 +125,7 @@ loadBorrowedMaterialsDT = () => {
                 { 
                     data: null,
                     render: data => {
-                        const material = data.copy.material;
+                        const borrowID = data.borrowID;
                         return `
                             <div class="dropdown">
                                 <div data-toggle="dropdown">
@@ -148,10 +149,9 @@ loadBorrowedMaterialsDT = () => {
                                         <span>View details</span>
                                     </div>
                                     <div 
-                                        class       = "dropdown-item"
-                                        role        = "button"
-                                        data-toggle = "modal"
-                                        data-target = "#markedAsReturnedModal"
+                                        class   = "dropdown-item"
+                                        role    = "button"
+                                        onclick = markAsReturned('${ borrowID }')
                                     >
                                         <i class="fas fa-check dropdown-icon-item text-success"></i>
                                         <span>Marked as returned</span>
@@ -186,6 +186,45 @@ loadBorrowedMaterialsDT = () => {
             }]
         });
     }
+}
+
+// Mark as Retuned
+markAsReturned = (borrowID) => {
+    $('#borrowIDForReturn').val(borrowID);
+    $('#markAsReturnedModal').modal('show');
+}
+
+// When Mark as Retuned Modal has been hidden,
+// Reset Borrow ID by setting value as null
+$('#markAsReturnedModal').on('hide.bs.modal', () => $('#borrowIDForReturn').val(null));
+
+// Validate Mark as Returned Form
+$('#markAsReturnedForm').validate(validateOptions({
+    rules: { borrowID: { required: true }},
+    messages: {},
+    submitHandler: () => change_borrow_status_AJAX('Returned')
+}));
+
+// Change Borrow Status AJAX
+change_borrow_status_AJAX = (borrowStatus) => {
+    const rawData = new FormData($('#markAsReturnedForm')[0]);
+    borrowID = rawData.get('borrowID');
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/change_borrow_status/${ borrowID }`,
+        type: 'PUT',
+        headers: AJAX_HEADERS,
+        data: { status: borrowStatus },
+        dataType: 'json',
+        success: result => {
+            if(result) {
+                if(borrowStatus === 'Returned') {
+                    $('#markAsReturnedModal').modal('hide');
+                    showAlert('success', 'Success!', 'A borrow record has been marked as returned.')
+                }
+            }
+        }
+    })
+    .fail(() => console.error('There was a problem in changing borrow status'))
 }
 
 /**
@@ -361,5 +400,24 @@ loadReturnedMaterialsDT = () => {
                 orderable: false
             }]
         });
+    }
+}
+
+/**
+ * ===============================================================================
+ * MATERIAL BORROW RECORDS COUNT
+ * ===============================================================================
+ */
+
+// Materials count AJAX
+material_borrow_records_countAJAX = () => {
+    if($('#borrowedMaterialsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/material_borrow_records/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => $('#borrowedMaterialsCount').html(result.count)
+        })
+        .fail(() => console.error('There was an error in getting room count'));
     }
 }

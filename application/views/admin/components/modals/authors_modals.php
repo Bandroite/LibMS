@@ -96,13 +96,7 @@
 </div>
 
 <!-- Edit Author Modal -->
-<div 
-    class         = "modal" 
-    id            = "editAuthorModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="editAuthorModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="editAuthorForm" class="modal-content">
             <div class="modal-header">
@@ -207,15 +201,8 @@
     </div>
 </div>
 
-
 <!-- Remove Author Modal -->
-<div 
-    class         = "modal" 
-    id            = "removeAuthorModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="removeAuthorModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form 
             class="modal-content"

@@ -18,7 +18,7 @@
 <?php endif ?>
 
 <!-- Transactions Summary -->
-<div class="card card-status card-info mb-4">
+<div class="card card-status card-info mb-4" id="transactionsCountContainer">
     <div class="card-body">
         <div class="d-flex align-items-start justify-content-between">
             <div class="card-icon-container alert-info text-info">
@@ -26,54 +26,7 @@
             </div>
             <div class="text-right">
                 <h6 class="m-0">Total Transactions</h6>
-                <h2 class="text-info">234</h2>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Borrowed and Returned Summary -->
-<div class="form-row">
-
-    <!-- Borrowed Summary -->
-    <div class="col-md-6 mb-4">
-        <div class="card card-status card-success">
-            <div class="card-body">
-                <div class="d-flex align-items-start justify-content-between">
-                    <div class="card-icon-container alert-success text-success">
-                        <i class="fas fa-book-reader text-success"></i>
-                    </div>
-                    <div class="text-right">
-                        <h6 class="m-0">Borrowed</h6>
-                        <h2 class="text-success">234</h2>
-                    </div>
-                </div>
-                <div class="dropdown-divider"></div>
-                <div class="text-right">
-                    <a href="<?= base_url() ?>admin/borrowed" class="btn btn-sm btn-success">View More Details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Returned Summary -->
-    <div class="col-md-6 mb-4">
-        <div class="card card-status card-danger">
-            <div class="card-body">
-                <div class="d-flex align-items-start justify-content-between">
-                    <div class="card-icon-container alert-danger text-danger">
-                        <i class="fas fa-undo text-danger"></i>
-                    </div>
-                    <div class="text-right">
-                        <h6 class="m-0">Returned</h6>
-                        <h2 class="text-danger">234</h2>
-                    </div>
-                </div>
-                <div class="dropdown-divider"></div>
-                <div class="text-right">
-                    <a href="<?= base_url() ?>admin/returned" class="btn btn-sm btn-danger">View More Details</a>
-                </div>
+                <h2 class="text-info" id="transactionsCount">0</h2>
             </div>
         </div>
     </div>
@@ -94,15 +47,13 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table small w-100" width="100%" cellspacing="0">
+            <table id="transactionsDT" class="table small w-100" width="100%" cellspacing="0">
                 <thead>
+                    <th>Added by</th>
                     <th>Borrower</th>
-                    <th>Standard Number</th>
-                    <th>Material</th>
-                    <th>Copy Number</th>
-                    <th>Date Borrowed</th>
-                    <th>Date Returned</th>
-                    <th>Status</th>
+                    <th>Date & Time Borrowed</th>
+                    <th>No. of Copies Borrowed</th>
+                    <th>Issued by:</th>
                     <th></th>
                 </thead>
                 <tbody>
@@ -118,26 +69,37 @@
                                 </div>
                             </div>
                         </td>
-                        <td>ISBN 99-9999-9999-9999-9</td>
                         <td>
                             <div class="d-flex align-items-baseline">
                                 <div class="icon-container text-primary">
-                                    <i class="fas fa-book"></i>
+                                    <i class="fas fa-hand-paper"></i>
                                 </div>
                                 <div>
-                                    <div>Multimedia Computing</div>
-                                    <div class="text-small font-italic text-secondary">Book</div>
+                                    <div>April 1, 2020</div>
+                                    <div class="text-small font-italic text-secondary">a minute ago</div>
                                 </div>
                             </div>
                         </td>
-                        <td>COPY-0001</td>
-                        <td>Apr. 3, 2021</td>
-                        <td>Apr. 10, 2021</td>
                         <td>
-                            <span class="w-100 p-2 badge alert-danger text-danger">
-                                <i class="fas fa-undo mr-1"></i>
-                                <span>Returned</span>
-                            </span>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-copy"></i>
+                                </div>
+                                <div>
+                                    <div>3</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <div>Juan Dela Cruz</div>
+                                    <div class="text-small font-italic text-secondary">Librarian</div>
+                                </div>
+                            </div>
                         </td>
                         <td class="text-center">
                             <div class="btn btn-sm btn-muted">

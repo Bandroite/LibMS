@@ -7,6 +7,12 @@
  */
 
 
+$(() => {
+    loadTransactionsDT();
+    transactions_countAJAX();
+});
+
+
 /**
  * ===============================================================================
  * ADD BORROW RECORDS AJAX
@@ -87,19 +93,25 @@ if($('#borrowerIDNumberInput').length) {
             if(result) {
                 const data = result.data;
                 var options = '';
-                data.forEach(b => {
-                    options += `
-                        <option
-                            title="${ b.idNumber }"
-                            data-content="
-                                <div class='font-weight-bold'>${ b.firstName } ${ b.lastName }</div>
-                                <div class='small'>${ b.idNumber }</div>
-                                <div class='small'>${ b.userType }</div>
-                            "
-                            val="${ b.idNumber }"
-                        >${ b.idNumber }</option>
+                if(data.length) {
+                    data.forEach(b => {
+                        options += `
+                            <option
+                                title="${ b.idNumber }"
+                                data-content="
+                                    <div class='font-weight-bold'>${ b.firstName } ${ b.lastName }</div>
+                                    <div class='small'>${ b.idNumber }</div>
+                                    <div class='small'>${ b.userType }</div>
+                                "
+                                val="${ b.idNumber }"
+                            >${ b.idNumber }</option>
+                        `
+                    });
+                } else {
+                    options = `
+                        <option class="text-center small" disabled>No borrowers yet</option>
                     `
-                });
+                }
 
                 $('#borrowerIDNumberInput').html(options);
                 $('#borrowerIDNumberInput').selectpicker('refresh');
@@ -127,26 +139,40 @@ if($('#copyForm').length) {
         success: result => {
             if(result) {
                 const data = result.data;
+
                 console.log(data);
 
                 standardNumberForAddCopyOptions = '';
                 data.forEach(m => {
                     const copies = m.copies;
                     if(copies.length) {
-                        standardNumberForAddCopyOptions += `
-                            <option 
-                                data-token="${ m.standardType } ${ m.standardNumber }"
-                                data-content="
-                                    <div class='font-weight-bold'>${ m.title }</div>
-                                    <div class='small'>${ m.standardType } ${ m.standardNumber }</div>
-                                    <div class='small'>${ m.material_type.typeName }</div>
-                                "
-                                title="${ m.standardType } ${ m.standardNumber }"
-                                value="${ m.materialID }"
-                            >${ m.standardType } ${ m.standardNumber }</option>
-                        `;
+                        hasAvailableCopies = false;
+                        copies.forEach(c => {
+                            if(c.status === 'Available') hasAvailableCopies = true;
+                        });
+
+                        if(hasAvailableCopies) {
+                            standardNumberForAddCopyOptions += `
+                                <option 
+                                    data-token="${ m.standardType } ${ m.standardNumber }"
+                                    data-content="
+                                        <div class='font-weight-bold'>${ m.title }</div>
+                                        <div class='small'>${ m.standardType } ${ m.standardNumber }</div>
+                                        <div class='small'>${ m.material_type.typeName }</div>
+                                    "
+                                    title="${ m.standardType } ${ m.standardNumber }"
+                                    value="${ m.materialID }"
+                                >${ m.standardType } ${ m.standardNumber }</option>
+                            `;
+                        }
                     }
                 });
+
+                if(standardNumberForAddCopyOptions === '') {
+                    standardNumberForAddCopyOptions = `
+                        <option class="text-center small" disabled>No material has available copies</option>
+                    `
+                }
 
                 $('#standardNumberForAddCopy').html(standardNumberForAddCopyOptions);
                 $('#standardNumberForAddCopy').selectpicker('refresh');
@@ -201,7 +227,6 @@ $('#standardNumberForAddCopy, #copiesForAddCopy, #dueDate, #dueTime').on('change
 });
 
 $('#resetCopyFormBtn').on('click', () => resetCopyForm());
-
 
 $('#addCopyBtn').on('click', () => {
     const copyID = $('#copiesForAddCopy').val();
@@ -340,3 +365,144 @@ $('#addBorrowRecordForm').on('submit', e => {
     })
     .fail(() => console.error('There was an error in adding a new transaction'));
 });
+
+/**
+ * ===============================================================================
+ * GET ALL TRANSACTIONS
+ * ===============================================================================
+ */
+
+loadTransactionsDT = () => {
+    const dt = $('#transactionsDT');
+    if(dt.length) {
+        dt.DataTable({
+            ajax: {
+                url: `${ BASE_URL_API }librarian/transactions`,
+                headers: AJAX_HEADERS,
+                // success: result => {
+                //     if(result) {
+                //         const data = result.data;
+                //         console.log(data);
+                //     }
+                // }
+            }, 
+            columns: [
+
+                // Added by (hidden for default sort)
+                { data: 'borrowDate', visible: false },
+
+                // Borrower
+                {
+                    data: null,
+                    render: data => {
+                        const borrower = data.transaction_borrower;
+
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div>${ borrower.firstName } ${ borrower.lastName }</div>
+                                    <div class="small font-italic text-secondary">${ borrower.userType }</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                },
+
+                // Date borrowed
+                {
+                    data: null,
+                    render: data => {
+                        const borrowDate = data.borrowDate;
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <div>
+                                    <div>${ moment(borrowDate).format('MMM. D, YYYY; hh:mm A') }</div>
+                                    <div class="small font-italic text-secondary">${ moment(borrowDate).fromNow() }</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }, 
+                
+                // No. of copies borrowed
+                {
+                    data: null,
+                    render: data => {
+                        return  `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-copy"></i>
+                                </div>
+                                <div>
+                                    <div>${ data.material_borrow_records.length }</div>
+                                </div>
+                            </div>
+                        `
+                    }
+                },
+
+                // Issued by
+                {
+                    data: null,
+                    render: data => {
+                        const addedBy = data.added_by_librarian;
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <div>${ addedBy.firstName } ${ addedBy.lastName }</div>
+                                    <div class="small font-italic text-secondary">${ addedBy.userType }</div>
+                                </div>
+                            </div>
+                        `
+                    }
+                },
+
+                // Actions
+                {
+                    data: null,
+                    class: 'text-center',
+                    render: data => {
+                        return `
+                            <div class="btn btn-sm btn-muted">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </div>
+                        `
+                    }
+                }
+            ],
+            columnDefs: [{
+                targets: [5],
+                orderable: false
+            }],
+            order: [[0, 'desc']]
+        })
+    }
+}
+
+/**
+ * ===============================================================================
+ * TRANSACTIONS COUNT
+ * ===============================================================================
+ */
+
+// Materials count AJAX
+transactions_countAJAX = () => {
+    if($('#transactionsCountContainer').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/transactions/count`,
+            type: 'GET',
+            headers: AJAX_HEADERS,
+            success: result => $('#transactionsCount').html(result.count)
+        })
+        .fail(() => console.error('There was an error in getting room count'));
+    }
+}

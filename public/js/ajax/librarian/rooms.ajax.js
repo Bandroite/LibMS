@@ -218,7 +218,7 @@ add_roomAJAX = () => {
                     $('#addRoomModal').modal('hide');
                     showAlert('danger','Failed!',result.message);
                 } else {
-
+                    
                     // Hide Add Room Modal
                     $('#addRoomModal').modal('hide');
                     
@@ -231,7 +231,7 @@ add_roomAJAX = () => {
 
                     // Reload rooms count
                     rooms_countAJAX();
-
+                    
                     // Reset add form
                     $('#addRoomForm').trigger('reset')
                 }

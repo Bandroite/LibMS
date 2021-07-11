@@ -338,7 +338,9 @@
                             data-live-search="true"
                             data-size="5"
                             title="Select building here"
-                        ></select>
+                        >
+                            <option class="text-center small" disabled>No data</option>
+                        </select>
                     </div>
                 </div>
 
@@ -354,7 +356,9 @@
                             data-live-search="true"
                             data-size="5"
                             title="Select room here"
-                        ></select>
+                        >
+                            <option class="text-center small" disabled>Please select a building first</option>
+                        </select>
                     </div>
                 </div>
 
@@ -370,7 +374,9 @@
                             data-live-search="true"
                             data-size="5"
                             title="Select shelf here"
-                        ></select>
+                        >
+                            <option class="text-center small" disabled>Please select a room first</option>
+                        </select>
                     </div>
                 </div>
             </div>

@@ -7,13 +7,20 @@
 <!-- Show Alert -->
 <div id="alertContainer"></div>
 
-<?php $this->load->view('admin/components/summary_card', [
-    'theme' => 'success',
-    'icon'  => 'money-check',
-    'title' => 'Borrowed Books',
-    'id'    => 'borrowedBooks',
-    'value' => '234'
-]); ?>
+<!-- Borrowed Materials Summary -->
+<div class="card card-status card-success mb-4" id="borrowedMaterialsCountContainer">
+    <div class="card-body">
+        <div class="d-flex align-items-start justify-content-between">
+            <div class="card-icon-container alert-info text-success">
+                <i class="fas fa-money-check text-success"></i>
+            </div>
+            <div class="text-right">
+                <h6 class="m-0">Total Borrowed Materials</h6>
+                <h2 class="text-success" id="borrowedMaterialsCount">0</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Borrowed Materials Table -->
 <div class="card mb-4">
