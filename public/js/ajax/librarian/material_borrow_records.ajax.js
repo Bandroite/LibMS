@@ -219,7 +219,9 @@ change_borrow_status_AJAX = (borrowStatus) => {
             if(result) {
                 if(borrowStatus === 'Returned') {
                     $('#markAsReturnedModal').modal('hide');
-                    showAlert('success', 'Success!', 'A borrow record has been marked as returned.')
+                    showAlert('success', 'Success!', 'A borrow record has been marked as returned.');
+                    const dt = $('#borrowedMaterialsDT').DataTable();
+                    dt.ajax.reload();
                 }
             }
         }
@@ -288,7 +290,7 @@ loadReturnedMaterialsDT = () => {
                                 </div>
                                 <div>
                                     <div>${ borrower.firstName + ' ' + borrower.lastName }</div>
-                                    <div class="text-secondary small font-italic">Student</div>
+                                    <div class="text-secondary small font-italic">${ borrower.userType }</div>
                                 </div>
                             </div>
                         `;
@@ -301,20 +303,20 @@ loadReturnedMaterialsDT = () => {
                     render: data => {
                         const createdAt = data.createdAt;
                         return `
-                            <div>${ moment(createdAt).format('MMM. d, YYYY') }</div>
+                            <div>${ moment(createdAt).format('MMM. D, YYYY') }</div>
                             <div class="small text-secondary font-italic">${ moment(createdAt).fromNow() }</div>
                         `;
                     }
                 },
 
-                // Due date
+                // Returned at
                 { 
                     data: null,
                     render: data => {
-                        const dueDate = data.dueDate;
+                        const updatedAt = data.updatedAt;
                         return `
-                            <div>${ moment(dueDate).format('MMM. d, YYYY') }</div>
-                            <div class="small text-secondary font-italic">${ moment(dueDate).fromNow() }</div>
+                            <div>${ moment(updatedAt).format('MMM. D, YYYY') }</div>
+                            <div class="small text-secondary font-italic">${ moment(updatedAt).fromNow() }</div>
                         `;
                     }
                 },

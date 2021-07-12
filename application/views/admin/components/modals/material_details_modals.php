@@ -55,11 +55,7 @@
 </div>
 
 <!-- Change Copy Status Modal -->
-<div 
-    class         = "modal" 
-    id            = "changeCopyStatusModal" 
-    tabindex      = "-1"
->
+<div class="modal" id="changeCopyStatusModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="changeCopyStatusForm" class="modal-content">
             <div class="modal-header">

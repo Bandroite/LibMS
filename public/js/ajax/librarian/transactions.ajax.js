@@ -95,17 +95,19 @@ if($('#borrowerIDNumberInput').length) {
                 var options = '';
                 if(data.length) {
                     data.forEach(b => {
-                        options += `
-                            <option
-                                title="${ b.idNumber }"
-                                data-content="
-                                    <div class='font-weight-bold'>${ b.firstName } ${ b.lastName }</div>
-                                    <div class='small'>${ b.idNumber }</div>
-                                    <div class='small'>${ b.userType }</div>
-                                "
-                                val="${ b.idNumber }"
-                            >${ b.idNumber }</option>
-                        `
+                        if(b.status === 'Active') {
+                            options += `
+                                <option
+                                    title="${ b.idNumber }"
+                                    data-content="
+                                        <div class='font-weight-bold'>${ b.firstName } ${ b.lastName }</div>
+                                        <div class='small'>${ b.idNumber }</div>
+                                        <div class='small'>${ b.userType }</div>
+                                    "
+                                    val="${ b.idNumber }"
+                                >${ b.idNumber }</option>
+                            `
+                        }
                     });
                 } else {
                     options = `
@@ -314,7 +316,8 @@ $('#removeCopyBtn').on('click', () => {
     copies = copies.filter(c => c.copyIDForRow !== copyIDForRemove);
     $(`#${ copyIDForRemove }`).remove();
     $('#removeCopyModal').modal('hide');
-    showAlert('info', 'Success!', 'A copy has been remove.')
+    showAlert('info', 'Success!', 'A copy has been remove.');
+    resetCopyForm();
     enableDisableSubmitBtnForCopy();
 });
 
