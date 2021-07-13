@@ -129,9 +129,7 @@
             <div class="modal-body">
 
                 <!-- Hide id in form -->
-                <div class ="form-group d-none">
-                    <input type="text" name="shelfID">
-                </div>
+                <input type="hidden" name="shelfID" id="shelfIDForEdit">
 
                 <!-- Shelf Field -->
                 <div class="form-group">
@@ -139,7 +137,7 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="shelfName"
+                        id="shelfNameForEdit"
                         name="shelfName"
                         placeholder="Enter room here"
                         value="Roth Bldg."
@@ -151,7 +149,7 @@
                     <label for="room">Room</label>
                     <select 
                         name="room" 
-                        id="room" 
+                        id="roomForEditShelf" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"
@@ -173,7 +171,7 @@
                     <label for="building">Building</label>
                     <select 
                         name="building" 
-                        id="building" 
+                        id="buildingForEditShelf" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"
@@ -201,7 +199,7 @@
                             <input 
                                 type="radio" 
                                 id="activeForEdit" 
-                                name="status" 
+                                name="statusForEdit" 
                                 class="custom-control-input"
                                 value="Active"
                             >
@@ -214,7 +212,7 @@
                             <input 
                                 type="radio" 
                                 id="inactiveForEdit" 
-                                name="status" 
+                                name="statusForEdit" 
                                 class="custom-control-input"
                                 value="Inactive"
                             >

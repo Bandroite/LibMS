@@ -76,14 +76,14 @@ loadShelvesDT = () => {
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "editAuthor('${data.shelfID}')"
+                                        onclick = "editShelf('${data.shelfID}')"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
                                     </div>
                                     <div 
                                         class="dropdown-item"
-                                        onclick = "removeAuthor('${data.shelfID}')"
+                                        onclick = "removeShelf('${data.shelfID}')"
                                     >
                                         <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
                                         <span>Remove</span>
@@ -218,19 +218,35 @@ add_shelfAJAX = () => {
         dataType: 'json',
         success: result => {
             if(result) {
-                // Hide modal
-                $('#addShelfModal').modal('hide');
+                if(result.error) {
+                    console.log(result.message)
 
-                // Show success alert
-                showAlert('success', 'Success!', 'A new shelf has been added');
+                    // Hide modal
+                    $('#addShelfModal').modal('hide');
+                    showAlert('danger','Failed!',result.message);
+                } else {
 
-                // Reload shelves count
-                shelves_countAJAX();
-                
-                // Reload shelves DataTable
-                const dt = $('#shelvesDT').DataTable();
-                dt.ajax.reload();
+                    // Hide modal
+                    $('#addShelfModal').modal('hide');
+
+                    // Show success alert
+                    showAlert('success', 'Success!', 'A new shelf has been added');
+
+                    // Reload shelves count
+                    shelves_countAJAX();
+                    
+                    // Reload shelves DataTable
+                    const dt = $('#shelvesDT').DataTable();
+                    dt.ajax.reload();
+                }
+            }else {
+                console.log('No result');
             }
+        },
+        error: (err) => {
+            const response = err.responseJSON
+            $('#addShelfModal').modal('hide');
+            showAlert('danger','Failed!',response.message);
         }
     })
 }
@@ -238,6 +254,192 @@ add_shelfAJAX = () => {
 // When add shelf modal is hidden
 $('#addShelfModal').on('show.bs.modal', () => $('#addShelfForm').trigger('reset'));
 
+
+/**
+ * ===============================================================================
+ * EDIT SHELVES AJAX
+ * ===============================================================================
+ */
+
+// Edit Shlef
+editShelf = (id) => {
+    
+    // Get all buildings for select
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/buildings`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(building => options +=`
+                    <option value="${building.buildingID}">${building.buildingName}</option>
+                `);
+
+                // For edit select in edit material
+                $('#buildingForEditShelf').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        $('#editShelfModal').modal('hide');
+        showAlert('danger', 'Failed!', 'There was an error in getting buildings');
+    });
+
+    // Get all rooms for select
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/rooms`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+
+                // Get data from result
+                const data = result.data
+
+                // Populate select options
+                var options = '';
+                data.forEach(room => options +=`
+                    <option value="${room.roomID}">${room.roomName}</option>
+                `);
+
+                // For edit select in edit material
+                $('#roomForEditShelf').html(options).selectpicker('refresh');
+            } else {
+                console.log('No result');
+            }
+        }
+    })
+    .fail(() => {
+        $('#editShelfModal').modal('hide');
+        showAlert('danger', 'Failed!', 'There was an error in getting buildings');
+    });
+
+    // Get the details of shelf for editing
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/shelves/${ id }`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                console.log(data)
+                
+                // Set the ID of the room
+                $('#shelfIDForEdit').val(data.shelfID);
+
+                // Set the name of the room
+                $('#shelfNameForEdit').val(data.shelfName);
+
+                // Set the selected building
+                $('#buildingForEditShelf').selectpicker('val', `${ data.building.buildingID }`);
+
+                // Set the selected rom
+                $('#roomForEditShelf').selectpicker('val', `${ data.room.roomID }`);
+                
+                // Set the status of shelf
+                const radios = $(`input:radio[name="statusForEdit"]`);
+                if(data.status === 'Active') {
+                    radios.filter(`[value="Active"]`).prop('checked', true);
+                } else if(data.status === 'Inactive') {
+                    radios.filter(`[value="Inactive"]`).prop('checked', true);
+                }
+
+                // Show Edit Room Modal
+                $('#editShelfModal').modal('show');
+            } else {
+                showAlert('danger', 'Failed!', 'No result was found');
+            }
+        }
+    })
+    .fail(() => showAlert('danger', 'Failed!', 'There was an error in getting a room'));
+}
+
+// Validate Edit Shelf Form
+$('#editShelfForm').validate(validateOptions({
+    rules: {
+        shelfName: {
+            required: true,
+        },
+        building: {
+            required: true,
+        },
+        room: {
+            required: true
+        },
+        statusForEdit: {
+            required: true
+        }
+    },
+    messages: {
+        shelfName: {
+            required: 'Shelf name is required',
+        },
+        building: {
+            required: 'Please select the building where the room belongs to',
+        },
+        room: {
+            required: 'Please select the room where the shelf belongs to',
+        },
+        statusForEdit: {
+            required: 'Please select the status of the shelf'
+        }
+    },
+    submitHandler: () => update_shelfAJAX()
+}));
+
+
+// Update Shelf AJAX
+update_shelfAJAX = () => {
+    const rawData = new FormData($('#editShelfForm')[0]);
+
+    data = {
+        shelfName:   rawData.get('shelfName'),
+        buildingID: rawData.get('building'),
+        roomID: rawData.get('room'),
+        status:     rawData.get('statusForEdit'),
+        updatedAt:  moment().format()
+    }
+
+    const id = rawData.get('shelfID');
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/shelves/${ id }`,
+        type: 'PUT',
+        data: data,
+        dataType: 'json',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            
+            if(result) {
+                // Reload shelves count
+                shelves_countAJAX();
+                
+                // Reload DataTables
+                const dt = $('#shelvesDT').DataTable();
+                dt.ajax.reload()
+
+                // Show success alert
+                showAlert('info', 'Success!', 'A shelf has been updated.');
+            } else {
+                showAlert('danger', 'Failed!', 'There was an error in updating a shelf. Please try again.');
+            }
+            
+            $('#editShelfModal').modal('hide');
+        }
+    })
+    .fail(() => {
+        $('#editShelfModal').modal('hide');
+        showAlert('danger', 'Failed!', 'There was an error in updating a shelf. Please try again.');
+    });
+}
 
 
 /**

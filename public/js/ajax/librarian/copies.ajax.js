@@ -226,5 +226,4 @@ add_copyAJAX = () => {
             showAlert('danger','Failed!',response.message);
         }
     })
-    .fail(() => showAlert('danger', 'Error', 'There was an error in reading file'));
 }

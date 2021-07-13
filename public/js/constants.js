@@ -47,8 +47,23 @@ const validateOptions = (validateOptions) => {
             err.addClass("invalid-feedback");
             el.closest(".form-group").append(err);
         },
-        highlight:   (el) => $(el).addClass('is-invalid').removeClass('is-valid'),
-        unhighlight: (el) => $(el).addClass('is-valid').removeClass('is-invalid'),
+        highlight:   (el) => {
+            console.log(el);
+            if($(el).hasClass('selectpicker')) {
+                $(el).selectpicker('setStyle', 'border-success', 'remove');
+                $(el).selectpicker('setStyle', 'border-danger', 'add');
+            } else {
+                $(el).addClass('is-invalid').removeClass('is-valid');
+            }
+        },
+        unhighlight: (el) => {
+            if($(el).hasClass('selectpicker')) {
+                $(el).selectpicker('setStyle', 'border-danger', 'remove');
+                $(el).selectpicker('setStyle', 'border-success', 'add');
+            } else {
+                $(el).addClass('is-valid').removeClass('is-invalid');
+            }
+        },
         submitHandler: validateOptions.submitHandler
     }
 }

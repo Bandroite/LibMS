@@ -786,15 +786,6 @@ $('#editMaterialForm').validate(validateOptions({
         standardType: {
             required: true,
         },
-        edition: {
-            required: true,
-        },
-        editionYear: {
-            required: true,
-        },
-        volumeNo: {
-            required: true,
-        },
         pageNo: {
             required: true,
         },
@@ -806,9 +797,6 @@ $('#editMaterialForm').validate(validateOptions({
         },
         pubCountryID: {
             required: true
-        },
-        seriesYear: {
-            required: true,
         },
         description: {
             required: true,
@@ -848,15 +836,6 @@ $('#editMaterialForm').validate(validateOptions({
         standardType: {
             required: 'Please select the standard type',
         },
-        edition: {
-            required: 'Edition is required',
-        },
-        editionYear: {
-            required: 'Edition year is required',
-        },
-        volumeNo: {
-            required: 'Volume number is required',
-        },
         pageNo: {
             required: 'Page number is required',
         },
@@ -868,9 +847,6 @@ $('#editMaterialForm').validate(validateOptions({
         },
         pubCountryID: {
             required: 'Please select the publication country'
-        },
-        seriesYear: {
-            required: 'Series year is required',
         },
         description: {
             required: 'Description is required',
