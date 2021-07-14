@@ -140,7 +140,7 @@ add_genreAJAX = () => {
         status: rawData.get('status'),
     }
 
-    // Add Author via AJAX
+    // Add Genre via AJAX
     $.ajax({
         url: `${ BASE_URL_API }librarian/genres`,
         type: 'POST',
