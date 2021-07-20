@@ -36,7 +36,10 @@
             <?php if($this->session->userType === 'Student' || $this->session->userType === 'Staff'): ?>
                 <li class="nav-item">
                     <div class="dropdown">
-                        <div class="nav-link" data-toggle="dropdown" role="button">John</div>
+                        <div class="nav-link flex-h-separated" data-toggle="dropdown" role="button">
+                            <div>John</div>
+                            <div id="notifContainer" class="p-1 ml-2 bg-primary rounded-circle" style="display: none"></div>
+                        </div>
 
                         <div 
                             class = "dropdown-menu dropdown-user-menu dropdown-menu-right user-select-none" 
@@ -58,7 +61,7 @@
                                     <i class="fas fa-heart dropdown-icon-item"></i>
                                     <span>Favorites</span>
                                 </div>
-                                <div class="badge badge-primary p-1">3</div>
+                                <div id="favoritesCountContainer"></div>
                             </a>
                             <a 
                                 class = "dropdown-item d-flex justify-content-between align-items-center" 

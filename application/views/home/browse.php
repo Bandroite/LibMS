@@ -1,7 +1,8 @@
 <!-- Materials -->
 <div class="container py-5">
+
+    <!-- Search Bar -->
     <div class="container mb-5 px-5">
-        <!-- Search Bar -->
         <div class="form-row pt-5">
             <div class="col-12 col-md-6 col-lg-3 mt-2 mt-md-0 px-1 order-2 order-md-1">
                 <div class="form-group">
@@ -27,9 +28,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
+
+    <!-- Materials -->
+    <div class="row" id="allMaterials">
         
-        <?php for($i=0;$i<16;$i++): ?>
         <div class="col-md-6 col-lg-3 mb-3 flex-center">
             <div class="material-card">
                 <div class="material-img-container">
@@ -52,7 +54,6 @@
                 </div>
             </div>
         </div>
-        <?php endfor ?>
 
     </div>
-    </div>
+</div>

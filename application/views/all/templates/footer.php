@@ -44,5 +44,11 @@
     <script src="<?= base_url() . 'public/js/ajax/' . $dir_path . '/' . $AJAX_File . '.ajax.js'?>"></script>
 <?php } ?>
 
+<?php if($this->session->userType === 'Student' || $this->session->userType === 'Staff') {
+    if(isset($sessioned_dir_path) && isset($sessioned_AJAX_Files)) foreach($sessioned_AJAX_Files as $AJAX_File) {
+?>
+    <script src="<?= base_url() . 'public/js/ajax/' . $sessioned_dir_path . '/' . $AJAX_File . '.ajax.js'?>"></script>
+<?php }} ?>
+
 </body>
 </html>

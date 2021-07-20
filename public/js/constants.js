@@ -137,18 +137,44 @@ const setFormValues = (formElement = '', formFieldNamesAndValues = []) => {
     }
 }
 
+// Set Full Name
+const setFullName = (format, userName = {
+    firstName: '',
+    middleName: '',
+    lastName: ''
+}) => {
+    
+    var firstName  = $.trim(userName.firstName);
+    var middleName = $.trim(userName.middleName);
+    var lastName   = $.trim(userName.lastName);
+    
+    // {last name}, {first name} {middle name}
+    if(format === 'L, F M') {
+        middleName = (middleName == null || middleName === '') ? '' : ' ' + middleName;
+        return lastName + ', ' + firstName + middleName;
+    } 
+    
+    // {first name} {middle name} {last name}
+    if(format === 'F M L') {
+        middleName = (middleName == null || middleName === '') ? ' ' : ' ' + middleName + ' ';
+        return firstName + middleName + lastName;
+    }
 
+    // {last name}, {first name} {middle initial}
+    if(format === 'L, F Mi') {
+        middleName = (middleName == null || middleName === '') ? '' : ' ' + middleName.charAt(0) + '.';
+        return lastName + ', ' + firstName + middleName;
+    }
 
+    // {first name} {middle initial} {last name}
+    if(format === 'F Mi L') {
+        middleName = (middleName == null || middleName === '') ? ' ' : w.charAt(0) + '. ';
+        return firstName + middleName + lastName;
+    }
 
+    // {last name}, {first name}
+    if(format === 'L, F') { return lastName + ', ' + firstName; }
 
-
-
-
-
-
-
-
-
-
-
-
+    // {first name}, {last name}
+    if(format === 'F L') { return firstName + ' ' + lastName; }
+}

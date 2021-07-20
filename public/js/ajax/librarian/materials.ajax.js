@@ -75,11 +75,7 @@ loadMaterialsDT = () => {
         dt.DataTable({
             ajax: {
                 url: `${ BASE_URL_API }librarian/materials`,
-                type: 'GET',
                 headers: AJAX_HEADERS,
-                // success: result => {
-                //     console.log(result.data);
-                // }
             },
             columns: [
 

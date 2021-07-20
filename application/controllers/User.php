@@ -12,7 +12,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
 
-    
     /**
      * ========================================================================
      * * CUSTOM-DEFINED METHODS
@@ -23,7 +22,9 @@ class User extends CI_Controller {
     private String $dir = "user";
 
     // AJAX Files
-    private Array $AJAX_files = [];
+    private Array $AJAX_files = [
+        'favorites'
+    ];
 
     // Load Views Method
     // This load the header and the footer templates automatically when called
@@ -50,7 +51,7 @@ class User extends CI_Controller {
             
             // This load the footer templates
             $this->load->view('all/templates/footer', [
-                'dir_path'   => 'borrowers',
+                'dir_path'   => 'borrower',
                 'AJAX_Files' => $this->AJAX_files
             ]);
         }

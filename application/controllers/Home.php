@@ -20,16 +20,28 @@ class Home extends CI_Controller {
 
 	// Directory Folder of Views
     private String $dir = "home";
-
-    // AJAX Files
-    private Array $AJAX_files = [
-        'login',
-        'user'
-    ];
     
     // Load Views Method
     // This load the header and the footer templates automatically when called
     public function load_views(String $pageTitle, Array $views) {
+
+        $userType = $this->session->userType;
+
+        // AJAX Files
+        if($userType === 'Staff' || $userType === 'Student') {
+            $AJAX_files = [
+                'materials',
+                'favorites'
+            ];
+            $dir_path = 'borrower';
+        } else {
+            $AJAX_files = [
+                'login',
+                'user',
+                'materials'
+            ];
+            $dir_path = 'home';
+        }
 
         // This load the header templates
         $this->load->view('all/templates/header', ['title'=>$pageTitle]);
@@ -49,9 +61,10 @@ class Home extends CI_Controller {
 
         // This load the footer templates
         $this->load->view('all/templates/footer', [
-            'dir_path'   => $this->dir,
-            'AJAX_Files' => $this->AJAX_files
+            'dir_path'   => $dir_path,
+            'AJAX_Files' => $AJAX_files
         ]);
+
     }
 
     /**
