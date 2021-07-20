@@ -175,6 +175,61 @@ $('#addCopyForm').validate(validateOptions({
 }))
 
 // Add Copy AJAX
+addCopy = (materialID) => {
+    add_copyAJAX = () => {
+
+        // Get values from form to rawData
+        const rawData = new FormData($('#addCopyForm')[0]);
+    
+        const URLParams = location.pathname.split('/');
+        materialID = URLParams[URLParams.length-1];
+    
+    
+        // Get data from rawData
+        data = {
+            copyNumber: rawData.get('copyNumber'),
+            materialID:`${materialID}`,
+            status: rawData.get('status'),
+        }
+    
+        // Add Copy via AJAX
+        $.ajax({
+            url: `${ BASE_URL_API }librarian/materials/${materialID}/copies`,
+            type: 'POST',
+            headers: AJAX_HEADERS,
+            data: data,
+            dataType: 'json',
+            success: (result) => {
+                if(result) {
+                    if(result.error) {
+                        console.log(result.message)
+                        $('#addCopyModal').modal('hide');
+    
+                        showAlert('danger','Failed!',result.message);
+    
+                    } else {
+                        console.log(result);
+                        $('#addCopyModal').modal('hide');
+                        
+                        showAlert('success','Success!',result.message);
+    
+                        // Refresh data table after add
+                        const dt = $('#copiesDT').DataTable();
+                        dt.ajax.reload();
+                    }
+                } else {
+                    console.log('No result');
+                }
+            },
+            error: (err) => {
+                const response = err.responseJSON
+                $('#addCopyModal').modal('hide');
+                showAlert('danger','Failed!',response.message);
+            }
+        })
+    }
+}
+
 add_copyAJAX = () => {
 
     // Get values from form to rawData

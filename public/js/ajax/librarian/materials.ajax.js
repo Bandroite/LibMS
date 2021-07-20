@@ -191,8 +191,7 @@ loadMaterialsDT = () => {
                                     </a>
                                     <div
                                         class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#addCopyModal"
+                                        onclick = "addCopy('${data.materialID}')"
                                     >
                                         <i class="fas fa-plus mr-1 text-primary"></i>
                                         <span>Add copy of this material</span>
