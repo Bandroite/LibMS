@@ -219,7 +219,7 @@
                             <i class="far fa-heart ml-1"></i>
                         </button>
                     </div>
-                <?php else: ?>
+                <?php elseif(!$this->session->has_userdata('userType')): ?>
                     <a href="<?= base_url() ?>login" class="btn btn-lg border-danger text-danger">
                         <span>Add to favorites</span>
                         <i class="far fa-heart ml-1"></i>

@@ -25,17 +25,7 @@ loadShelvesDT = () => {
         dt.DataTable({
             ajax: {
                 url: `${ BASE_URL_API }librarian/shelves`,
-                type: 'GET',
                 headers: AJAX_HEADERS,
-                // success: (result) => {
-                //     if(result){
-                //         const data = result.data;
-                //         console.log(data);
-                //     }
-                //     else{
-                //         console.log('No result');
-                //     }
-                // }
             },
             columns: [
                 {

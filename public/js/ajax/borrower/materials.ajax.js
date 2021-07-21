@@ -6,14 +6,16 @@
  * ===============================================================================
  */
 
- $(() => {
+$(() => {
     view_all_available_materialsAJAX();
     get_one_available_materialAJAX();
-})
+    available_materials_countAJAX();
+});
+
 
 /**
  * ===============================================================================
- * GET ALL AUTHORS AJAX
+ * GET ALL AVAILABLE MATERIALS AJAX
  * ===============================================================================
  */
 
@@ -22,104 +24,115 @@ view_all_available_materialsAJAX = () => {
     const allMaterials = $('#allMaterials');
 
     if(allMaterials.length) {
-        $.ajax({
-            url: `${ BASE_URL_API }borrower/materials`,
-            headers: AJAX_HEADERS,
-            type: 'GET',
-            success: result => {
-                const data = result.data;
-
-                console.log(data);
-
-                if(data.length) {
-                    var materialCards = '';
-                    data.forEach(m => {
-                        const authors = m.authors;
-
-                        var authorBlade = '';
-                        authors.forEach((a, i) => {
-                            authorBlade += setFullName('F L', {
-                                firstName: a.authorFirstName,
-                                lastName: a.authorLastName,
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page');
+        if(urlParams.has('page') && page > 0) {
+            $.ajax({
+                url: `${ BASE_URL_API }borrower/materials/pages/${page}`,
+                type: 'GET',
+                headers: AJAX_HEADERS,
+                success: result => {
+                    const data = result.data;
+    
+                    if(data.length) {
+                        var materialCards = '';
+                        data.forEach(m => {
+                            const authors = m.authors;
+    
+                            var authorBlade = '';
+                            authors.forEach((a, i) => {
+                                authorBlade += setFullName('F L', {
+                                    firstName: a.authorFirstName,
+                                    lastName: a.authorLastName,
+                                });
+                                if(i < authors.length-1) authorBlade += ', ';
                             });
-                            if(i < authors.length-1) authorBlade += ', ';
-                        });
-
-                        const favoriteByBorrowers = m.favorite_by_borrowers;
-                        favBlade = `
-                            <div id="FAV-${m.materialID}">
-                                <button 
-                                    class="btn btn-sm" data-toggle="tooltip" 
-                                    title="Add to favorites" 
-                                    onclick="addToFavorites('${ m.materialID }')"
-                                >
-                                    <i class="far fa-heart text-danger"></i>
-                                </button>
-                            </div>
-                        `;
-                        favoriteByBorrowers.forEach(f => {
-                            if(f.userID == localStorage.getItem('userID'));
+    
+                            const favoriteByBorrowers = m.favorite_by_borrowers;
                             favBlade = `
-                                <div id="FAV-${ m.materialID }">
+                                <div id="FAV-${m.materialID}">
                                     <button 
                                         class="btn btn-sm" data-toggle="tooltip" 
-                                        title="Remove as favorite" 
-                                        onclick="removeAsFavorite('${ m.materialID }')"
+                                        title="Add to favorites" 
+                                        onclick="addToFavorites('${ m.materialID }')"
                                     >
-                                        <i class="fas fa-heart text-danger"></i>
+                                        <i class="far fa-heart text-danger"></i>
                                     </button>
                                 </div>
                             `;
-                        })
-
-                        materialDetailsLink = `${ BASE_URL_WEB }materials/${ m.materialID }`;
-
-                        materialCards += `
-                            <div class="col-md-6 col-lg-3 mb-3 flex-center">
-                                <div class="material-card w-100">
-                                    <div class="material-img-container">
-                                        <img 
-                                            class="border"
-                                            src="${ BASE_URL_API }materials/${ m.image }" 
-                                            alt="Book 3"
+                            favoriteByBorrowers.forEach(f => {
+                                if(f.userID == localStorage.getItem('userID'));
+                                favBlade = `
+                                    <div id="FAV-${ m.materialID }">
+                                        <button 
+                                            class="btn btn-sm" data-toggle="tooltip" 
+                                            title="Remove as favorite" 
+                                            onclick="removeAsFavorite('${ m.materialID }')"
                                         >
+                                            <i class="fas fa-heart text-danger"></i>
+                                        </button>
                                     </div>
-                                    <div class="material-details-container">
-                                        <a href="${ materialDetailsLink }" class="material-title">${ m.title }</a>
-                                        <div class="material-details">
-                                            <strong class="mr-1">Author:</strong>
-                                            <span class="d-inline-block text-truncate" style="max-width: 10rem">
-                                                <span>${ authorBlade }</span>
-                                            </span>
+                                `;
+                            })
+    
+                            materialDetailsLink = `${ BASE_URL_WEB }materials/${ m.materialID }`;
+    
+                            materialCards += `
+                                <div class="col-md-6 col-lg-3 mb-3 flex-center">
+                                    <div class="material-card w-100">
+                                        <div class="material-img-container">
+                                            <img 
+                                                class="border"
+                                                src="${ BASE_URL_API }materials/${ m.image }" 
+                                                alt="Book 3"
+                                            >
+                                        </div>
+                                        <div class="material-details-container">
+                                            <a href="${ materialDetailsLink }" class="material-title">${ m.title }</a>
+                                            <div class="material-details">
+                                                <strong class="mr-1">Author:</strong>
+                                                <span class="d-inline-block text-truncate" style="max-width: 10rem">
+                                                    <span>${ authorBlade }</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="material-card-footer flex-h-separated">
+                                            ${ favBlade }
+                                            <a href="${ materialDetailsLink }" class="btn btn-sm btn-primary">View More Details</a>
                                         </div>
                                     </div>
-                                    <div class="material-card-footer flex-h-separated">
-                                        ${ favBlade }
-                                        <a href="${ materialDetailsLink }" class="btn btn-sm btn-primary">View More Details</a>
-                                    </div>
                                 </div>
+                            `
+                        });
+                        allMaterials.html(materialCards);
+                    } else {
+                        allMaterials.html(`
+                            <div class="container flex-center">
+                                <div class="py-5">No materials yet</div>
                             </div>
-                        `
-                    });
-                    allMaterials.html(materialCards);
-                } else {
-                    allMaterials.html(`
-                        <div class="container flex-center">
-                            <div class="py-5">No materials yet</div>
-                        </div>
-                    `);
+                        `);
+                    }
                 }
-            }
-        })
+            });
+        } else {
+            location.assign(`${ BASE_URL_WEB }page-not-found`)
+        }
     }
 }
 
+
+/**
+ * ===============================================================================
+ * GET ONE AVAILABLE MATERIAL AJAX
+ * ===============================================================================
+ */
+
 // Get one available materials
 get_one_available_materialAJAX = () => {
-    if($('#materialDetails').length){
+    if($('#materialDetails').length) {
         const params = window.location.pathname.split('/');
         const materialID = params[params.length-1];
-        
+
         $.ajax({
             url: `${ BASE_URL_API }borrower/materials/${materialID}`,
             headers: AJAX_HEADERS,
@@ -129,12 +142,16 @@ get_one_available_materialAJAX = () => {
                     const data = result.data;
                     console.log(data);
 
+                    // Set material ID for favorites
                     $('#materialIDForFavorites').val(data.materialID);
 
+                    // Set material image
                     $('#materialImage').attr('src', `${ BASE_URL_API }materials/${ data.image }`);
 
+                    // Material Title
                     $('#materialTitle').html(data.title);
 
+                    // Material Genres
                     const genres = data.genres;
                     var genresBlade = '';
                     var genresDetailedBlade = '';
@@ -145,6 +162,7 @@ get_one_available_materialAJAX = () => {
                     });
                     $('#materialGenres').html(genresBlade);
 
+                    // Material Titles
                     const authors = data.authors;
                     var authorsBlade = '';
                     var authorsDetailedBlade = '';
@@ -160,6 +178,7 @@ get_one_available_materialAJAX = () => {
                     });
                     $('#materialAuthors').html(authorsBlade);
 
+                    // Other Material Details
                     $('#descriptionDetails').html(data.description);
                     $('#detailedAuthors').html(authorsDetailedBlade);
                     $('#standardNumber').html(data.standardType + ' ' + data.standardNumber)
@@ -179,8 +198,62 @@ get_one_available_materialAJAX = () => {
                     $('#shelf').html(data.shelf.shelfName);
                     $('#room').html(data.shelf.room.roomName);
                     $('#building').html(data.shelf.room.building.buildingName);
+
+                    // For favorite button
+                    const favoriteByBorrowers = data.favorite_by_borrowers;
+                    $('#userFavBtnContainer').html(`
+                        <button type="button" class="btn btn-lg border-danger text-danger" onclick="addToFavorites('${ materialID }')">
+                            <span>Add to favorites</span>
+                            <i class="far fa-heart ml-1"></i>
+                        </button>
+                    `)
+                    favoriteByBorrowers.forEach(f => {
+                        if(f.userID === localStorage.getItem('userID')) {
+                            $('#userFavBtnContainer').html(`
+                                <button type="button" class="btn btn-lg border-danger text-danger" onclick="removeAsFavorite('${ data.materialID }')">
+                                    <span>Added</span>
+                                    <i class="fas fa-heart ml-1"></i>
+                                </button>
+                            `);
+                        }
+                    })
                 }
             }
         })
+        .fail(() => location.assign(`${ BASE_URL_WEB }page-not-found`));
+    }
+}
+
+
+/**
+ * ===============================================================================
+ * AVAILABLE MATERIALS COUNT AJAX
+ * ===============================================================================
+ */
+
+// Available Materials Count
+available_materials_countAJAX = () => {
+    if($('#allMaterials').length) {
+        $.ajax({
+            url: `${ BASE_URL_API }home/materials/count`,
+            type: 'GET',
+            success: result => {
+                const count = result.data;
+                if('#allMaterials') {
+
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const currentPage = parseInt(urlParams.get('page'));
+
+                    const baseURL = `${ BASE_URL_WEB }browse/?page=`;
+                    
+                    createPagination($('#allMaterialsPagination'), {
+                        currentPage: currentPage,
+                        totalRows: count,
+                        baseURL: baseURL
+                    });
+                }
+            }
+        })
+        .fail(() => console.log('There was a problem in getting available materials count'));
     }
 }

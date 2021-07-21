@@ -65,11 +65,11 @@
                             </a>
                             <a 
                                 class = "dropdown-item d-flex justify-content-between align-items-center" 
-                                href  = "<?= base_url() ?>me/borrowed-books"
+                                href  = "<?= base_url() ?>me/transactions"
                             >
                                 <div>
                                     <i class="fas fa-book dropdown-icon-item"></i>
-                                    <span>Borrowed Books</span>
+                                    <span>Transactions</span>
                                 </div>
                                 <div class="badge badge-primary p-1">3</div>
                             </a>

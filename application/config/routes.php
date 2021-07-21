@@ -76,7 +76,7 @@ $route['alert']                     = 'home/alert';
 // User Routes
 $route['me']                  = 'user/profile';
 $route['me/favorites']        = 'user/favorites';
-$route['me/borrowed-books']   = 'user/borrowed_books';
+$route['me/transactions']     = 'user/transactions';
 $route['me/edit-info']        = 'user/edit_info';
 $route['me/account-settings'] = 'user/account_settings';
 $route['me/logout']           = 'user/logout';

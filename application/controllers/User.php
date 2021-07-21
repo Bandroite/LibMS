@@ -23,7 +23,8 @@ class User extends CI_Controller {
 
     // AJAX Files
     private Array $AJAX_files = [
-        'favorites'
+        'favorites',
+        'transactions'
     ];
 
     // Load Views Method
@@ -48,6 +49,9 @@ class User extends CI_Controller {
                 $viewData = isset($view[1]) ? $view[1] : NULL;
                 $this->load->view($viewPath, $viewData);
             }
+
+            // This load the footer components
+            $this->load->view('all/components/footer');
             
             // This load the footer templates
             $this->load->view('all/templates/footer', [
@@ -73,17 +77,24 @@ class User extends CI_Controller {
 
     // Favorites
     public function favorites() {
-        $this->load_views('Favorites', [
-            ['components/banner', ['title' => 'Your Favorites']],
-            ['favorites']
-        ]);
+        $currentPage = $this->input->get('page');
+        if($currentPage == NULL) {
+            redirect('me/favorites/?page=1');
+        } else if($currentPage == 0) {
+            $this->Error_model->page_not_found();
+        } else {
+            $this->load_views('Favorites', [
+                ['components/banner', ['title' => 'Your Favorites']],
+                ['favorites']
+            ]);
+        }
     }
 
-    // Borrowed Books
-    public function borrowed_books() {
+    // Transactions
+    public function transactions() {
         $this->load_views('Borrowed Books', [
-            ['components/banner', ['title' => 'Your Borrowed Books']],
-            ['borrowed_books']
+            ['components/banner', ['title' => 'Your transactions']],
+            ['transactions']
         ]);
     }
 

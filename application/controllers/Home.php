@@ -80,10 +80,17 @@ class Home extends CI_Controller {
 
     // Browse
 	public function browse() {
-		$this->load_views('Browse', [
-            ['components/banner', ["title" => "Browse All Materials"]],
-            ['browse']
-        ]);
+        $currentPage = $this->input->get('page');
+        if($currentPage == NULL) {
+            redirect('browse/?page=1');
+        } else if($currentPage == 0) {
+            $this->Error_model->page_not_found();
+        } else {
+            $this->load_views('Browse', [
+                ['components/banner', ["title" => "Browse All Materials"]],
+                ['browse']
+            ]);
+        }
 	}
 
     // Advance Search
