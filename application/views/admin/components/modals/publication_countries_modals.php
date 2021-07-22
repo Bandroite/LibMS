@@ -111,7 +111,7 @@
                     <input 
                         type="text" 
                         class="form-control"
-                        id="country"
+                        id="editCountry"
                         name="country"
                         placeholder="Enter publication Country here"
                     >
@@ -199,6 +199,90 @@
             <button type="submit" class="btn btn-danger" id="removePublicationCountryModal">
                 <i class="fas fa-trash-alt mr-1"></i>
                 <span>Remove</span>
+            </button>
+        </div>
+        </form>
+    </div>
+</div>
+
+<!-- View Publication Country Modal -->
+<div 
+    class         = "modal" 
+    id            = "viewPublicationCountryModal" 
+    data-backdrop = "static" 
+    data-keyboard = "false"
+    tabindex      = "-1"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <form 
+            class="modal-content"
+            id="viewPublicationCountryForm"
+        >
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <i class="fas fa-eye mr-1 text-info"></i>
+                <span>View Publication Country Details</span>
+            </h5>
+            <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="fas fa-times"></i>
+                </span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>Publication Country</th>
+                        <td id="publicationCountry">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Status</th>
+                        <td id="status">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Added By</th>
+                        <td id="addedBy">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Updated By</th>
+                        <td id="updatedBy">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Added At</th>
+                        <td id="addedAt">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td id="updatedAt">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button 
+                type="button" 
+                class="btn btn-muted" 
+                data-dismiss="modal"
+            >
+                OK
             </button>
         </div>
         </form>

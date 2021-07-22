@@ -385,16 +385,21 @@ viewGenre = (genreID) => {
                 const data = result.data;
                 const addedBy = data.added_by_librarian
                 const updatedBy = data.updated_by_librarian
-                const fullName =
+                
+                const addedByFullName =
                 setFullName('F Mi L',{
                     firstName: addedBy.firstName,
                     middleName: addedBy.middleName,
-                    lastName: addedBy.lastName,
+                    lastName: addedBy.lastName
+                })
 
+                const updatedByFullName =
+                setFullName('F Mi L',{
                     firstName: updatedBy.firstName,
                     middleName: updatedBy.middleName,
                     lastName: updatedBy.lastName,
                 })
+
                 var statusBlade;
                     if(data.status == 'Active'){
                         statusBlade = `
@@ -414,8 +419,8 @@ viewGenre = (genreID) => {
 
                 $('#genreName').html(data.genre);
                 $('#status').html(statusBlade);
-                $('#addedBy').html(fullName);
-                $('#updatedBy').html(fullName);
+                $('#addedBy').html(addedByFullName);
+                $('#updatedBy').html(updatedByFullName);
                 $('#addedAt').html(addedAt);
                 $('#updatedAt').html(updatedAt);
                 

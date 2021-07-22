@@ -213,3 +213,88 @@
         </form>
     </div>
 </div>
+
+
+<!-- View Material Type Modal -->
+<div 
+    class         = "modal" 
+    id            = "viewMaterialTypeModal" 
+    data-backdrop = "static" 
+    data-keyboard = "false"
+    tabindex      = "-1"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <form 
+            class="modal-content"
+            id="viewMaterialTypeForm"
+        >
+        <div class="modal-header">
+            <h5 class="modal-title">
+                <i class="fas fa-eye mr-1 text-info"></i>
+                <span>View Material Type Details</span>
+            </h5>
+            <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">
+                    <i class="fas fa-times"></i>
+                </span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>Material Type</th>
+                        <td id="type">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Status</th>
+                        <td id="status">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Added By</th>
+                        <td id="addedBy">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Updated By</th>
+                        <td id="updatedBy">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Added At</th>
+                        <td id="addedAt">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td id="updatedAt">
+                            <span class="text-secondary font-italic">No data</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button 
+                type="button" 
+                class="btn btn-muted" 
+                data-dismiss="modal"
+            >
+                OK
+            </button>
+        </div>
+        </form>
+    </div>
+</div>

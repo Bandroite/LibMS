@@ -72,6 +72,13 @@ loadPublishersDT = () => {
                                 </div>
 
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    <div  
+                                        class       = "dropdown-item"
+                                        onclick     = "viewPublisher('${data.publisherID}')"
+                                    >
+                                        <i class="fas fa-eye dropdown-icon-item text-info"></i>
+                                        <span>View details</span>
+                                    </div>
                                     <div 
                                         class="dropdown-item"
                                         onclick = "editPublisher('${data.publisherID}')"
@@ -357,6 +364,70 @@ delete_publisherAJAX = () => {
     })
 }
 
+/**
+ * ===============================================================================
+ * VIEW PUBLISHER
+ * ===============================================================================
+ */
+
+// View Publisher
+viewPublisher = (publisherID) => {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/publishers/${publisherID}`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result){
+                const data = result.data;
+                const addedBy = data.added_by_librarian
+                const updatedBy = data.updated_by_librarian
+                
+                const addedByFullName =
+                setFullName('F Mi L',{
+                    firstName: addedBy.firstName,
+                    middleName: addedBy.middleName,
+                    lastName: addedBy.lastName
+                })
+
+                const updatedByFullName =
+                setFullName('F Mi L',{
+                    firstName: updatedBy.firstName,
+                    middleName: updatedBy.middleName,
+                    lastName: updatedBy.lastName,
+                })
+
+                var statusBlade;
+                    if(data.status == 'Active'){
+                        statusBlade = `
+                            <div class="badge alert-success text-success p-2">Active</div>
+                        `
+                    }
+                    else{
+                        statusBlade = `
+                            <div class="badge alert-danger text-danger p-2">Inactive</div>
+                        `
+                    }
+
+                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
+                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
+
+                console.log(data);
+
+                $('#publisher').html(data.publisherName);
+                $('#status').html(statusBlade);
+                $('#addedBy').html(addedByFullName);
+                $('#updatedBy').html(updatedByFullName);
+                $('#addedAt').html(addedAt);
+                $('#updatedAt').html(updatedAt);
+                
+                $('#viewPublisherModal').modal('show')
+            }
+            else{
+                console.log('No result');
+            }
+        } 
+    })
+}
 
 /**
  * ===============================================================================
