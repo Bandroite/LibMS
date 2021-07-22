@@ -23,6 +23,7 @@ class User extends CI_Controller {
 
     // AJAX Files
     private Array $AJAX_files = [
+        'account',
         'favorites',
         'transactions'
     ];

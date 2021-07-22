@@ -105,7 +105,7 @@
                                 <th>Student Name</th>
                                 <th>Program, Year/Section</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -125,7 +125,7 @@
                                 <th>ID Number</th>
                                 <th>Staff Name</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

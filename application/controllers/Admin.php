@@ -23,6 +23,7 @@ class Admin extends CI_Controller {
 
     // AJAX Files
     private Array $AJAX_Files = [
+        'account',
         'authors',
         'buildings',
         'transactions',
@@ -102,7 +103,10 @@ class Admin extends CI_Controller {
 
     // Borrowers
 	public function borrowers() {
-        $this->load_views('Borrowers', 'Borrowers', [['borrowers']]);
+        $this->load_views('Borrowers', 'Borrowers', [
+            ['components/modals/borrowers_modals'],
+            ['borrowers']
+        ]);
 	}
 
     // Borrowers

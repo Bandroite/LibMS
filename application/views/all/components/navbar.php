@@ -37,7 +37,7 @@
                 <li class="nav-item">
                     <div class="dropdown">
                         <div class="nav-link flex-h-separated" data-toggle="dropdown" role="button">
-                            <div>John</div>
+                            <div><span id="borrowerFirstName"></span></div>
                             <div id="notifContainer" class="p-1 ml-2 bg-primary rounded-circle" style="display: none"></div>
                         </div>
 

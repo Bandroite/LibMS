@@ -31,7 +31,7 @@
                 aria-expanded="false"
             >
                 <i class="fas fa-user fa-fw mr-1"></i>
-                <span id="librarianFullName"></span>
+                <span id="librarianFirstName"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="">

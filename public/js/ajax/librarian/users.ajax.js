@@ -88,10 +88,38 @@ loadStudentBorrowersDT = () => {
                     class: 'text-center',
                     render: data => {
                         return `
-                            <div class="dropdown">
-                                <div>
-                                    <div class="btn btn-sm btn-muted">
+                            <div class="dropdown d-inline-block">
+                                <div data-toggle="dropdown">
+                                    <div 
+                                        class       = "btn btn-sm btn-muted"
+                                        data-toggle = "tooltip"
+                                        title       = "More"
+                                    >
                                         <i class="fas fa-ellipsis-v"></i>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <div  
+                                        class       = "dropdown-item"
+                                        onclick     = "viewBorrower('${data.userID}')"
+                                    >
+                                        <i class="fas fa-eye dropdown-icon-item text-info"></i>
+                                        <span>View details</span>
+                                    </div>
+                                    <div 
+                                        class="dropdown-item"
+                                        onclick = "editBorrower('${data.userID}')"
+                                    >
+                                        <i class="fas fa-edit dropdown-icon-item text-blue"></i>
+                                        <span>Edit</span>
+                                    </div>
+                                    <div 
+                                        class="dropdown-item"
+                                        onclick = "removeBorrower('${data.userID}')"
+                                    >
+                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
+                                        <span>Remove</span>
                                     </div>
                                 </div>
                             </div>
