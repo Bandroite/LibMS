@@ -1,8 +1,15 @@
 <!-- Materials -->
 <div class="container py-5">
 
+    <!-- Header -->
+    <div class="mb-3">
+        <h3>View all available materials here</h3>
+        <h6 class="text-secondary">Mark your favorite materials too!</h6>
+    </div>
+
+
     <!-- Search Bar -->
-    <div class="container mb-5 px-5">
+    <div class="container mb-4 px-5">
         <div class="form-row pt-5">
             <div class="col-12 col-md-6 col-lg-3 mt-2 mt-md-0 px-1 order-2 order-md-1">
                 <div class="form-group">

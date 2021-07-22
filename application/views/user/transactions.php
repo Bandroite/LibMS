@@ -1,62 +1,19 @@
 <!-- Materials -->
 <div class="container py-5">
-    <div class="list-group" id="transactions">
-        
-        <?php for($i=0;$i<16;$i++): ?>
-            <div class="list-group-item border rounded-lg mb-4 d-flex">
-                <div class="mr-3">
-                    <div class="alert-primary rounded-lg flex-center" style="height: 4rem; width: 4rem">
-                        <h2><i class="fas fa-exchange-alt text-primary"></i></h2>
-                    </div>
-                </div>
-                <div class="flex-grow-1">
-                    <div class="mb-2">
-                        <div class="h5">Saturday, July 1, 2021; 11:45 AM</div>
-                        <div class="h6 mb-1">
-                            <i class="fas fa-user-tie mr-1 text-secondary"></i>
-                            <span>Processed by: Vanessah Buenaventura</span>
-                        </div>
-                        <div class="small text-secondary font-italic">3 hours ago</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <span>Total copies borrowed:</span>
-                            <span>
-                                <span class="badge badge-blue ml-2">3</span>
-                            </span>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <span>Returned copies:</span>
-                            <span>
-                                <span class="badge badge-success ml-2">3</span>
-                            </span>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <span>Uneturned copies:</span>
-                            <span>
-                                <span class="badge badge-info ml-2">3</span>
-                            </span>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <span>Over due:</span>
-                            <span>
-                                <span class="badge badge-danger ml-2">3</span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <a href="#" data-toggle="modal" data-target="#viewTransactionDetailsModal" class="btn btn-sm btn-info">View More</a>
-                    </div>
-                </div>
-            </div>
-        <?php endfor ?>
 
+    <!-- Header -->
+    <div class="mb-4">
+        <h3>View all of your transactions here</h3>
+        <h6 class="text-secondary" id="noOfTransactions"></h6>
     </div>
+
+    <!-- Transaction List -->
+    <div class="list-group" id="transactionsList"></div>
 </div>
 
 <!-- Returned Material Details Modal -->
-<div class="modal fade" id="viewTransactionDetailsModal" tabindex="-1">
-    <div class="modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable">
+<div class="modal" id="viewTransactionDetailsModal" tabindex="-1">
+    <div class="modal-xl modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
@@ -93,28 +50,16 @@
                     <i class="fas fa-copy text-primary mr-1"></i>
                     <span>List of borrowed copies</span>
                 </h6>
-                <div class="table-responsive">
-                    <table class="table w-100" width="100%" cellspacing="0">
+                <div class="table-responsive p-3 border rounded-lg">
+                    <table class="table w-100" width="100%" cellspacing="0" id="copiesBorrowedDT">
                         <thead>
                             <th>Copy Number</th>
                             <th>Material</th>
                             <th>Status</th>
+                            <th>Due Date</th>
                             <th>Date Returned</th>
                         </thead>
-                        <tbody>
-                            <?php for($i=0;$i<3;$i++): ?>
-                            <tr>
-                                <td>COPY-0001</td>
-                                <td>The Life of Juan</td>
-                                <td>
-                                    <span class="badge alert-warning text-warning p-2 w-100">Unreturned</span>
-                                </td>
-                                <td>
-                                    <span class="font-italic text-secondary">Not yet returned</span>
-                                </td>
-                            </tr>
-                            <?php endfor ?>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>

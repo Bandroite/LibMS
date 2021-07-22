@@ -71,7 +71,7 @@
                                     <i class="fas fa-book dropdown-icon-item"></i>
                                     <span>Transactions</span>
                                 </div>
-                                <div class="badge badge-primary p-1">3</div>
+                                <div id="transactionsCountContainer"></div>
                             </a>
                             <div class="dropdown-divider"></div>
                             <a 

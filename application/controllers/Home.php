@@ -31,7 +31,8 @@ class Home extends CI_Controller {
         if($userType === 'Staff' || $userType === 'Student') {
             $AJAX_files = [
                 'materials',
-                'favorites'
+                'favorites',
+                'transactions'
             ];
             $dir_path = 'borrower';
         } else {

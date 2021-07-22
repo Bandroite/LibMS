@@ -76,33 +76,76 @@ view_all_available_materialsAJAX = () => {
                             })
     
                             materialDetailsLink = `${ BASE_URL_WEB }materials/${ m.materialID }`;
-    
-                            materialCards += `
-                                <div class="col-md-6 col-lg-3 mb-3 flex-center">
-                                    <div class="material-card w-100">
-                                        <div class="material-img-container">
-                                            <img 
-                                                class="border"
-                                                src="${ BASE_URL_API }materials/${ m.image }" 
-                                                alt="Book 3"
-                                            >
-                                        </div>
-                                        <div class="material-details-container">
-                                            <a href="${ materialDetailsLink }" class="material-title">${ m.title }</a>
-                                            <div class="material-details">
-                                                <strong class="mr-1">Author:</strong>
-                                                <span class="d-inline-block text-truncate" style="max-width: 10rem">
-                                                    <span>${ authorBlade }</span>
-                                                </span>
+                            
+                            imageLink = `${ BASE_URL_API }materials/${ m.image }`;
+
+                            const appendMaterialCardWithImage = () => {
+                                materialCards += `
+                                    <div class="col-md-6 col-lg-3 mb-3 flex-center">
+                                        <div class="material-card w-100">
+                                            <div class="material-img-container">
+                                                <img 
+                                                    class="border"
+                                                    src="${ imageLink }" 
+                                                    alt="Book 3"
+                                                >
+                                            </div>
+                                            <div class="material-details-container">
+                                                <a href="${ materialDetailsLink }" class="material-title">${ m.title }</a>
+                                                <div class="material-details">
+                                                    <strong class="mr-1">Author:</strong>
+                                                    <span class="d-inline-block text-truncate" style="max-width: 10rem">
+                                                        <span>${ authorBlade }</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="material-card-footer flex-h-separated">
+                                                ${ favBlade }
+                                                <a href="${ materialDetailsLink }" class="btn btn-sm btn-primary">View More Details</a>
                                             </div>
                                         </div>
-                                        <div class="material-card-footer flex-h-separated">
-                                            ${ favBlade }
-                                            <a href="${ materialDetailsLink }" class="btn btn-sm btn-primary">View More Details</a>
+                                    </div>
+                                `
+                            }
+
+                            const appendMaterialCardWithoutImage = () => {
+                                materialCards += `
+                                    <div class="col-md-6 col-lg-3 mb-3 flex-center">
+                                        <div class="material-card w-100">
+                                            <div class="material-img-container">
+                                                <div class="w-100 h-100 rounded flex-center p-3 border">
+                                                    <div class="text-center">
+                                                        <div>${ m.title }</div>
+                                                        <div class="small text-secondary">No image</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="material-details-container">
+                                                <a href="${ materialDetailsLink }" class="material-title">${ m.title }</a>
+                                                <div class="material-details">
+                                                    <strong class="mr-1">Author:</strong>
+                                                    <span class="d-inline-block text-truncate" style="max-width: 10rem">
+                                                        <span>${ authorBlade }</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="material-card-footer flex-h-separated">
+                                                ${ favBlade }
+                                                <a href="${ materialDetailsLink }" class="btn btn-sm btn-primary">View More Details</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            `
+                                `
+                            }
+
+                            // Check if has image
+                            $.ajax({
+                                async: false,
+                                url: imageLink,
+                                type: 'HEAD',
+                                success: () => appendMaterialCardWithImage(),
+                                error: () => appendMaterialCardWithoutImage() 
+                            })
                         });
                         allMaterials.html(materialCards);
                     } else {
