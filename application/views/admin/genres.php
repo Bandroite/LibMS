@@ -17,7 +17,7 @@
                         <i class="fas fa-book text-primary"></i>
                     </div>
                     <div class="text-right">
-                        <h6 class="m-0">Total number of Languages</h6>
+                        <h6 class="m-0">Total number of Genres</h6>
                         <h2 class="text-primary" id="genresTotalCount">0</h2>
                     </div>
                 </div>
