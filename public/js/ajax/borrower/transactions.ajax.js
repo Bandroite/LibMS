@@ -128,7 +128,21 @@ viewTransactionDetails = (transactionID) => {
         success: result => {
             if(result) {
                 const data = result.data;
-                console.log(data);
+
+                $('#transactionDate').html(moment(data.addedAt).format('dddd, MMMM D, YYYY; hh:mm A'))
+                $('#transactionHumanized').html(moment(data.addedAt).fromNow());
+
+                const addedByLibrarian = data.added_by_librarian;
+                $('#processedBy').html(() => {
+                    return setFullName('F L', {
+                        firstName: addedByLibrarian.firstName,
+                        lastName: addedByLibrarian.lastName
+                    })
+                })
+
+                // Clear and destroy any existing content of DataTable first
+                const dt = $('#copiesBorrowedDT').DataTable();
+                dt.clear().destroy();
                 
                 $('#copiesBorrowedDT').DataTable({
                     ajax: {
@@ -163,7 +177,7 @@ viewTransactionDetails = (transactionID) => {
                                 return `
                                     <div class="d-flex align-items-baseline">
                                         <div class="icon-container">
-                                            <i class="fas fa-copy text-primary"></i>
+                                            <i class="fas fa-book text-primary"></i>
                                         </div>
                                         <div>
                                             <div>${ data.copy.material.title }</div>

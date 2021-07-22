@@ -160,7 +160,7 @@ removeAsFavorite = (materialID) => {
             if(result) { view_all_favoritesAJAX() }
             
             // If material removed as favorite in all materials list
-            if($('#allMaterials').length) {
+            if($('#allMaterials').length || $('#latestMaterials').length) {
                 $(`#FAV-${ materialID }`).html(`
                     <button 
                         class="btn btn-sm" data-toggle="tooltip" 
@@ -217,6 +217,18 @@ favorites_countAJAX = () => {
                         totalRows: count,
                         baseURL: baseURL
                     });
+                }
+
+                const noOfFavoriteMaterials = $('#noOfFavoriteMaterials');
+                if(noOfFavoriteMaterials.length) {
+                    var noOfFavoriteMaterialsBlade;
+                    if(count == 0) {
+                        noOfFavoriteMaterialsBlade = `You don't have any favorite material yet.`;
+                    } else {
+                        withOrWithoutS = count > 1 ? 's' : '';
+                        noOfFavoriteMaterialsBlade = `Overall, you have ${count} favorite material` + withOrWithoutS + `.`;
+                    }
+                    noOfFavoriteMaterials.html(noOfFavoriteMaterialsBlade);
                 }
             }
         }

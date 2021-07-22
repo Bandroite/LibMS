@@ -36,12 +36,12 @@
                         </div>
                     </div>
                     <div>
-                        <h4>Saturday, July 1, 2021; 11:45 AM</h4>
+                        <h4 id="transactionDate"></h4>
                         <h6>
                             <i class="fas fa-user-tie mr-1 text-secondary"></i>
-                            <span>Processed by: Vanessah Buenaventura</span>
+                            <span>Processed by: <span id="processedBy"></span></span>
                         </h6>
-                        <div class="small text-secondary font-italic">3 hours ago</div>
+                        <div class="small text-secondary font-italic" id="transactionHumanized"></div>
                     </div>
                 </div>
 

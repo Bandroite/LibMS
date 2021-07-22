@@ -4,7 +4,7 @@
     <!-- Header -->
     <div class="mb-3">
         <h3>View all available materials here</h3>
-        <h6 class="text-secondary">Mark your favorite materials too!</h6>
+        <h6 class="text-secondary" id="noOfAvailableMaterials"></h6>
     </div>
 
 
