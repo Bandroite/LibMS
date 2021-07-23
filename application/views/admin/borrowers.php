@@ -7,6 +7,16 @@
 <!-- Show Alert -->
 <div id="alertContainer"></div>
 
+<!-- Show Sessioned Alert -->
+<?php if($this->session->has_userdata('alert')): ?>
+    <div class="alert alert-<?= $this->session->alertTheme ?> alert-dismissible fade show mb-4" role="alert" id="alert">
+        <div><b><?= $this->session->alertTitle ?></b> <?= $this->session->alertMessage ?></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif ?>
+
 <!-- Borrowers Summary -->
 <div class="form-row">
     

@@ -111,15 +111,15 @@ add_studentAJAX = () => {
         userType:       'Student'
     }
 
-    // Add User via AJAX
+    // Add Student via AJAX
     $.ajax({
         url: `${ BASE_URL_API }home/users`,
         type: 'POST',
         data: data,
         dataType: 'json',
         success: (result) => {
-            if(result) {$(
-                '#registerSuccessModal').modal('show');
+            if(result) {
+                $('#registerSuccessModal').modal('show');
             } else {
                 console.log('No result');
             }
@@ -216,7 +216,7 @@ add_staffAJAX = () => {
         userType:       'Staff'
     }
 
-    // Add User via AJAX
+    // Add Staff via AJAX
     $.ajax({
         url: `${ BASE_URL_API }home/users`,
         type: 'POST',

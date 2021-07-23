@@ -114,61 +114,141 @@
                     </div>
                 </div>
 
-                <!-- Course and Section -->
+                <!-- Course, Year and Section -->
                 <div class="form-row">
 
                     <!-- Course Field -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="course">Course</label>
-                            <select 
-                                class            = "selectpicker form-control border"
-                                name             = "course" 
-                                id               = "course" 
-                                data-style       = "form-control"
-                                data-live-search = "true"
-                                data-size        = "5"
-                                title            = "Select a course"
+                            <input 
+                                type="text" 
+                                name="course" 
+                                id="course" 
+                                class="form-control" 
+                                placeholder="Type course here"
                             >
-                                <option value="BSIT" data-tokens="BSIT Technology">Bachelor of Science in Information Technology (BSIT)</option>
-                                <option value="BSIT" data-tokens="BSIT Technology">Bachelor of Science in Information Technology (BSIT)</option>
-                                <option value="BSIT" data-tokens="BSIT Technology">Bachelor of Science in Information Technology (BSIT)</option>
-                                <option value="BSIT" data-tokens="BSIT Technology">Bachelor of Science in Information Technology (BSIT)</option>
-                                <option value="BSIT" data-tokens="BSIT Technology">Bachelor of Science in Information Technology (BSIT)</option>
-                                <option value="BSIT" data-tokens="BSIT Technology">Bachelor of Science in Information Technology (BSIT)</option>
-                            </select>
                         </div>
                     </div>
 
-                    <!-- Course Field -->
-                    <div class="col-md-6">
+                    <!-- Year Field -->
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="section">Section</label>
-                            <select 
-                                class            = "selectpicker form-control border"
-                                name             = "section" 
-                                id               = "section" 
-                                data-style       = "form-control"
-                                data-live-search = "true"
-                                data-size        = "5"
-                                title            = "Select a section"
-                            >
-                                <option value="Section 1" data-tokens="Section 1">Section 1</option>
-                                <option value="Section 1" data-tokens="Section 1">Section 1</option>
-                                <option value="Section 1" data-tokens="Section 1">Section 1</option>
-                                <option value="Section 1" data-tokens="Section 1">Section 1</option>
-                                <option value="Section 1" data-tokens="Section 1">Section 1</option>
-                                <option value="Section 1" data-tokens="Section 1">Section 1</option>
-                            </select>
+                                <label for="year">Year</label>
+                                <input 
+                                    type="text" 
+                                    name="year" 
+                                    id="year" 
+                                    class="form-control" 
+                                    placeholder="Type year here"
+                                >
+                        </div>
+                    </div>
+
+                    <!-- Section Field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                                <label for="section">Section</label>
+                                <input 
+                                    type="text" 
+                                    name="section" 
+                                    id="section" 
+                                    class="form-control" 
+                                    placeholder="Type your section here"
+                                >
                         </div>
                     </div>
 
                 </div>
+
+                <!-- Gender & Contact Number Field -->
+                <div class="form-row">
+
+                    <!-- Gender Field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="studentGender">Gender</label>
+                            <select 
+                                name="studentGender" 
+                                id="studentGender" 
+                                class="selectpicker form-control border"
+                                data-style="form-control"
+                                data-live-search="true"
+                                data-size="5"
+                                title="Select your gender here"
+                            >
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
+                            </select>
+                        </div>
+                    </div>
+                        
+                    <!-- Contact Number field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="studentContactNumber">Contact Number</label>
+                            <input 
+                                type="text" 
+                                name="studentContactNumber" 
+                                id="studentContactNumber" 
+                                class="form-control" 
+                                placeholder="Type your contact number here"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="studentEmail">Email</label>
+                            <input 
+                                type="email" 
+                                name="studentEmail" 
+                                id="studentEmail" 
+                                class="form-control" 
+                                placeholder="Type your email here"
+                            >
+                        </div>
+                    </div>
+                </div>
                 
+                <!-- Email, Password and Confirm Password -->
+                <div class="form-row">
+
+                    <!-- Password Field -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="studentPassword">Password</label>
+                            <input 
+                                type="password" 
+                                name="studentPassword" 
+                                id="studentPassword" 
+                                class="form-control" 
+                                placeholder="Type your password here"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Re-type Password Field -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="studentRetypePassword">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                name="studentRetypePassword" 
+                                id="studentRetypePassword" 
+                                class="form-control" 
+                                placeholder="Re-type your password here"
+                            >
+                        </div>
+                    </div>
+
+                </div>
+
                 <!-- Active Field -->
                 <div class="form-group">
                     <label class="mb-0" for="active">User status</label>
-                    <div class="small text-secondary mb-2">This is an example of some helper text</div>
                     <div class="form-control">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="activeStudent" name="studentStatus" class="custom-control-input">
@@ -259,6 +339,91 @@
                             >
                         </div>
                     </div>
+                </div>
+
+                <!-- Gender & Contact Number Field -->
+                <div class="form-row">
+
+                    <!-- Gender Field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="staffGender">Gender</label>
+                            <select 
+                                name="staffGender" 
+                                id="staffGender" 
+                                class="selectpicker form-control border"
+                                data-style="form-control"
+                                data-live-search="true"
+                                data-size="5"
+                                title="Select your gender here"
+                            >
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
+                            </select>
+                        </div>
+                    </div>
+                        
+                    <!-- Contact Number field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="staffContactNumber">Contact Number</label>
+                            <input 
+                                type="text" 
+                                name="staffContactNumber" 
+                                id="staffContactNumber" 
+                                class="form-control" 
+                                placeholder="Type your contact number here"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="staffEmail">Email</label>
+                            <input 
+                                type="email" 
+                                name="staffEmail" 
+                                id="staffEmail" 
+                                class="form-control" 
+                                placeholder="Type your email here"
+                            >
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Email, Password and Confirm Password -->
+                <div class="form-row">
+
+                    <!-- Password Field -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="staffPassword">Password</label>
+                            <input 
+                                type="password" 
+                                name="staffPassword" 
+                                id="staffPassword" 
+                                class="form-control" 
+                                placeholder="Type your password here"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Re-type Password Field -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="staffRetypePassword">Confirm Password</label>
+                            <input 
+                                type="password" 
+                                name="staffRetypePassword" 
+                                id="staffRetypePassword" 
+                                class="form-control" 
+                                placeholder="Re-type your password here"
+                            >
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Active Field -->

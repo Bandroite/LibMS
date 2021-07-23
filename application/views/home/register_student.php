@@ -83,7 +83,7 @@
                                     name="course" 
                                     id="course" 
                                     class="form-control" 
-                                    placeholder="Type your last name here"
+                                    placeholder="Type your course here"
                                 >
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                     name="year" 
                                     id="year" 
                                     class="form-control" 
-                                    placeholder="Type your last name here"
+                                    placeholder="Type your year here"
                                 >
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                     name="section" 
                                     id="section" 
                                     class="form-control" 
-                                    placeholder="Type your last name here"
+                                    placeholder="Type your section here"
                                 >
                             </div>
                         </div>

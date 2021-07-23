@@ -216,6 +216,153 @@ loadStaffBorrowersDT = () => {
     }
 }
 
+/**
+ * ===============================================================================
+ * ADD STUDENT AJAX
+ * ===============================================================================
+ */
+
+const addStudentForm = $('#addStudentAsBorrowerForm');
+
+// Add Student From Validation
+addStudentForm.validate(validateOptions({
+    rules: {
+        studentIDNumber: {
+            required: true
+        },
+        studentFirstName: {
+            required: true
+        },
+        studentLastName: {
+            required: true
+        },
+        studentContactNumber:{
+            required: true
+        },
+        studentGender:{
+            required: true
+        },
+        course:{
+            required: true
+        },
+        year:{
+            required: true
+        },
+        section:{
+            required: true
+        },
+        studentEmail:{
+            required: true
+        },
+        studentPassword:{
+            required: true
+        },
+        studentRetypePassword:{
+            required: true,
+            equalTo: '#studentPassword'
+        },
+        studentStatus:{
+            required: true
+        }
+    },
+    messages: {
+        studentIDNumber: {
+            required: 'Student Number is required'
+        },
+        studentFirstName: {
+            required: 'First Name is required'
+        },
+        studentLastName: {
+            required: 'Last Name is required'
+        },
+        studentContactNumber:{
+            required: 'Contact Number is required'
+        },
+        studentGender:{
+            required: 'Gender is required'
+        },
+        course:{
+            required: 'Course is required'
+        },
+        year:{
+            required: 'Year is required'
+        },
+        section:{
+            required: 'Section is required'
+        },
+        studentEmail:{
+            required: 'Email is required'
+        },
+        studentPassword:{
+            required: 'Password is required'
+        },
+        studentRetypePassword:{
+            required: 'Re-type Password is required',
+            equalTo: 'This doesn\'t match to your input password'
+        }
+    },
+    submitHandler: () => add_studentAJAX()
+}))
+
+// Add Student AJAX
+add_studentAJAX = () => {
+
+    // Get values from form to rawData
+    const rawData = new FormData(addStudentForm[0]);
+
+
+    // Get data from rawData
+    data = {
+        idNumber:       rawData.get('studentIDNumber'),
+        firstName:      rawData.get('studentFirstName'),
+        middleName:     rawData.get('studentMiddleName'),
+        lastName:       rawData.get('studentLastName'),
+        contactNumber:  rawData.get('studentContactNumber'),
+        gender:         rawData.get('studentGender'),
+        course:         rawData.get('course'),
+        year:           rawData.get('year'),
+        section:        rawData.get('section'),
+        email:          rawData.get('studentEmail'),
+        password:       rawData.get('studentPassword'),
+        status:         'Active',
+        userType:       'Student'
+    }
+
+   // Add Student via AJAX
+    $.ajax({
+    url: `${ BASE_URL_API }librarian/students`,
+    type: 'POST',
+    headers: AJAX_HEADERS,
+    data: data,
+    dataType: 'json',
+    success: (result) => {
+        if(result) {
+                // Request a temporary sessioned alert
+                // (for next page alerts)
+                $.ajax({
+                    url: `${ BASE_URL_WEB }alert`,
+                    type: 'POST',
+                    data: {
+                        theme: 'success',
+                        title: 'Success!',
+                        message: 'A new student account is added'
+                    },
+                    success: () => location.replace(`${ BASE_URL_WEB }admin/borrowers`)
+                });
+
+            // Refresh data table after add
+            const dt = $('#studentBorrowersDT').DataTable();
+            dt.ajax.reload();
+        } else {
+            showAlert('danger','Failed!',result.message);
+        }
+    },
+    error: err => {
+        const responseJSON = err.responseJSON;
+        showAlert('danger', 'Oops!', responseJSON.message)
+    }
+})
+}
 
 /**
  * ===============================================================================

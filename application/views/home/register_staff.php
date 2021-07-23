@@ -13,7 +13,7 @@
                     </div>
                     
                     <!-- Error Registration Alert -->
-                    <div id="errorRegisterContainer"></div>
+                    <div id="alertContainer"></div>
                     
                     <!-- ID Number field -->
                     <div class="form-group">
