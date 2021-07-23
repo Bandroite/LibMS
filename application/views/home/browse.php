@@ -10,22 +10,33 @@
 
     <!-- Search Bar -->
     <div class="container mb-4 px-5">
-        <div class="form-row pt-5">
+        <form class="form-row pt-5" action="<?= base_url() ?>search">
             <div class="col-12 col-md-6 col-lg-3 mt-2 mt-md-0 px-1 order-2 order-md-1">
                 <div class="form-group">
-                    <select class="selectpicker w-100" data-style="btn btn-primary btn-block" title="Search by...">
-                        <option value="Author">General</option>
+                    <select 
+                        class="selectpicker w-100" 
+                        id="searchBy"
+                        name="searchBy"
+                        data-style="btn btn-primary btn-block" 
+                        title="Search by..."
+                    >
                         <option value="Author">Author</option>
                         <option value="Title">Title</option>
                         <option value="Genre">Genre</option>
-                        <option value="Genre">Publisher</option>
-                        <option value="Genre">Country</option>
+                        <option value="Publisher">Publisher</option>
+                        <option value="Country">Country</option>
                     </select>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-9 px-1 order-1 order-md-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search here...">
+                    <input 
+                        type="text"
+                        id="searchQuery" 
+                        name="query" 
+                        class="form-control" 
+                        placeholder="Search here..."
+                    >
                     <div class="input-group-append">
                         <button class="btn btn-primary">
                             <i class="fas fa-search"></i>
@@ -33,7 +44,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <!-- Materials -->

@@ -11759,10 +11759,18 @@ body {
 }
 
 .banner {
+  background: url("http://localhost/LibMS/public/images/app/hero_image2.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: fit;
+  background-position: center;
+}
+
+.banner .banner-glass {
   background: rgba(0, 0, 0, 0.75);
 }
 
-.banner .banner-title {
+.banner .banner-glass .banner-title {
   color: white;
 }
 

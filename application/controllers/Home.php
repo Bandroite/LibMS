@@ -30,8 +30,9 @@ class Home extends CI_Controller {
         // AJAX Files
         if($userType === 'Staff' || $userType === 'Student') {
             $AJAX_files = [
-                'materials',
                 'favorites',
+                'materials',
+                'search',
                 'transactions',
                 'account',
             ];
@@ -99,13 +100,20 @@ class Home extends CI_Controller {
     // Search
 	public function search() {
         $input = $this->input->get();
-        if($input['searchBy'] == '' || $input['query'] == '') {
-            redirect();
-        } else {
+        if($input == null) {
             $this->load_views('Search', [
                 ['components/banner', ["title" => "Search"]],
                 ['search']
             ]);
+        } else {
+            if(($input['searchBy'] != '' || $input['query'] != '') && $input['page'] == '') {
+                redirect('search?searchBy='. $input['searchBy'] . '&query=' . $input['query'] . '&page=1');
+            } else {
+                $this->load_views('Search', [
+                    ['components/banner', ["title" => "Search"]],
+                    ['search']
+                ]);
+            }
         }
 	}
 

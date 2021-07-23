@@ -48,10 +48,18 @@
 
 // Banner
 .banner {
-    background: rgba(0,0,0,0.75);
-    
-    .banner-title {
-        color: white;
+    background: url('http://localhost/LibMS/public/images/app/hero_image2.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: fit;
+    background-position: center;
+
+    .banner-glass {
+      background: rgba(0,0,0,0.75);
+      
+      .banner-title {
+          color: white;
+      }
     }
 }
 

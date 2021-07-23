@@ -185,94 +185,95 @@ const createPagination = (el, options = {
     totalRows: 0,
     baseURL: ''
 }) => {
-    var paginationBlade = '';
-    const limit = 12;
-    const totalPages = Math.ceil(options.totalRows/limit);
-    const baseURL = options.baseURL;
-
-    const currentPage = options.currentPage;
-
-
-    // For Previous Link
-    paginationBlade += (currentPage === 1) 
-        ? `
-            <li class="page-item disabled">
-                <a class="page-link">
-                    <i class="fas fa-caret-left mr-1"></i>
-                    <span>Previous</span>
-                </a>
-            </li>
-        `
-        : `
-            <li class="page-item">
-                <a class="page-link" href="${ baseURL }${ currentPage-1 }">
-                    <i class="fas fa-caret-left mr-1"></i>
-                    <span>Previous</span>
-                </a>
-            </li>
-        `
-
-    // Display ellipsis indicate that there are more pages before currentPage-2
-    if(currentPage > 3 && totalPages > 4) paginationBlade += `
-        <li class="page-item disabled">
-            <a class="page-link">
-                <i class="fas fa-ellipsis-h"></i>
-            </a>
-        </li>
-    `
-
-    // Middle Page Links
-    var i, endOfIncrement;
-    if(currentPage < 3) {
-        i = 1;
-        endOfIncrement = totalPages >= 5 ? 5 : totalPages;
-    } else if(currentPage+3 > totalPages) {
-        i = currentPage+3 > 3 ? totalPages-3 : 1;
-        endOfIncrement = totalPages;
-    } else {
-        i = currentPage-2;
-        endOfIncrement = currentPage+2;
-    }
-
-    for(i; i <= endOfIncrement; i++) {
-        paginationBlade += (i === currentPage) 
+    if(options.totalRows > 1) {
+        var paginationBlade = '';
+        const limit = 12;
+        const totalPages = Math.ceil(parseInt(options.totalRows)/limit);
+        const baseURL = options.baseURL;
+    
+        const currentPage = parseInt(options.currentPage);
+    
+        // For Previous Link
+        paginationBlade += (currentPage === 1) 
             ? `
-                <li class="page-item active">
-                    <a class="page-link" href="${ baseURL }${ i }">${ i }</a>
+                <li class="page-item disabled">
+                    <a class="page-link">
+                        <i class="fas fa-caret-left mr-1"></i>
+                        <span>Previous</span>
+                    </a>
                 </li>
             `
             : `
                 <li class="page-item">
-                    <a class="page-link" href="${ baseURL }${ i }">${ i }</a>
+                    <a class="page-link" href="${ baseURL }${ currentPage-1 }">
+                        <i class="fas fa-caret-left mr-1"></i>
+                        <span>Previous</span>
+                    </a>
                 </li>
             `
-    }
-
-    if(currentPage+3 < totalPages) paginationBlade += `
+    
+        // Display ellipsis indicate that there are more pages before currentPage-2
+        if(currentPage > 3 && totalPages > 4) paginationBlade += `
             <li class="page-item disabled">
                 <a class="page-link">
                     <i class="fas fa-ellipsis-h"></i>
                 </a>
             </li>
-        `;
-
-    paginationBlade += (currentPage === totalPages || totalPages === 0) 
-        ? `
-            <li class="page-item disabled">
-                <a class="page-link">
-                    <span>Next</span>
-                    <i class="fas fa-caret-right ml-1"></i>
-                </a>
-            </li>
         `
-        : `
-            <li class="page-item">
-                <a class="page-link" href="${ baseURL }${ currentPage+1 }">
-                    <span>Next</span>
-                    <i class="fas fa-caret-right ml-1"></i>
-                </a>
-            </li>
-        `
-
-    el.html(paginationBlade);
+    
+        // Middle Page Links
+        var i, endOfIncrement;
+        if(currentPage < 3) {
+            i = 1;
+            endOfIncrement = totalPages >= 5 ? 5 : totalPages;
+        } else if(currentPage+3 > totalPages) {
+            i = currentPage+3 > 3 ? totalPages-3 : 1;
+            endOfIncrement = totalPages;
+        } else {
+            i = currentPage-2;
+            endOfIncrement = currentPage+2;
+        }
+    
+        for(i; i <= endOfIncrement; i++) {
+            paginationBlade += (i === currentPage) 
+                ? `
+                    <li class="page-item active">
+                        <a class="page-link" href="${ baseURL }${ i }">${ i }</a>
+                    </li>
+                `
+                : `
+                    <li class="page-item">
+                        <a class="page-link" href="${ baseURL }${ i }">${ i }</a>
+                    </li>
+                `
+        }
+    
+        if(currentPage+3 < totalPages) paginationBlade += `
+                <li class="page-item disabled">
+                    <a class="page-link">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </a>
+                </li>
+            `;
+    
+        paginationBlade += (currentPage === totalPages || totalPages === 0) 
+            ? `
+                <li class="page-item disabled">
+                    <a class="page-link">
+                        <span>Next</span>
+                        <i class="fas fa-caret-right ml-1"></i>
+                    </a>
+                </li>
+            `
+            : `
+                <li class="page-item">
+                    <a class="page-link" href="${ baseURL }${ currentPage+1 }">
+                        <span>Next</span>
+                        <i class="fas fa-caret-right ml-1"></i>
+                    </a>
+                </li>
+            `
+    
+        el.html(paginationBlade);
+    }
 }

@@ -25,7 +25,7 @@ class User extends CI_Controller {
     private Array $AJAX_files = [
         'account',
         'favorites',
-        'transactions'
+        'transactions',
     ];
 
     // Load Views Method

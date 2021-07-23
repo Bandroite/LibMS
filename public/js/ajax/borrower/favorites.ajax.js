@@ -181,6 +181,19 @@ removeAsFavorite = (materialID) => {
                     </button>
                 `);
             }
+
+            // If material removed as favorite in search result list
+            if($('#searchResults').length) {
+                $(`#FAV-${ materialID }`).html(`
+                    <button 
+                        class="btn btn-sm" data-toggle="tooltip" 
+                        title="Add to favorites" 
+                        onclick="addToFavorites('${ materialID }')"
+                    >
+                        <i class="far fa-heart text-danger"></i>
+                    </button>
+                `);
+            }
             
             $('#notifContainer').show();
             favorites_countAJAX();

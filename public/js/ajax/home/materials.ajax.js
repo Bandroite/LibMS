@@ -32,7 +32,6 @@ view_all_available_materialsAJAX = () => {
                 type: 'GET',
                 success: result => {
                     const data = result.data;
-
                     if(data.length) {
                         var materialCards = '';
                         data.forEach(m => {

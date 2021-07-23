@@ -13,9 +13,9 @@
     <!-- Links -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>Browse</span>
+                    <span>Materisa</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="<?= base_url() ?>browse">All</a>
@@ -23,9 +23,12 @@
                     <a class="dropdown-item" href="#">Books</a>
                     <a class="dropdown-item" href="#">Magazines</a>
                 </div>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url() ?>browse" tabindex="-1" aria-disabled="true">Browse Materials</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url() ?>advance-search" tabindex="-1" aria-disabled="true">Advance Search</a>
+                <a class="nav-link" href="<?= base_url() ?>search" tabindex="-1" aria-disabled="true">Search</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url() ?>about-us" tabindex="-1" aria-disabled="true">About Us</a>
