@@ -24,17 +24,7 @@ loadGenresDT = () => {
         dt.DataTable({
             ajax: {
                 url: `${ BASE_URL_API }librarian/genres`,
-                type: 'GET',
                 headers: AJAX_HEADERS,
-                // success: (result) => {
-                //     if(result){
-                //         const data = result.data;
-                //         console.log(data);
-                //     }
-                //     else{
-                //         console.log('No result');
-                //     }
-                // }
             },
             columns: [
                 {
@@ -114,8 +104,11 @@ loadGenresDT = () => {
  * ===============================================================================
  */
 
+const addGenreForm = $('#addGenreForm');
+const addGenreModal = $('#addGenreModal');
+
 // Add Genre From Validation
-$('#addGenreForm').validate(validateOptions({
+addGenreForm.validate(validateOptions({
     rules: {
         genre: {
             required: true
@@ -139,7 +132,7 @@ $('#addGenreForm').validate(validateOptions({
 add_genreAJAX = () => {
 
     // Get values from form to rawData
-    const rawData = new FormData($('#addGenreForm')[0]);
+    const rawData = new FormData(addGenreForm[0]);
 
     // Get data from rawData
     data = {
@@ -158,13 +151,13 @@ add_genreAJAX = () => {
             if(result) {
                 if(result.error) {
                     console.log(result.message)
-                    $('#addGenreModal').modal('hide');
+                    addGenreModal.modal('hide');
 
                     showAlert('danger','Failed!',result.message);
 
                 } else {
                     console.log(result);
-                    $('#addGenreModal').modal('hide');
+                    addGenreModal.modal('hide');
                     
                     showAlert('success','Success!',result.message);
 
@@ -181,12 +174,13 @@ add_genreAJAX = () => {
         },
         error: (err) => {
             const response = err.responseJSON
-            $('#addGenreModal').modal('hide');
+            addGenreModal.modal('hide');
             showAlert('danger','Failed!',response.message);
         }
     })
-    
 }
+
+addGenreModal.on('hide.bs.modal', () => addGenreForm.trigger('reset'));
 
 
 /**
@@ -401,21 +395,22 @@ viewGenre = (genreID) => {
                 })
 
                 var statusBlade;
-                    if(data.status == 'Active'){
-                        statusBlade = `
-                            <div class="badge alert-success text-success p-2">Active</div>
-                        `
-                    }
-                    else{
-                        statusBlade = `
-                            <div class="badge alert-danger text-danger p-2">Inactive</div>
-                        `
-                    }
+                if(data.status == 'Active') {
+                    statusBlade = `<div class="badge alert-success text-success p-2">Active</div>`
+                } else {
+                    statusBlade = `<div class="badge alert-danger text-danger p-2">Inactive</div>`
+                }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
-
-                console.log(data);
+                const addedAt = `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt = `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 $('#genreName').html(data.genre);
                 $('#status').html(statusBlade);

@@ -1,11 +1,5 @@
 <!-- Add Genre Modal -->
-<div 
-    class         = "modal" 
-    id            = "addGenreModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="addGenreModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="addGenreForm" class="modal-content">
             <div class="modal-header">
@@ -78,18 +72,9 @@
 </div>
 
 <!-- Edit Genre Modal -->
-<div 
-    class         = "modal" 
-    id            = "editGenreModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="editGenreModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <form 
-            id="editGenreForm" 
-            class="modal-content"
-        >
+        <form id="editGenreForm" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     <i class="fas fa-edit mr-1 text-blue"></i>
@@ -165,13 +150,7 @@
 </div>
 
 <!-- Remove Genre Modal -->
-<div 
-    class         = "modal" 
-    id            = "removeGenreModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal" id="removeGenreModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form 
             class="modal-content"
@@ -219,85 +198,74 @@
 </div>
 
 <!-- View Genre Modal -->
-<div 
-    class         = "modal" 
-    id            = "viewGenreModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal fade" id="viewGenreModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <form 
-            class="modal-content"
-            id="viewGenreForm"
-        >
-        <div class="modal-header">
-            <h5 class="modal-title">
-                <i class="fas fa-eye mr-1 text-info"></i>
-                <span>View Genre Details</span>
-            </h5>
-            <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">
-                    <i class="fas fa-times"></i>
-                </span>
-            </button>
-        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye mr-1 text-info"></i>
+                    <span>View Genre Details</span>
+                </h5>
+                <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
 
-        <div class="modal-body">
-            <div>
-                <table class="table">
-                    <tr>
-                        <th>Genre</th>
-                        <td id="genreName">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
+            <div class="modal-body">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th>Genre</th>
+                            <td id="genreName">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>Status</th>
-                        <td id="status">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td id="status">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>Added By</th>
-                        <td id="addedBy">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Updated By</th>
-                        <td id="updatedBy">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>Added By</th>
+                            <td id="addedBy">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Updated By</th>
+                            <td id="updatedBy">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>Added At</th>
-                        <td id="addedAt">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Updated At</th>
-                        <td id="updatedAt">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
-                </table>
+                        <tr>
+                            <th>Added At</th>
+                            <td id="addedAt">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Updated At</th>
+                            <td id="updatedAt">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-muted" 
+                    data-dismiss="modal"
+                >Close</button>
             </div>
         </div>
-
-        <div class="modal-footer">
-            <button 
-                type="button" 
-                class="btn btn-muted" 
-                data-dismiss="modal"
-            >
-                OK
-            </button>
-        </div>
-        </form>
     </div>
 </div>

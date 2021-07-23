@@ -441,8 +441,16 @@ viewAuthor = (authorID) => {
                         `
                     }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
+                const addedAt = `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt = `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 console.log(data);
 

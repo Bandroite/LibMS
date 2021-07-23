@@ -229,10 +229,17 @@ loadMaterialsDT = () => {
 
 /**
  * ===============================================================================
- * FOR ADD/EDIT MATERIAL
+ *                              FOR ADD/EDIT MATERIAL
  * ===============================================================================
  */
 
+/**
+ * ===============================================================================
+ * FOR ADD MATERIAL
+ * ===============================================================================
+ */
+
+// Fetch Material Details AJAXes
 fetchMaterialDetails_AJAXes = () => {
 
     // Fetch buildings for add and editing rooms and material
@@ -694,6 +701,12 @@ add_materialAJAX = () => {
     })
     .fail(() => showAlert('danger', 'Error', 'There was an error in reading file'));
 }
+
+/**
+ * ===============================================================================
+ * FOR EDIT MATERIAL
+ * ===============================================================================
+ */
 
 // When edit material button is clicked
 $('#editMaterialBtn').on('click', () => {

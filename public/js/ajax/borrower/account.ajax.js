@@ -18,7 +18,7 @@ $(() => {
 
 get_borrower_infoAJAX = () => {
     $.ajax({
-        url: `${ BASE_URL_API }borrowers/info`,
+        url: `${ BASE_URL_API }borrower/info`,
         type: 'GET',
         headers: AJAX_HEADERS,
         success: (result) => {
@@ -35,4 +35,3 @@ get_borrower_infoAJAX = () => {
         } 
     })
 }
-

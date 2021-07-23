@@ -32,14 +32,16 @@ class Home extends CI_Controller {
             $AJAX_files = [
                 'materials',
                 'favorites',
-                'transactions'
+                'transactions',
+                'account',
             ];
             $dir_path = 'borrower';
         } else {
             $AJAX_files = [
                 'login',
                 'user',
-                'materials'
+                'materials',
+                'search',
             ];
             $dir_path = 'home';
         }
@@ -90,6 +92,19 @@ class Home extends CI_Controller {
             $this->load_views('Browse', [
                 ['components/banner', ["title" => "Browse All Materials"]],
                 ['browse']
+            ]);
+        }
+	}
+
+    // Search
+	public function search() {
+        $input = $this->input->get();
+        if($input['searchBy'] == '' || $input['query'] == '') {
+            redirect();
+        } else {
+            $this->load_views('Search', [
+                ['components/banner', ["title" => "Search"]],
+                ['search']
             ]);
         }
 	}
@@ -148,9 +163,15 @@ class Home extends CI_Controller {
             redirect('admin');
         else {
             if($user == 'student')
-                $this->load_views('Register as Student', [['register_student']]);
+                $this->load_views('Register as Student', [
+                    ['components/modals/register_modals'],
+                    ['register_student']
+                ]);
             else if($user == 'staff')
-                $this->load_views('Register as Staff', [['register_staff']]);
+                $this->load_views('Register as Staff', [
+                    ['components/modals/register_modals'],
+                    ['register_staff']
+                ]);
             else
                 $this->Error_model->page_not_found();
         }

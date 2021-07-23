@@ -114,8 +114,11 @@ loadMaterialTypesDT = () => {
  * ===============================================================================
  */
 
+const addMaterialTypeForm = $('#addMaterialTypeForm');
+const addMaterialTypeModal = $('#addMaterialTypeModal');
+
 // Add Material Type From Validation
-$('#addMaterialTypeForm').validate(validateOptions({
+addMaterialTypeForm.validate(validateOptions({
     rules: {
         typeName: {
             required: true
@@ -158,13 +161,13 @@ add_material_typeAJAX = () => {
             if(result) {
                 if(result.error) {
                     console.log(result.message)
-                    $('#addMaterialTypeModal').modal('hide');
+                    addMaterialTypeModal.modal('hide');
 
                     showAlert('danger','Failed!',result.message);
 
                 } else {
                     console.log(result);
-                    $('#addMaterialTypeModal').modal('hide');
+                    addMaterialTypeModal.modal('hide');
                     
                     showAlert('success','Success!',result.message);
 
@@ -184,12 +187,15 @@ add_material_typeAJAX = () => {
         },
         error: (err) => {
             const response = err.responseJSON
-            $('#addMaterialTypeModal').modal('hide');
+            addMaterialTypeModal.modal('hide');
             showAlert('danger','Failed!',response.message);
         }
     })
     
 }
+
+// Reset Add Material Form when its modal has been hidden
+addMaterialTypeModal.on('hide.bs.modal', () => addMaterialTypeForm.trigger('reset'))
 
 /**
  * ===============================================================================
@@ -329,7 +335,7 @@ $('#removeMaterialTypeForm').validate(validateOptions({
     rules: {},
     messages: {},
     submitHandler: () => delete_material_typeAJAX()
-}))
+}));
 
 // Delete Material Type AJAX
 delete_material_typeAJAX = () => {
@@ -444,10 +450,16 @@ viewMaterialType = (typeID) => {
                         `
                     }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
-
-                console.log(data);
+                const addedAt =  `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt =  `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 $('#type').html(data.typeName);
                 $('#status').html(statusBlade);

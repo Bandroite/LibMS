@@ -64,6 +64,7 @@ $route['server-down']    = 'auth/server_down';
 
 // Main Routes
 $route['browse']                    = 'home/browse';
+$route['search']            = 'home/search';
 $route['advance-search']            = 'home/advance_search';
 $route['about-us']                  = 'home/about_us';
 $route['terms-and-conditions']      = 'home/terms_and_conditions';

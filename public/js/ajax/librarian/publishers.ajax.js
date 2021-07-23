@@ -17,23 +17,14 @@ $(() => {
  * ===============================================================================
  */
 
+// Load Publishers DataTable
 loadPublishersDT = () => {
     const dt = $('#publishersDT');
     if(dt.length){
         dt.DataTable({
             ajax: {
                 url: `${ BASE_URL_API }librarian/publishers`,
-                type: 'GET',
                 headers: AJAX_HEADERS,
-                // success: (result) => {
-                //     if(result){
-                //         const data = result.data;
-                //         console.log(data);
-                //     }
-                //     else{
-                //         console.log('No result');
-                //     }
-                // }
             },
             columns: [
                 {
@@ -113,8 +104,11 @@ loadPublishersDT = () => {
  * ===============================================================================
  */
 
+const addPublisherForm = $('#addPublisherForm');
+const addPublisherModal = $('#addPublisherModal');
+
 // Add Publisher From Validation
-$('#addPublisherForm').validate(validateOptions({
+addPublisherForm.validate(validateOptions({
     rules: {
         publisherName: {
             required: true
@@ -138,7 +132,7 @@ $('#addPublisherForm').validate(validateOptions({
 add_publisherAJAX = () => {
 
     // Get values from form to rawData
-    const rawData = new FormData($('#addPublisherForm')[0]);
+    const rawData = new FormData(addPublisherForm[0]);
 
     // Get data from rawData
     data = {
@@ -157,13 +151,13 @@ add_publisherAJAX = () => {
             if(result) {
                 if(result.error) {
                     console.log(result.message)
-                    $('#addPublisherModal').modal('hide');
+                    addPublisherModal.modal('hide');
 
                     showAlert('danger','Failed!',result.message);
 
                 } else {
                     console.log(result);
-                    $('#addPublisherModal').modal('hide');
+                    addPublisherModal.modal('hide');
                     
                     showAlert('success','Success!',result.message);
 
@@ -180,12 +174,16 @@ add_publisherAJAX = () => {
         },
         error: (err) => {
             const response = err.responseJSON
-            $('#addPublisherModal').modal('hide');
+            addPublisherModal.modal('hide');
             showAlert('danger','Failed!',response.message);
         }
     })
     
 }
+
+// Reset Add Publisher Form when its modal has been hidden
+addPublisherModal.on('hide.bs.modal', () => addPublisherForm.trigger('reset'));
+
 
 /**
  * ===============================================================================
@@ -408,8 +406,16 @@ viewPublisher = (publisherID) => {
                         `
                     }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
+                const addedAt = `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt = `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 console.log(data);
 

@@ -118,24 +118,17 @@ add_studentAJAX = () => {
         data: data,
         dataType: 'json',
         success: (result) => {
-            if(result) {
-                if(result.error) {
-                    console.log(result.message)
-
-                    showAlert('danger','Failed!',result.message);
-
-                } else {
-                    console.log(result);
-                    
-                    showAlert('success','Success!',result.message);
-                }
+            if(result) {$(
+                '#registerSuccessModal').modal('show');
             } else {
                 console.log('No result');
             }
+        },
+        error: err => {
+            const responseJSON = err.responseJSON;
+            showAlert('danger', 'Oops!', responseJSON.message)
         }
-    })
-    .fail(() => showAlert('danger', 'Error', 'There was an error in reading file'));
-    
+    })    
 }
 
 
@@ -230,22 +223,15 @@ add_staffAJAX = () => {
         data: data,
         dataType: 'json',
         success: (result) => {
-            if(result) {
-                if(result.error) {
-                    console.log(result.message)
-
-                    showAlert('danger','Failed!',result.message);
-
-                } else {
-                    console.log(result);
-                    
-                    showAlert('success','Success!',result.message);
-                }
+            if(result) {$(
+                '#registerSuccessModal').modal('show');
             } else {
                 console.log('No result');
             }
+        },
+        error: err => {
+            const responseJSON = err.responseJSON;
+            showAlert('danger', 'Oops!', responseJSON.message)
         }
-    })
-    .fail(() => showAlert('danger', 'Error', 'There was an error in reading file'));
-    
+    })    
 }

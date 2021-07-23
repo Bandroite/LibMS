@@ -12,13 +12,38 @@
                             </div>
                         </h1>
                         <p>Browse all available materials here in our website! Add it to your favorites too!.</p>
-                        <form class="form-group mt-3">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search any materials here ...">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-search"></i>
-                                    </button>
+                        
+                        <!-- Search Bar -->
+                        <form class="form-row pt-5" action="<?= base_url() ?>search">
+                            <div class="col-12 col-md-6 col-lg-3 mt-2 mt-md-0 px-1 order-2 order-md-1">
+                                <div class="form-group">
+                                    <select 
+                                        class="selectpicker w-100" 
+                                        name="searchBy"
+                                        data-style="btn btn-primary btn-block" 
+                                        title="Search by..."
+                                    >
+                                        <option value="Author">Author</option>
+                                        <option value="Title">Title</option>
+                                        <option value="Genre">Genre</option>
+                                        <option value="Publisher">Publisher</option>
+                                        <option value="Country">Country</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-9 px-1 order-1 order-md-2">
+                                <div class="input-group">
+                                    <input 
+                                        type="text"
+                                        name="query" 
+                                        class="form-control" 
+                                        placeholder="Search here..."
+                                    >
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>

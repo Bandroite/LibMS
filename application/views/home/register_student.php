@@ -1,4 +1,4 @@
-<div class="container-fluid p-0">
+<div class="container py-5">
     <div class="min-vh-100 flex-center m-0">
     
         <!-- Register Section -->

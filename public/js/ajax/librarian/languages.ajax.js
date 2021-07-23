@@ -114,8 +114,11 @@ loadLanguagesDT = () => {
  * ===============================================================================
  */
 
+const addLanguageForm = $('#addLanguageForm');
+const addLanguageModal = $('#addLanguageModal');
+
 // Add language From Validation
-$('#addLanguageForm').validate(validateOptions({
+addLanguageForm.validate(validateOptions({
     rules: {
         language: {
             required: true
@@ -139,7 +142,7 @@ $('#addLanguageForm').validate(validateOptions({
 add_languageAJAX = () => {
 
     // Get values from form to rawData
-    const rawData = new FormData($('#addLanguageForm')[0]);
+    const rawData = new FormData(addLanguageForm[0]);
 
     // Get data from rawData
     data = {
@@ -158,13 +161,13 @@ add_languageAJAX = () => {
             if(result) {
                 if(result.error) {
                     console.log(result.message)
-                    $('#addLanguageModal').modal('hide');
+                    addLanguageModal.modal('hide');
 
                     showAlert('danger','Failed!',result.message);
 
                 } else {
                     console.log(result);
-                    $('#addLanguageModal').modal('hide');
+                    addLanguageModal.modal('hide');
                     
                     showAlert('success','Success!',result.message);
 
@@ -181,12 +184,14 @@ add_languageAJAX = () => {
         },
         error: (err) => {
             const response = err.responseJSON
-            $('#addLanguageModal').modal('hide');
+            addLanguageModal.modal('hide');
             showAlert('danger','Failed!',response.message);
         }
-    })
-    
+    })   
 }
+
+// Reset the Add Language Form if its modal has been hidden
+addLanguageModal.on('hide.bs.modal', () => addLanguageForm.trigger('reset'));
 
 
 /**
@@ -313,13 +318,10 @@ update_languageAJAX = () => {
 
 // Remove Language
 removeLanguage = (languageID) => {
-    setFormValues('#removeLanguageForm',[
-        {
-            name: 'languageID',
-            value: languageID
-        }
-    ]);
-
+    setFormValues('#removeLanguageForm',[{
+        name: 'languageID',
+        value: languageID
+    }]);
     $('#removeLanguageModal').modal('show')
 }
 
@@ -335,10 +337,7 @@ delete_languageAJAX = () => {
 
     // Get values from form to rawData
     const rawData = new FormData($('#removeLanguageForm')[0]);
-
     const languageID = rawData.get('languageID')
-
-
     $.ajax({
         url: `${ BASE_URL_API }librarian/languages/${languageID}`,
         type: 'DELETE',
@@ -447,8 +446,16 @@ viewLanguage = (languageID) => {
                         `
                     }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
+                const addedAt =  `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt =  `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 console.log(data);
 

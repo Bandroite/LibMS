@@ -1,5 +1,5 @@
 <!-- Add Author Modal -->
-<div class= "modal" id= "addAuthorModal" data-backdrop= "static" data-keyboard= "false" tabindex= "-1">
+<div class="modal" id="addAuthorModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form id="addAuthorForm" class="modal-content">
             <div class="modal-header">
@@ -204,59 +204,46 @@
 <!-- Remove Author Modal -->
 <div class="modal" id="removeAuthorModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-        <form 
-            class="modal-content"
-            id="removeAuthorForm"    
-        >
-        <div class="modal-header">
-            <h5 class="modal-title">
-                <i class="fas fa-trash-alt mr-1 text-danger"></i>
-                <span>Remove author</span>
-            </h5>
-            <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">
-                    <i class="fas fa-times"></i>
-                </span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p>Are you sure you want to remove this author?</p>
-        </div>
-
-        <!-- Hide id in form -->
-        <div class ="form-group d-none">
-                <input type="text" name="authorID">
-        </div>
-
-        <div class="modal-footer">
-            <button 
-                type="button" 
-                class="btn btn-muted" 
-                data-dismiss="modal"
-            >
-                Cancel
-            </button>
-            <button 
-                type="submit" 
-                class="btn btn-danger"
-                id="removeAuthorModal"
-            >
-                <i class="fas fa-trash-alt mr-1"></i>
-                <span>Remove</span>
-            </button>
-        </div>
+        <form class="modal-content" id="removeAuthorForm"    >
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-trash-alt mr-1 text-danger"></i>
+                    <span>Remove author</span>
+                </h5>
+                <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Hide id in form -->
+                <input type="hidden" name="authorID">
+                <p>Are you sure you want to remove this author?</p>
+            </div>
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-muted" 
+                    data-dismiss="modal"
+                >
+                    Cancel
+                </button>
+                <button 
+                    type="submit" 
+                    class="btn btn-danger"
+                    id="removeAuthorModal"
+                >
+                    <i class="fas fa-trash-alt mr-1"></i>
+                    <span>Remove</span>
+                </button>
+            </div>
         </form>
     </div>
 </div>
 
 <!-- View Author Modal -->
-<div 
-    class         = "modal" 
-    id            = "viewAuthorModal" 
-    data-backdrop = "static" 
-    data-keyboard = "false"
-    tabindex      = "-1"
->
+<div class="modal fade" id="viewAuthorModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <form 
             class="modal-content"
@@ -325,9 +312,7 @@
                 type="button" 
                 class="btn btn-muted" 
                 data-dismiss="modal"
-            >
-                OK
-            </button>
+            >Close</button>
         </div>
         </form>
     </div>
