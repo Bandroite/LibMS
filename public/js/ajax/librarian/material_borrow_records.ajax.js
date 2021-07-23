@@ -60,7 +60,7 @@ loadBorrowedMaterialsDT = () => {
                 },
 
                 // Copy Number
-                { data: 'copy.copyNumber' },
+                { data: 'copy.copyNumber', class: 'text-nowrap' },
 
                 // Borrower
                 { 
@@ -84,6 +84,7 @@ loadBorrowedMaterialsDT = () => {
                 // Borrowed At
                 { 
                     data: null,
+                    class: 'text-nowrap',
                     render: data => {
                         const createdAt = data.createdAt;
                         return `
@@ -96,6 +97,7 @@ loadBorrowedMaterialsDT = () => {
                 // Due date
                 { 
                     data: null,
+                    class: 'text-nowrap',
                     render: data => {
                         const dueDate = data.dueDate;
                         return `
@@ -157,10 +159,9 @@ loadBorrowedMaterialsDT = () => {
                                         <span>Marked as returned</span>
                                     </div>
                                     <div 
-                                        class       = "dropdown-item"
-                                        role        = "button"
-                                        data-toggle = "modal"
-                                        data-target = "#markedAsReturnedModal"
+                                        class   = "dropdown-item"
+                                        role    = "button"
+                                        onclick = markAsWeeded('${ borrowID }')
                                     >
                                         <i class="fas fa-check dropdown-icon-item text-secondary"></i>
                                         <span>Marked as weeded</span>
@@ -187,6 +188,12 @@ loadBorrowedMaterialsDT = () => {
         });
     }
 }
+
+/**
+ * ===============================================================================
+ * MARK AS RETURNED
+ * ===============================================================================
+ */
 
 // Mark as Retuned
 markAsReturned = (borrowID) => {
@@ -228,6 +235,45 @@ change_borrow_status_AJAX = (borrowStatus) => {
     })
     .fail(() => console.error('There was a problem in changing borrow status'))
 }
+
+/**
+ * ===============================================================================
+ * MARK AS WEEDED
+ * ===============================================================================
+ */
+
+const markAsWeededModal = $('#markAsWeededModal');
+const markAsWeededForm = $('#markAsWeededForm');
+
+// Mark as Weeded
+markAsWeeded = (borrowID) => {
+    $('#borrowIDForWeed').val(borrowID);
+    markAsWeededModal.modal('show');
+}
+
+// Validate Mark As Weeded Form
+markAsWeededForm.validate(validateOptions({
+    rules: {
+        borrowID: {
+            required: true
+        },
+        description: {
+            required: true
+        }
+    },
+    messages: {
+        borrowID: {
+            required: 'Borrow ID must have a value'
+        },
+        description: {
+            required: 'Description is required'
+        }
+    },
+    submitHandler: () => alert('submitted')
+}));
+
+// Reset mark as weeded form is its modal was hidden
+markAsWeededModal.on('hide.bs.modal', () => markAsWeededForm.trigger('reset'))
 
 /**
  * ===============================================================================

@@ -24,17 +24,7 @@ loadRoomsDT = () => {
         dt.DataTable({
             ajax:{
                 url:`${ BASE_URL_API }librarian/rooms`,
-                type: 'GET',
                 headers: AJAX_HEADERS,
-                // success: (result) => {
-                //     if(result){
-                //         const data = result.data;
-                //         console.log(data);
-                //     }
-                //     else{
-                //         console.log('No result');
-                //     }
-                // }
             },
             columns: [
                 {
@@ -104,6 +94,13 @@ loadRoomsDT = () => {
                                     >
                                         <i class="fas fa-eye dropdown-icon-item text-info"></i>
                                         <span>View details</span>
+                                    </div>
+                                    <div  
+                                        class       = "dropdown-item"
+                                        onclick     = "editRoom('${data.roomID}')"
+                                    >
+                                        <i class="fas fa-edit dropdown-icon-item text-blue"></i>
+                                        <span>Edit Room</span>
                                     </div>
                                     <div 
                                         class="dropdown-item"
@@ -518,8 +515,16 @@ viewRoom = (roomID) => {
                         `
                     }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
+                const addedAt = `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt = `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 console.log(data);
 

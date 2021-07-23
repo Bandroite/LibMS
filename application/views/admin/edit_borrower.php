@@ -181,7 +181,7 @@
         <!-- User Actions -->
         <div class="form-group text-center">
             <button type="button" class="btn btn-muted" onclick="history.back()">Cancel</button>
-            <button type="submit" class="btn btn-blue" id="editStudentBtn">
+            <button type="submit" class="btn btn-blue">
                 <i class="fas fa-check mr-1"></i>
                 <span>Save</span>
             </button>

@@ -327,7 +327,6 @@ editShelf = (id) => {
         success: result => {
             if(result) {
                 const data = result.data;
-                console.log(data)
                 
                 // Set the ID of the room
                 $('#shelfIDForEdit').val(data.shelfID);
@@ -336,7 +335,7 @@ editShelf = (id) => {
                 $('#shelfNameForEdit').val(data.shelfName);
 
                 // Set the selected building
-                $('#buildingForEditShelf').selectpicker('val', `${ data.building.buildingID }`);
+                $('#buildingForEditShelf').selectpicker('val', `${ data.room.building.buildingID }`);
 
                 // Set the selected rom
                 $('#roomForEditShelf').selectpicker('val', `${ data.room.roomID }`);
@@ -472,7 +471,6 @@ delete_shelfAJAX = () => {
 
     const shelfID = rawData.get('shelfID')
 
-
     $.ajax({
         url: `${ BASE_URL_API }librarian/shelves/${shelfID}`,
         type: 'DELETE',
@@ -551,8 +549,16 @@ viewShelf = (shelfID) => {
                         `
                     }
 
-                const addedAt = moment(data.addedAt).format("dddd, MMMM D, YYYY hh:mm A")
-                const updatedAt = moment(data.updated).format("dddd, MMMM D, YYYY hh:mm A")
+                const addedAt = `
+                    <div>${ moment(data.addedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.addedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.addedAt).fromNow() }</div>
+                `
+                const updatedAt = `
+                    <div>${ moment(data.updatedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(data.updatedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(data.updatedAt).fromNow() }</div>
+                `
 
                 console.log(data);
 

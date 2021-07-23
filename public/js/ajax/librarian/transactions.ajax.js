@@ -100,7 +100,7 @@ if($('#borrowerIDNumberInput').length) {
                                 <option
                                     title="${ b.idNumber }"
                                     data-content="
-                                        <div class='font-weight-bold'>${ b.firstName } ${ b.lastName }</div>
+                                        <div class='font-weight-bold text-wrap'>${ b.firstName } ${ b.lastName }</div>
                                         <div class='small'>${ b.idNumber }</div>
                                         <div class='small'>${ b.userType }</div>
                                     "
@@ -158,7 +158,7 @@ if($('#copyForm').length) {
                                 <option 
                                     data-token="${ m.standardType } ${ m.standardNumber }"
                                     data-content="
-                                        <div class='font-weight-bold'>${ m.title }</div>
+                                        <div class='font-weight-bold text-wrap'>${ m.title }</div>
                                         <div class='small'>${ m.standardType } ${ m.standardNumber }</div>
                                         <div class='small'>${ m.material_type.typeName }</div>
                                     "

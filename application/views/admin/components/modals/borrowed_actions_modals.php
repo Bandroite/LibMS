@@ -25,6 +25,44 @@
     </div>
 </div>
 
+<!-- Mark As Weeded Modal -->
+<div class="modal" id="markAsWeededModal" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <form class="modal-content" id="markAsWeededForm">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-check mr-1 text-dark"></i>
+                    <span>Mark as Weeded</span>
+                </h5>
+                <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="borrowIDForWeed" name="borrowID">
+                
+                <!-- Description for Weeded -->
+                <div class="form-group">
+                    <label for="weedingsDescription">Please describe the condition of the copy</label>
+                    <textarea 
+                        class="form-control"
+                        name="description" 
+                        id="weedingsDescription" 
+                        rows="5"
+                        placeholder="Type description here"
+                    ></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-muted" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-dark">Mark as Weeded</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <!-- Remove Borrowed Record Modal -->
 <div class="modal" id="removeMaterialsBorrowRecordsModal" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">

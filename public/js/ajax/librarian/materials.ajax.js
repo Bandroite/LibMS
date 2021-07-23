@@ -424,7 +424,10 @@ fetchMaterialDetails_AJAXes = () => {
                 // Populate select options
                 var options = '';
                 data.forEach(pubCountry => options +=`
-                    <option value="${pubCountry.pubCountryID}">${pubCountry.country}</option>
+                    <option 
+                        value="${pubCountry.pubCountryID}"
+                        data-content="<div class='text-wrap'>${pubCountry.country}</div>"
+                    >${pubCountry.country}</option>
                 `);
     
                 // For add select in add material

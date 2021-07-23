@@ -363,18 +363,19 @@ latest_available_materialsAJAX = () => {
                                 </div>
                             `;
                             favoriteByBorrowers.forEach(f => {
-                                if(f.userID == localStorage.getItem('userID'));
-                                favBlade = `
-                                    <div id="FAV-${ m.materialID }">
-                                        <button 
-                                            class="btn btn-sm" data-toggle="tooltip" 
-                                            title="Remove as favorite" 
-                                            onclick="removeAsFavorite('${ m.materialID }')"
-                                        >
-                                            <i class="fas fa-heart text-danger"></i>
-                                        </button>
-                                    </div>
-                                `;
+                                if(f.userID == localStorage.getItem('userID')) {
+                                    favBlade = `
+                                        <div id="FAV-${ m.materialID }">
+                                            <button 
+                                                class="btn btn-sm" data-toggle="tooltip" 
+                                                title="Remove as favorite" 
+                                                onclick="removeAsFavorite('${ m.materialID }')"
+                                            >
+                                                <i class="fas fa-heart text-danger"></i>
+                                            </button>
+                                        </div>
+                                    `;
+                                }
                             })
     
                             materialDetailsLink = `${ BASE_URL_WEB }materials/${ m.materialID }`;

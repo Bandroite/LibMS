@@ -694,13 +694,6 @@ viewStaff = (userID) => {
  * ===============================================================================
  */
 
-// When edit borrower button is clicked
-$('#editStudentBtn').on('click', () => {
-    const params = window.location.pathname.split('/');
-    const userID = params[params.length-1];
-    location.assign(`${ BASE_URL_WEB }admin/edit-borrower/${ userID }`)
-});
-
 // Get student details when student form is loaded
 if($('#editStudentAsBorrowerForm').length) {
     const params = window.location.pathname.split('/');
