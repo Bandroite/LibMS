@@ -706,16 +706,17 @@ if($('#editStudentAsBorrowerForm').length) {
         success: result => {
             if(result) {
                 const data = result.data;
-
+                const gender = data.gender
                 console.log(data);
 
                 $('#studentIDNumber').val(data.idNumber);
                 $('#studentFirstName').val(data.firstName);
                 $('#studentMiddleName').val(data.middleName);
+                $('#studentLastName').val(data.lastName);
                 $('#course').val(data.course);
                 $('#year').val(data.year);
                 $('#section').val(data.section);
-                $('#studentGender').val(data.gender);
+                $('#studentGender').selectpicker('val', gender);
                 $('#studentContactNumber').val(data.contactNumber);
 
                 if(data.status == 'Active'){
@@ -811,7 +812,9 @@ edit_studentAJAX = () => {
         userType:       'Student'
     }
 
-    // Edit Student via AJAX
+    console.log(data)
+
+    //Edit Student via AJAX
     $.ajax({
         url: `${BASE_URL_API}librarian/users/${userID}`,
         type: 'PUT',
@@ -822,16 +825,16 @@ edit_studentAJAX = () => {
             if(result) {
                     // Request a temporary sessioned alert
                     // (for next page alerts)
-                    $.ajax({
-                        url: `${ BASE_URL_WEB }alert`,
-                        type: 'POST',
-                        data: {
-                            theme: 'success',
-                            title: 'Success!',
-                            message: 'Student Information successfully updated!'
-                        },
-                        success: () => location.replace(`${ BASE_URL_WEB }admin/borrowers`)
-                    });
+                    // $.ajax({
+                    //     url: `${ BASE_URL_WEB }alert`,
+                    //     type: 'POST',
+                    //     data: {
+                    //         theme: 'success',
+                    //         title: 'Success!',
+                    //         message: 'Student Information successfully updated!'
+                    //     },
+                    //     success: () => location.replace(`${ BASE_URL_WEB }admin/borrowers`)
+                    // });
     
             } else {
                 showAlert('danger','Failed!',result.message);
