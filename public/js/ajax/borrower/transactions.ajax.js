@@ -6,7 +6,6 @@
  * ===============================================================================
  */
 
-
 $(() => {
     view_all_transactionsAJAX();
     get_transactions_countAJAX();
@@ -48,6 +47,7 @@ view_all_transactionsAJAX = () => {
                     materialBorrowRecords.forEach(b => {
                         if(b.status == 'Returned')   borrowCopiesSummary.returned++;
                         if(b.status == 'Unreturned') borrowCopiesSummary.unreturned++;
+                        if(b.status == 'Unreturned' && moment().isAfter(b.dueDate)) borrowCopiesSummary.overdue++;
                     });
 
                     const processedBy = t.added_by_librarian;
@@ -94,7 +94,7 @@ view_all_transactionsAJAX = () => {
                                     <div class="col-lg-3 col-md-6">
                                         <span>Over due:</span>
                                         <span>
-                                            <span class="badge badge-danger ml-2">3</span>
+                                            <span class="badge badge-danger ml-2">${ borrowCopiesSummary.overdue }</span>
                                         </span>
                                     </div>
                                 </div>
@@ -197,9 +197,13 @@ viewTransactionDetails = (transactionID) => {
                                         <span class="badge alert-success text-success p-2 w-100">Returned</span>
                                     `
                                 } else if(status === 'Unreturned') {
-                                    return `
-                                        <span class="badge alert-warning text-warning p-2 w-100">Unreturned</span>
-                                    `
+                                    if(moment().isAfter(data.dueDate)){
+                                        return `<div class="badge alert-danger text-danger p-2 w-100">Overdue</div>`;
+                                    }else{
+                                        return `
+                                            <span class="badge alert-warning text-warning p-2 w-100">Unreturned</span>
+                                        `
+                                    }
                                 } else if(status === 'Weeded') {
                                     return `
                                         <span class="badge alert-secondary text-secondary p-2 w-100">Weeded</span>

@@ -1,6 +1,6 @@
 <?php $this->load->view('admin/components/title_header', [
     'icon'     => 'book',
-    'title'    => 'Weeded Materials',
+    'title'    => 'Weeded Copies',
     'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
 ]); ?>
 
@@ -10,9 +10,9 @@
 <?php $this->load->view('admin/components/summary_card', [
     'theme' => 'dark',
     'icon'  => 'book',
-    'title' => 'Number of Weeded Materials',
-    'id'    => 'numberOfWeededMaterials',
-    'value' => '8'
+    'title' => 'Number of Weeded Copies',
+    'id'    => 'numberOfWeededCopies',
+    'value' => '0'
 ]); ?>
 
 <!-- Weeded Materials Table -->
@@ -23,13 +23,13 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table" id="weededMaterialsDT">
+            <table class="table w-100" id="weededCopiesDT">
                 <thead>
                     <tr>
-                        <th>Standard Number</th>
-                        <th>Title</th>
-                        <th>Copies</th>
-                        <th>Actions</th>
+                        <th>Copy Number</th>
+                        <th>Material</th>
+                        <th>Description</th>
+                        <th>Date Weeded</th>
                     </tr>
                 </thead>
                 <tbody>

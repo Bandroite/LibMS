@@ -168,12 +168,12 @@
             <label class="mb-0" for="active">User status</label>
             <div class="form-control">
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="activeStudent" name="studentStatus" class="custom-control-input">
-                    <label class="custom-control-label" for="activeStudent" value="Active">Active</label>
+                    <input type="radio" id="activeStudent" name="studentStatus" class="custom-control-input" value="Active">
+                    <label class="custom-control-label" for="activeStudent" >Active</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="inactiveStudent" name="studentStatus" class="custom-control-input">
-                    <label class="custom-control-label" for="inactiveStudent" value="Inactive">Not active</label>
+                    <input type="radio" id="inactiveStudent" name="studentStatus" class="custom-control-input" value="Inactive">
+                    <label class="custom-control-label" for="inactiveStudent" >Not active</label>
                 </div>
             </div>
         </div>

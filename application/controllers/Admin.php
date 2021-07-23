@@ -38,6 +38,7 @@ class Admin extends CI_Controller {
         'publishers',
         'rooms',
         'shelves',
+        'weed'
     ];
 
     // Load Views Method

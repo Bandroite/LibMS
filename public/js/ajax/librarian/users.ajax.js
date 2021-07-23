@@ -797,6 +797,8 @@ $('#editStudentAsBorrowerForm').validate(validateOptions({
 // Edit Student AJAX
 edit_studentAJAX = () => {
     const rawData = new FormData($('#editStudentAsBorrowerForm')[0]);
+    const params = window.location.pathname.split('/');
+    const userID = params[params.length-1];
 
     data = {
         idNumber:       rawData.get('studentIDNumber'),
@@ -825,16 +827,16 @@ edit_studentAJAX = () => {
             if(result) {
                     // Request a temporary sessioned alert
                     // (for next page alerts)
-                    // $.ajax({
-                    //     url: `${ BASE_URL_WEB }alert`,
-                    //     type: 'POST',
-                    //     data: {
-                    //         theme: 'success',
-                    //         title: 'Success!',
-                    //         message: 'Student Information successfully updated!'
-                    //     },
-                    //     success: () => location.replace(`${ BASE_URL_WEB }admin/borrowers`)
-                    // });
+                    $.ajax({
+                        url: `${ BASE_URL_WEB }alert`,
+                        type: 'POST',
+                        data: {
+                            theme: 'success',
+                            title: 'Success!',
+                            message: 'Student Information successfully updated!'
+                        },
+                        success: () => location.replace(`${ BASE_URL_WEB }admin/borrowers`)
+                    });
     
             } else {
                 showAlert('danger','Failed!',result.message);

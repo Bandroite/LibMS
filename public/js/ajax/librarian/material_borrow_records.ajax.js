@@ -6,7 +6,6 @@
  * ===============================================================================
  */
 
-
 $(() => {
     loadBorrowedMaterialsDT();
     loadReturnedMaterialsDT();
@@ -112,13 +111,17 @@ loadBorrowedMaterialsDT = () => {
                     data: null,
                     render: data => {
                         const status = data.status;
-                        if(status === 'Returned') {
-                            return `<div class="badge alert-success text-success p-2 w-100">Returned</div>`;
-                        } else if(status === 'Unreturned') {
-                            return `<div class="badge alert-warning text-warning p-2 w-100">Unreturned</div>`;
-                        } else if(status === 'Overdue') {
-                            return `<div class="badge alert-danger text-danger p-2 w-100">Overdue</div>`;
 
+                        if(moment().isAfter(data.dueDate)){
+                            return `<div class="badge alert-danger text-danger p-2 w-100">Overdue</div>`;
+                        }else{
+                            if(status === 'Returned') {
+                                return `<div class="badge alert-success text-success p-2 w-100">Returned</div>`;
+                            } else if(status === 'Unreturned') {
+                                return `<div class="badge alert-warning text-warning p-2 w-100">Unreturned</div>`;
+                            } else if(status === 'Overdue') {
+                                return `<div class="badge alert-danger text-danger p-2 w-100">Overdue</div>`;
+                            }
                         }
                     }
                 },
@@ -269,11 +272,43 @@ markAsWeededForm.validate(validateOptions({
             required: 'Description is required'
         }
     },
-    submitHandler: () => alert('submitted')
+    submitHandler: () => add_weeding_recordAJAX()
 }));
 
 // Reset mark as weeded form is its modal was hidden
 markAsWeededModal.on('hide.bs.modal', () => markAsWeededForm.trigger('reset'))
+
+add_weeding_recordAJAX = () => {
+    const rawData = new FormData(markAsWeededForm[0]);
+
+    const borrowID = rawData.get('borrowID')
+
+    data = {
+        description: rawData.get('description')
+    }
+
+    console.log(borrowID);
+    console.log(data);
+
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/weedings/${borrowID}`,
+        type: 'POST',
+        headers: AJAX_HEADERS,
+        data: data,
+        dataType: 'json',
+        success: (result) => {
+            if(result){
+                markAsWeededModal.modal('hide')
+
+                showAlert('blue', 'Success', 'A copy has been marked as weeded')
+
+                const dt = $('#borrowedMaterialsDT').DataTable();
+                dt.ajax.reload()
+            }
+        }
+    })
+    .fail(() => console.error('There was an error in making a copy as weeded'))
+}
 
 /**
  * ===============================================================================
