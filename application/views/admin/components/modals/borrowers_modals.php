@@ -51,3 +51,41 @@
         </form>
     </div>
 </div>
+
+
+<!-- View Student Modal -->
+<div class="modal fade" id="viewBorrowerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye mr-1 text-info"></i>
+                    <span>View Borrower Details</span>
+                </h5>
+                <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <table class="table w-100" id="borrowerDetails">
+
+                        
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-muted" 
+                    data-dismiss="modal"
+                >Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

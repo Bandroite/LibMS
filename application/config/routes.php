@@ -89,6 +89,7 @@ $route['admin/transactions']                = 'admin/transactions';
 $route['admin/borrowed']                    = 'admin/borrowed';
 $route['admin/borrowers']                   = 'admin/borrowers';
 $route['admin/add-borrower']                = 'admin/add_borrower';
+$route['admin/edit-borrower/(:borrower_ID)']= 'admin/edit_borrower/$1';
 $route['admin/returned']                    = 'admin/returned';
 $route['admin/materials/(:book_ID)']        = 'admin/materials/$1'; 
 $route['admin/add-material']                = 'admin/add_material';

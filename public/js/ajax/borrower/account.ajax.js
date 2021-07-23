@@ -98,7 +98,7 @@ get_borrower_infoAJAX = () => {
                                 <td>${ borrowerFullName }</td>
                             </tr>
                             <tr>
-                                <th>Student Number</th>
+                                <th>Staff Number</th>
                                 <td>${ data.idNumber }</td>
                             </tr>
                             <tr>

@@ -161,7 +161,7 @@
 
                 </div>
 
-                <!-- Gender & Contact Number Field -->
+                <!-- Gender, Contact Number and Email Field -->
                 <div class="form-row">
 
                     <!-- Gender Field -->
@@ -213,7 +213,7 @@
                     </div>
                 </div>
                 
-                <!-- Email, Password and Confirm Password -->
+                <!-- Password and Confirm Password -->
                 <div class="form-row">
 
                     <!-- Password Field -->
@@ -252,11 +252,11 @@
                     <div class="form-control">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="activeStudent" name="studentStatus" class="custom-control-input">
-                            <label class="custom-control-label" for="activeStudent">Active</label>
+                            <label class="custom-control-label" for="activeStudent" value="Active">Active</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="inactiveStudent" name="studentStatus" class="custom-control-input">
-                            <label class="custom-control-label" for="inactiveStudent">Not active</label>
+                            <label class="custom-control-label" for="inactiveStudent" value="Inactive">Not active</label>
                         </div>
                     </div>
                 </div>
@@ -341,7 +341,7 @@
                     </div>
                 </div>
 
-                <!-- Gender & Contact Number Field -->
+                <!-- Gender, Contact Number and Email Field -->
                 <div class="form-row">
 
                     <!-- Gender Field -->
@@ -393,7 +393,7 @@
                     </div>
                 </div>
                 
-                <!-- Email, Password and Confirm Password -->
+                <!-- Password and Confirm Password -->
                 <div class="form-row">
 
                     <!-- Password Field -->
@@ -432,12 +432,12 @@
                     <div class="small text-secondary mb-2">This is an example of some helper text</div>
                     <div class="form-control">
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="activeStaff" name="userStatus" class="custom-control-input">
-                            <label class="custom-control-label" for="activeStaff">Active</label>
+                            <input type="radio" id="activeStaff" name="staffStatus" class="custom-control-input">
+                            <label class="custom-control-label" for="activeStaff" value="Active">Active</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="inactiveStaff" name="userStatus" class="custom-control-input">
-                            <label class="custom-control-label" for="inactiveStaff">Not active</label>
+                            <input type="radio" id="inactiveStaff" name="staffStatus" class="custom-control-input">
+                            <label class="custom-control-label" for="inactiveStaff" value="Inactive">Not active</label>
                         </div>
                     </div>
                 </div>

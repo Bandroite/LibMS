@@ -109,9 +109,20 @@ class Admin extends CI_Controller {
         ]);
 	}
 
-    // Borrowers
+    // Add Borrowers
 	public function add_borrower() {
         $this->load_views('Add Borrower', 'Borrowers', [['add_borrower']]);
+	}
+
+    // Edit Borrowers
+	public function edit_borrower($borrower_ID = NULL) {
+        if($borrower_ID == NULL) {
+            $this->Error_model->page_not_found();
+        } else {
+            $this->load_views('Edit Borrower', 'Borrowers', [
+                ['edit_borrower'],
+            ]);
+        }
 	}
 
     // Retuned
