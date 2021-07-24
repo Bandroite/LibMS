@@ -116,12 +116,23 @@ class Admin extends CI_Controller {
 	}
 
     // Edit Borrowers
-	public function edit_borrower($borrower_ID = NULL) {
+    //Students
+	public function edit_student($borrower_ID = NULL) {
         if($borrower_ID == NULL) {
             $this->Error_model->page_not_found();
         } else {
             $this->load_views('Edit Borrower', 'Borrowers', [
-                ['edit_borrower'],
+                ['edit_student'],
+            ]);
+        }
+	}
+    //Staff
+    public function edit_staff($borrower_ID = NULL) {
+        if($borrower_ID == NULL) {
+            $this->Error_model->page_not_found();
+        } else {
+            $this->load_views('Edit Borrower', 'Borrowers', [
+                ['edit_staff'],
             ]);
         }
 	}

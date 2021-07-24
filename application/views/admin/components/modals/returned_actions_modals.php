@@ -104,3 +104,82 @@
         </div>
     </div>
 </div>
+
+<!-- View Returned Copy Modal -->
+<div class="modal fade" id="viewReturnModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye mr-1 text-info"></i>
+                    <span>View Return Copy Details</span>
+                </h5>
+                <button type="button" class="btn btn-sm btn-muted" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th>Standard Number</th>
+                            <td id="standardNumber">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Material</th>
+                            <td id="title">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Copy Number</th>
+                            <td id="copyNo">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Borrower</th>
+                            <td id="borrower">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Borrowed At</th>
+                            <td id="borrowedAt">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Returned At</th>
+                            <td id="returnedAt">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Returned Process By</th>
+                            <td id="returnedProcessBy">
+                                <span class="text-secondary font-italic">No data</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button 
+                    type="button" 
+                    class="btn btn-muted" 
+                    data-dismiss="modal"
+                >Close</button>
+            </div>
+        </div>
+    </div>
+</div>

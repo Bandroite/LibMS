@@ -109,7 +109,7 @@ loadStudentBorrowersDT = () => {
                                     </div>
                                     <a 
                                         class="dropdown-item"
-                                        href="${ BASE_URL_WEB }admin/edit-borrower/${ data.userID }"
+                                        href="${ BASE_URL_WEB }admin/edit-student/${ data.userID }"
                                     >
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
@@ -208,13 +208,13 @@ loadStaffBorrowersDT = () => {
                                     <i class="fas fa-eye dropdown-icon-item text-info"></i>
                                     <span>View details</span>
                                 </div>
-                                <div 
-                                    class="dropdown-item"
-                                    onclick = "editStaff('${data.userID}')"
+                                <a 
+                                class="dropdown-item"
+                                href="${ BASE_URL_WEB }admin/edit-staff/${ data.userID }"
                                 >
                                     <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                     <span>Edit</span>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         `
@@ -843,8 +843,143 @@ edit_studentAJAX = () => {
             }
         },
         error: err => {
-            const responseJSON = err.responseJSON;
-            showAlert('danger', 'Oops!', responseJSON.message)
+            showAlert('danger', 'Oops!', 'ID Number already existed')
+        }
+    })
+}
+
+/**
+ * ===============================================================================
+ * VIEW EDIT STAFF INFORMATION
+ * ===============================================================================
+ */
+
+// Get staff details when staff form is loaded
+if($('#editStaffAsBorrowerForm').length) {
+    const params = window.location.pathname.split('/');
+    const userID = params[params.length-1];
+
+    $.ajax({
+        url: `${BASE_URL_API}librarian/users/${userID}`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                const gender = data.gender
+                console.log(data);
+
+                $('#staffIDNumber').val(data.idNumber);
+                $('#staffFirstName').val(data.firstName);
+                $('#staffMiddleName').val(data.middleName);
+                $('#staffLastName').val(data.lastName);
+                $('#staffGender').selectpicker('val', gender);
+                $('#staffContactNumber').val(data.contactNumber);
+
+                if(data.status == 'Active'){
+                    $('#activeStaff').prop('checked', true);
+                }
+                else{
+                    $('#inactiveStaff').prop('checked', true);
+                }
+            }
+        }
+    })
+    .fail(() => console.error('There was an error in getting material details'));
+}
+
+// Vadlidate edit material form
+$('#editStaffAsBorrowerForm').validate(validateOptions({
+    rules: {
+        staffIDNumber: {
+            required: true
+        },
+        staffFirstName: {
+            required: true
+        },
+        staffLastName: {
+            required: true
+        },
+        staffContactNumber:{
+            required: true
+        },
+        staffGender:{
+            required: true
+        },
+        staffStatus:{
+            required: true
+        }
+    },
+    messages: {
+        staffIDNumber: {
+            required: 'Student Number is required'
+        },
+        staffFirstName: {
+            required: 'First Name is required'
+        },
+        staffLastName: {
+            required: 'Last Name is required'
+        },
+        staffContactNumber:{
+            required: 'Contact Number is required'
+        },
+        staffGender:{
+            required: 'Gender is required'
+        },
+        staffStatus:{
+            required: 'Status is required'
+        }
+    },
+    submitHandler: () => edit_staffAJAX()
+}));
+
+// Edit Student AJAX
+edit_staffAJAX = () => {
+    const rawData = new FormData($('#editStaffAsBorrowerForm')[0]);
+    const params = window.location.pathname.split('/');
+    const userID = params[params.length-1];
+
+    data = {
+        idNumber:       rawData.get('staffIDNumber'),
+        firstName:      rawData.get('staffFirstName'),
+        middleName:     rawData.get('staffMiddleName'),
+        lastName:       rawData.get('staffLastName'),
+        contactNumber:  rawData.get('staffContactNumber'),
+        gender:         rawData.get('staffGender'),
+        status:         rawData.get('staffStatus'),
+        userType:       'Staff'
+    }
+
+    console.log(data)
+
+    //Edit Student via AJAX
+    $.ajax({
+        url: `${BASE_URL_API}librarian/users/${userID}`,
+        type: 'PUT',
+        headers: AJAX_HEADERS,
+        data: data,
+        dataType: 'json',
+        success: (result) => {
+            if(result) {
+                    // Request a temporary sessioned alert
+                    // (for next page alerts)
+                    $.ajax({
+                        url: `${ BASE_URL_WEB }alert`,
+                        type: 'POST',
+                        data: {
+                            theme: 'success',
+                            title: 'Success!',
+                            message: 'Staff Information successfully updated!'
+                        },
+                        success: () => location.replace(`${ BASE_URL_WEB }admin/borrowers`)
+                    });
+    
+            } else {
+                showAlert('danger','Failed!',result.message);
+            }
+        },
+        error: err => {
+            showAlert('danger', 'Oops!', 'ID Number already existed')
         }
     })
 }

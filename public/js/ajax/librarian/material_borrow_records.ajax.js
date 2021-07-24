@@ -422,7 +422,6 @@ loadReturnedMaterialsDT = () => {
                 { 
                     data: null,
                     render: data => {
-                        const material = data.copy.material;
                         return `
                             <div class="dropdown">
                                 <div data-toggle="dropdown">
@@ -436,42 +435,13 @@ loadReturnedMaterialsDT = () => {
                                 </div>
 
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <div  
-                                        class       = "dropdown-item"
-                                        role        = "button"
-                                        data-toggle = "modal"
-                                        data-target = "#borrowedMaterialDetailsModal"
-                                    >
-                                        <i class="fas fa-eye dropdown-icon-item text-info"></i>
-                                        <span>View details</span>
-                                    </div>
-                                    <div 
-                                        class       = "dropdown-item"
-                                        role        = "button"
-                                        data-toggle = "modal"
-                                        data-target = "#markedAsReturnedModal"
-                                    >
-                                        <i class="fas fa-check dropdown-icon-item text-success"></i>
-                                        <span>Marked as returned</span>
-                                    </div>
-                                    <div 
-                                        class       = "dropdown-item"
-                                        role        = "button"
-                                        data-toggle = "modal"
-                                        data-target = "#markedAsReturnedModal"
-                                    >
-                                        <i class="fas fa-check dropdown-icon-item text-secondary"></i>
-                                        <span>Marked as weeded</span>
-                                    </div>
-                                    <div 
-                                        class       = "dropdown-item" 
-                                        role        = "button"
-                                        data-toggle = "modal" 
-                                        data-target = "#removeBorrowedRecordModal"
-                                    >
-                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Remove</span>
-                                    </div>
+                                <div  
+                                    class       = "dropdown-item"
+                                    onclick     = "viewReturn('${data.borrowID}')"
+                                >
+                                    <i class="fas fa-eye dropdown-icon-item text-info"></i>
+                                    <span>View details</span>
+                                </div>
                                 </div>
                             </div>
                         `;
@@ -484,6 +454,73 @@ loadReturnedMaterialsDT = () => {
             }]
         });
     }
+}
+
+
+/**
+ * ===============================================================================
+ * VIEW RETURNED COPIES
+ * ===============================================================================
+ */
+
+// View Returned Copies
+viewReturn = (borrowID) => {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_borrow_records/${borrowID}`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: (result) => {
+            if(result){
+                const data = result.data;
+                const transaction = data.transaction;
+                const borrower =    data.transaction.transaction_borrower;
+                const copy =        data.copy;
+                const returnedAt =  data.updatedAt;
+                const addedBy =     data.added_by_librarian
+                
+                const returnProcessByFullName =
+                setFullName('F Mi L',{
+                    firstName: addedBy.firstName,
+                    middleName: addedBy.middleName,
+                    lastName: addedBy.lastName
+                })
+
+                const material = data.copy.material;
+                console.log(material)
+
+                const borrowerFullName =
+                setFullName('F Mi L',{
+                    firstName: borrower.firstName,
+                    middleName: borrower.middleName,
+                    lastName: borrower.lastName
+                })
+
+                const returnedDate = `
+                    <div>${ moment(returnedAt).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(returnedAt).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(returnedAt).fromNow() }</div>
+                `
+                const borrowedAt = `
+                    <div>${ moment(transaction.borrowedDate).format("dddd, MMMM D, YYYY") }</div>
+                    <div>${ moment(transaction.borrowedDate).format("hh:mm A") }</div>
+                    <div class="small text-secondary">${ moment(transaction.borrowedDate).fromNow() }</div>
+                `
+
+                $('#standardNumber').html(material.standardNumber);
+                $('#title').html(material.title);
+                $('#copyNo').html(copy.copyNumber);
+                $('#returnedProcessBy').html(returnProcessByFullName);
+                $('#borrower').html(borrowerFullName);
+                $('#returnedAt').html(returnedDate);
+                $('#borrowedAt').html(borrowedAt);
+                
+                $('#viewReturnModal').modal('show')
+            }
+            else{
+                console.log('No result');
+            }
+        } 
+    })
 }
 
 /**

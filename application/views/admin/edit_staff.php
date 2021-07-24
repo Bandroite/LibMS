@@ -15,33 +15,32 @@
     <div class="card-body">
 
 
-    <!-- Student Forms -->
-    <form id="editStudentAsBorrowerForm"> 
+    <form id="editStaffAsBorrowerForm">
 
         <!-- ID Number field -->
         <div class="form-group">
-            <label for="studentIDNumber">Student Number</label>
+            <label for="staffIDNumber">Staff ID</label>
             <input 
                 type        = "text" 
                 class       = "form-control"
-                id          = "studentIDNumber"
-                name        = "studentIDNumber"
+                id          = "staffIDNumber"
+                name        = "staffIDNumber"
                 placeholder = "Enter the ID Number here"
             >
         </div>
-        
-        <!-- Student Name Fields -->
+
+        <!-- Staff Name Fields -->
         <div class="form-row">
             
             <!-- First Name Field -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="studentFirstName">First Name</label>
+                    <label for="staffFirstName">First Name</label>
                     <input 
                         type        = "text" 
                         class       = "form-control"
-                        id          = "studentFirstName"
-                        name        = "studentFirstName"
+                        id          = "staffFirstName"
+                        name        = "staffFirstName"
                         placeholder = "Enter first name here"
                     >
                 </div>
@@ -50,12 +49,12 @@
             <!-- Middle Name Field -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="studentMiddleName">Middle Name</label>
+                    <label for="staffMiddleName">Middle Name</label>
                     <input 
                         type        = "text" 
                         class       = "form-control"
-                        id          = "studentMiddleName"
-                        name        = "studentMiddleName"
+                        id          = "staffMiddleName"
+                        name        = "staffMiddleName"
                         placeholder = "Enter middle name here"
                     >
                 </div>
@@ -64,75 +63,28 @@
             <!-- Last Name Field -->
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="studentLastName">Last Name</label>
+                    <label for="lastName">Last Name</label>
                     <input 
                         type        = "text" 
                         class       = "form-control"
-                        id          = "studentLastName"
-                        name        = "studentLastName"
+                        id          = "staffLastName"
+                        name        = "staffLastName"
                         placeholder = "Enter last name here"
                     >
                 </div>
             </div>
         </div>
 
-        <!-- Course, Year and Section -->
-        <div class="form-row">
-
-            <!-- Course Field -->
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="course">Course</label>
-                    <input 
-                        type="text" 
-                        name="course" 
-                        id="course" 
-                        class="form-control" 
-                        placeholder="Type course here"
-                    >
-                </div>
-            </div>
-
-            <!-- Year Field -->
-            <div class="col-md-4">
-                <div class="form-group">
-                        <label for="year">Year</label>
-                        <input 
-                            type="text" 
-                            name="year" 
-                            id="year" 
-                            class="form-control" 
-                            placeholder="Type year here"
-                        >
-                </div>
-            </div>
-
-            <!-- Section Field -->
-            <div class="col-md-4">
-                <div class="form-group">
-                        <label for="section">Section</label>
-                        <input 
-                            type="text" 
-                            name="section" 
-                            id="section" 
-                            class="form-control" 
-                            placeholder="Type your section here"
-                        >
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Gender & Contact Number Field -->
+        <!-- Gender, Contact Number and Email Field -->
         <div class="form-row">
 
             <!-- Gender Field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="studentGender">Gender</label>
+                    <label for="staffGender">Gender</label>
                     <select 
-                        name="studentGender" 
-                        id="studentGender" 
+                        name="staffGender" 
+                        id="staffGender" 
                         class="selectpicker form-control border"
                         data-style="form-control"
                         data-live-search="true"
@@ -149,43 +101,45 @@
             <!-- Contact Number field -->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="studentContactNumber">Contact Number</label>
+                    <label for="staffContactNumber">Contact Number</label>
                     <input 
                         type="text" 
-                        name="studentContactNumber" 
-                        id="studentContactNumber" 
+                        name="staffContactNumber" 
+                        id="staffContactNumber" 
                         class="form-control" 
                         placeholder="Type your contact number here"
                     >
                 </div>
             </div>
-
         </div>
-        
+
 
         <!-- Active Field -->
         <div class="form-group">
             <label class="mb-0" for="active">User status</label>
+            <div class="small text-secondary mb-2">This is an example of some helper text</div>
             <div class="form-control">
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="activeStudent" name="studentStatus" class="custom-control-input" value="Active">
-                    <label class="custom-control-label" for="activeStudent" >Active</label>
+                    <input type="radio" id="activeStaff" name="staffStatus" class="custom-control-input" value="Active">
+                    <label class="custom-control-label" for="activeStaff">Active</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="inactiveStudent" name="studentStatus" class="custom-control-input" value="Inactive">
-                    <label class="custom-control-label" for="inactiveStudent" >Not active</label>
+                    <input type="radio" id="inactiveStaff" name="staffStatus" class="custom-control-input" value="Inactive">
+                    <label class="custom-control-label" for="inactiveStaff">Not active</label>
                 </div>
             </div>
         </div>
 
         <!-- User Actions -->
         <div class="form-group text-center">
-            <button type="button" class="btn btn-muted" onclick="history.back()">Cancel</button>
-            <button type="submit" class="btn btn-blue">
-                <i class="fas fa-check mr-1"></i>
+            <button class="btn btn-muted" type="button" onclick="history.back()">
+                <span>Cancel</span>
+            </button>
+            <button class="btn btn-blue" type="submit">
                 <span>Save</span>
+                <i class="fas fa-plus ml-1"></i>
             </button>
         </div>
     </form>
-    
+    </div>
 </div>

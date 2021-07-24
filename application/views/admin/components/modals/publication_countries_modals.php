@@ -248,19 +248,6 @@
                     </tr>
 
                     <tr>
-                        <th>Added By</th>
-                        <td id="addedBy">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Updated By</th>
-                        <td id="updatedBy">
-                            <span class="text-secondary font-italic">No data</span>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <th>Added At</th>
                         <td id="addedAt">
                             <span class="text-secondary font-italic">No data</span>
