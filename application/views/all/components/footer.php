@@ -5,6 +5,16 @@
     <div class="container-fluid text-white p-5">
         <div class="row">
             <div class="col-12 col-lg-4 px-3">
+                <div class="background-brand">
+                    <!-- Brand Name -->
+                    <h4 class="font-weight-light">Welcome to</h4>
+                    <a class="navbar-brand text-primary" href="#">
+                        <h1 class="display-2">Lib<span class="text-white">MS</span></h1>
+                    </a>
+                </div>
+                
+            </div>
+            <div class="col-12 col-lg-4 px-3">
                 <h4 class="font-weight-normal">Contact Details</h4>
                 <div class="nav flex-column">
                     <a href="#" class="footer-links">
@@ -27,37 +37,18 @@
             </div>
             <div class="col-12 mt-5 mt-lg-0 col-lg-4 px-3">
                 <h4 class="font-weight-normal">Navigation</h4>
-
-                <div class="nav flex-column">
-                    <a href="#" class="footer-links">
-                        <i class="fas fa-search footer-icons"></i>
-                        <span>Advance Search</span>
+                <a href="<?= base_url() ?>browse" class="footer-links">
+                        <i class="fas fa-info-circle footer-icons"></i>
+                        <span>Browse</span>
                     </a>
-                    <a href="#" class="footer-links">
+                <div class="nav flex-column">
+                    <a href="<?= base_url() ?>search" class="footer-links">
+                        <i class="fas fa-search footer-icons"></i>
+                        <span>Search</span>
+                    </a>
+                    <a href="<?= base_url() ?>about-us" class="footer-links">
                         <i class="fas fa-info-circle footer-icons"></i>
                         <span>About Us</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 mt-5 mt-lg-0 col-lg-4 px-3">
-                <h4 class="font-weight-normal">Categories</h4>
-
-                <div class="nav flex-column">
-                    <a href="#" class="footer-links">
-                        <i class="fas fa-laptop footer-icons"></i>
-                        <span>Technology</span>
-                    </a>
-                    <a href="#" class="footer-links">
-                        <i class="fas fa-laptop footer-icons"></i>
-                        <span>English</span>
-                    </a>
-                    <a href="#" class="footer-links">
-                        <i class="fas fa-book footer-icons"></i>
-                        <span>History</span>
-                    </a>
-                    <a href="#" class="footer-links">
-                        <i class="fas fa-vial footer-icons"></i>
-                        <span>Science</span>
                     </a>
                 </div>
             </div>
