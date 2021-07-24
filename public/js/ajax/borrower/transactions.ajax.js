@@ -226,23 +226,23 @@ viewTransactionDetails = (transactionID) => {
                             }
                         },
 
-                        // Date Returned
-                        {
-                            data: null,
-                            class: 'text-nowrap',
-                            render: data => {
-                                const returnedDate = data.returnedDate;
-                                if(returnedDate == null || returnedDate == '') {
-                                    return `<div class="text-secondary font-italic">Not yet returned</div>`
-                                } else {
-                                    return `
-                                        <div>${ moment(returnedDate).format('MMM. D, YYYY') }</div>
-                                        <div>${ moment(returnedDate).format('hh:mm A') }</div>
-                                        <div class="small text-secondary font-italic">${ moment(returnedDate).fromNow() }</div>
-                                    `
-                                }
-                            }
-                        }
+                        // // Date Returned
+                        // {
+                        //     data: null,
+                        //     class: 'text-nowrap',
+                        //     render: data => {
+                        //         const returnedDate = data.returnedDate;
+                        //         if(returnedDate == null || returnedDate == '') {
+                        //             return `<div class="text-secondary font-italic">Not yet returned</div>`
+                        //         } else {
+                        //             return `
+                        //                 <div>${ moment(returnedDate).format('MMM. D, YYYY') }</div>
+                        //                 <div>${ moment(returnedDate).format('hh:mm A') }</div>
+                        //                 <div class="small text-secondary font-italic">${ moment(returnedDate).fromNow() }</div>
+                        //             `
+                        //         }
+                        //     }
+                        // }
                     ]
                 });
 

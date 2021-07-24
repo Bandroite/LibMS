@@ -57,7 +57,6 @@
                             <th>Material</th>
                             <th>Status</th>
                             <th>Due Date</th>
-                            <th>Date Returned</th>
                         </thead>
                         <tbody></tbody>
                     </table>
