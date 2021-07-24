@@ -205,6 +205,8 @@ add_publication_countryAJAX = () => {
 	});
 };
 
+$('#addPublicationCountryModal').on('hide.bs.modal', () => $("#addPublicationCountryForm").trigger('reset'))
+
 /**
  * ===============================================================================
  * EDIT PUBLICATION COUNTRIES AJAX
@@ -321,6 +323,11 @@ update_publication_countryAJAX = () => {
     })
 }
 
+$('#editPublicationCountryModal').on('hide.bs.modal', () => {
+    $("#addPublicationCountryForm").trigger('reset');
+    $("#editPublicationCountryForm").trigger('reset');
+})
+
 /**
  * ===============================================================================
  * REMOVE PUBLICATION COUNTRY AJAX
@@ -400,7 +407,6 @@ viewPublicationCountry = (pubCountryID) => {
         success: (result) => {
             if(result){
                 const data = result.data;
-
 
                 var statusBlade;
                     if(data.status == 'Active'){

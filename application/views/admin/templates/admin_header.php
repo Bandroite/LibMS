@@ -94,7 +94,7 @@
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-book sidebar-icon"></i>
                         </div>
-                        <span>Borrowed Materials</span>
+                        <span>Borrowed Copies</span>
                     </a>
                     <a 
                         class = "nav-link<?= $active === 'Borrowers' ? ' active' : ''; ?>" 
@@ -112,7 +112,7 @@
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-undo sidebar-icon"></i>
                         </div>
-                        <span>Returned Materials</span>
+                        <span>Returned Copies</span>
                     </a>
 
                     <div class="dropdown-divider"></div>

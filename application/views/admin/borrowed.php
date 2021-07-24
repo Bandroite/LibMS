@@ -1,7 +1,7 @@
 <?php $this->load->view('admin/components/title_header', [
     'icon'     => 'money-check',
-    'title'    => 'Borrowed Books',
-    'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    'title'    => 'Borrowed Copies',
+    'subtitle' => 'Manage the list of borrowed copies here.'
 ]); ?>
 
 <!-- Show Alert -->
@@ -15,8 +15,8 @@
                 <i class="fas fa-money-check text-success"></i>
             </div>
             <div class="text-right">
-                <h6 class="m-0">Total Borrowed Materials</h6>
-                <h2 class="text-success" id="borrowedMaterialsCount">0</h2>
+                <h6 class="m-0">Total Borrowed Copies</h6>
+                <h2 class="text-success" id="borrowedCopiesCount">0</h2>
             </div>
         </div>
     </div>

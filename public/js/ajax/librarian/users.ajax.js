@@ -522,6 +522,7 @@ add_staffAJAX = () => {
  * ===============================================================================
  */
 
+// View Student
 viewStudent = (userID) => {
     $.ajax({
         url: `${ BASE_URL_API }librarian/students/${userID}`,
@@ -610,6 +611,7 @@ viewStudent = (userID) => {
  * ===============================================================================
  */
 
+// View Staff
 viewStaff = (userID) => {
     $.ajax({
         url: `${ BASE_URL_API }librarian/staffs/${userID}`,
@@ -990,7 +992,7 @@ edit_staffAJAX = () => {
  * ===============================================================================
  */
 
-if($('#studentsCount, #staffsCount').length) {
+if($('#studentsCount, #staffsCount, #borrowersCount').length) {
     $.ajax({
         url: `${ BASE_URL_API }librarian/users/count`,
         type: 'GET',
@@ -1000,6 +1002,7 @@ if($('#studentsCount, #staffsCount').length) {
                 const count = result.count;
                 $('#studentsCount').html(count.students);
                 $('#staffsCount').html(count.staffs);
+                $('#borrowersCount').html(parseInt(count.students) + parseInt(count.staffs))
             }
         }
     })

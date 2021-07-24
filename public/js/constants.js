@@ -48,7 +48,6 @@ const validateOptions = (validateOptions) => {
             el.closest(".form-group").append(err);
         },
         highlight:   (el) => {
-            console.log(el);
             if($(el).hasClass('selectpicker')) {
                 $(el).selectpicker('setStyle', 'border-success', 'remove');
                 $(el).selectpicker('setStyle', 'border-danger', 'add');

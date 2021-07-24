@@ -24,14 +24,14 @@
                         <i class="fas fa-book text-primary"></i>
                     </div>
                     <div class="text-right">
-                        <h6 class="m-0">Available Books</h6>
-                        <h2 class="text-primary">234</h2>
+                        <h6 class="m-0">Available Copies</h6>
+                        <h2 class="text-primary" id="availableCopies">0</h2>
                     </div>
                 </div>
 
                 <div class="text-right">
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="btn btn-sm btn-primary">View Details</a>
+                    <a href="<?= base_url() ?>admin/materials" class="btn btn-sm btn-primary">View Details</a>
                 </div>
             </div>
         </div>
@@ -47,13 +47,13 @@
                     </div>
                     <div class="text-right">
                         <h6 class="m-0">Borrowers</h6>
-                        <h2 class="text-warning">234</h2>
+                        <h2 class="text-warning" id="borrowersCount">0</h2>
                     </div>
                 </div>
                 
                 <div class="text-right">
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="btn btn-sm btn-warning text-white">View Details</a>
+                    <a href="<?= base_url() ?>" class="btn btn-sm btn-warning text-white">View Details</a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="text-right">
                         <h6 class="m-0">Borrowed Books</h6>
-                        <h2 class="text-success">234</h2>
+                        <h2 class="text-success" id="borrowedCopiesCount">0</h2>
                     </div>
                 </div>
                 
@@ -91,7 +91,7 @@
                     </div>
                     <div class="text-right">
                         <h6 class="m-0">Returned Books</h6>
-                        <h2 class="text-danger">234</h2>
+                        <h2 class="text-danger" id="returnedCopiesCount">0</h2>
                     </div>
                 </div>
                 
@@ -113,7 +113,7 @@
                     </div>
                     <div class="text-right">
                         <h6 class="m-0">Weeded Books</h6>
-                        <h2 class="text-secondary">234</h2>
+                        <h2 class="text-secondary" id="weedingsCount">234</h2>
                     </div>
                 </div>
                 
@@ -127,72 +127,75 @@
 
 </div>
 
-<!-- Inventory of Books -->
 <div class="card mb-4">
     <div class="card-header">
         <i class="fas fa-table mr-1 text-primary"></i>
-        <span>Inventory of Books</span>
-    </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table" id="inventoryOfBooksDT" width="100%" cellspacing="0">
-                    <thead class="thead">
-                        <tr>
-                            <th>Book Title</th>
-                            <th>Description</th>
-                            <th>Category</th>
-                            <th>Quantity</th> 
-                        </tr>
-                    </thead> 
-                    <tbody>
-                        <?php for($i=0;$i<25;$i++): ?>
-                        <tr role="row" class="even">
-                            <td class="sorting_1">book  now</td>
-                            <td>book one</td>
-                            <td>ALL</td>
-                            <td>1</td>
-                        </tr>
-                        <?php endfor ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-</div>
-
-<!-- Transactions History -->
-<div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-chart-area mr-1 text-primary"></i>
-        <span>Transaction History</span>
+        <span>Latest Transactions</span>
     </div>
     <div class="card-body">
-        <div class="table-responsive"> 
-            <table id="transactionHistoryDT" class="table table-hover" cellspacing="0"  >
-                <thead class="thead">
-                    <tr> 
-                        <th>IBSN</th>
-                        <th>Title</th> 
-                        <th>Borrower</th> 
-                        <th>DateBorrowed</th>
-                        <th>DueDate</th> 
-                        <th>Date Returned</th>
-                        <th>Remarks</th> 
-                    </tr>   
+        <div class="table-responsive">
+            <table id="latestTransactionsDT" class="table small w-100" width="100%" cellspacing="0">
+                <thead>
+                    <th>Added by</th>
+                    <th>Borrower</th>
+                    <th>Date & Time Borrowed</th>
+                    <th>No. of Copies Borrowed</th>
+                    <th>Issued by:</th>
+                    <th></th>
                 </thead>
                 <tbody>
-                    <?php for($i=0;$i<25;$i++): ?>
-                        <tr role="row">
-                            <td>1345673</td>
-                            <td>life of juan</td>
-                            <td>ambot guess sure</td>
-                            <td>2018-03-23 19:01:51</td>
-                            <td>2018-03-24 19:01:51</td>
-                            <td>0000-00-00 00:00:00</td>
-                            <td>Overdue</td>
-                        </tr>
-                    <?php endfor ?>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div>Juan Dela Cruz</div>
+                                    <div class="text-small font-italic text-secondary">Student</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <div>
+                                    <div>April 1, 2020</div>
+                                    <div class="text-small font-italic text-secondary">a minute ago</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-copy"></i>
+                                </div>
+                                <div>
+                                    <div>3</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <div>Juan Dela Cruz</div>
+                                    <div class="text-small font-italic text-secondary">Librarian</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn btn-sm btn-muted">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div> 
+</div>

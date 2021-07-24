@@ -72,6 +72,7 @@ class User extends CI_Controller {
     public function profile() {
         $this->load_views('Profile', [
             ['components/banner', ['title' => 'Your Profile']],
+            ['components/modals/profile_modals'],
             ['profile']
         ]);
     }

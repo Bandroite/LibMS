@@ -192,6 +192,23 @@ loadBorrowedMaterialsDT = () => {
     }
 }
 
+
+// Borrowed copies count
+if($('#borrowedCopiesCount').length) {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_borrow_records/borrowed`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                $('#borrowedCopiesCount').html(data.length)
+            }
+        }
+    })
+    .fail(() => console.error('There was an error in getting the borrowed data'))
+}
+
 /**
  * ===============================================================================
  * MARK AS RETURNED
@@ -278,6 +295,7 @@ markAsWeededForm.validate(validateOptions({
 // Reset mark as weeded form is its modal was hidden
 markAsWeededModal.on('hide.bs.modal', () => markAsWeededForm.trigger('reset'))
 
+// Add weeding record AJAX
 add_weeding_recordAJAX = () => {
     const rawData = new FormData(markAsWeededForm[0]);
 
@@ -286,9 +304,6 @@ add_weeding_recordAJAX = () => {
     data = {
         description: rawData.get('description')
     }
-
-    console.log(borrowID);
-    console.log(data);
 
     $.ajax({
         url: `${ BASE_URL_API }librarian/weedings/${borrowID}`,
@@ -521,6 +536,21 @@ viewReturn = (borrowID) => {
             }
         } 
     })
+}
+
+if($('#returnedCopiesCount').length) {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/material_borrow_records/returned`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                $('#returnedCopiesCount').html(data.length)
+            }
+        }
+    })
+    .fail(() => console.error('There was an error in getting the returned copies count'))
 }
 
 /**

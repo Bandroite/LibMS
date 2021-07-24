@@ -37,7 +37,12 @@ loadWeededCopiesDT = () => {
                     data: 'copy.material.title'
                 },
                 {
-                    data: 'description'
+                    data: null,
+                    render: data => {
+                        return `
+                            <span class="d-inline-block text-truncate" style="max-width: 15rem;">${ data.description }</span>
+                        `
+                    }
                 },
                 {
                     data: null,
@@ -59,8 +64,9 @@ loadWeededCopiesDT = () => {
     }
 }
 
+// Weedings count
 weedings_countAJAX = () => {
-    if($('#numberOfWeededCopies').length){
+    if($('#numberOfWeededCopies, #weedingsCount').length){
         $.ajax({
             url: `${ BASE_URL_API }librarian/weedings/count`,
             type: 'GET',
@@ -68,7 +74,7 @@ weedings_countAJAX = () => {
             success: result => {
                 if(result) {
                     $('#numberOfWeededCopies').html(result.data)
-
+                    $('#weedingsCount').html(result.data);
                 } else {
                     console.log('No result was found');
                 }

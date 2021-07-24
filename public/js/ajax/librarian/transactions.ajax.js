@@ -10,6 +10,7 @@
 $(() => {
     loadTransactionsDT();
     transactions_countAJAX();
+    loadLatestTransactionsDT();
 });
 
 
@@ -507,5 +508,128 @@ transactions_countAJAX = () => {
             success: result => $('#transactionsCount').html(result.count)
         })
         .fail(() => console.error('There was an error in getting room count'));
+    }
+}
+
+
+/**
+ * ===============================================================================
+ * GET LATEST TRANSACTIONS
+ * ===============================================================================
+ */
+
+loadLatestTransactionsDT = () => {
+    const dt = $('#latestTransactionsDT');
+    if(dt.length) {
+        dt.DataTable({
+            ajax: {
+                url: `${ BASE_URL_API }librarian/transactions/latest`,
+                headers: AJAX_HEADERS,
+                // success: result => {
+                //     if(result) {
+                //         const data = result.data;
+                //         console.log(data);
+                //     }
+                // }
+            }, 
+            columns: [
+
+                // Added by (hidden for default sort)
+                { data: 'borrowDate', visible: false },
+
+                // Borrower
+                {
+                    data: null,
+                    render: data => {
+                        const borrower = data.transaction_borrower;
+
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <div>${ borrower.firstName } ${ borrower.lastName }</div>
+                                    <div class="small font-italic text-secondary">${ borrower.userType }</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                },
+
+                // Date borrowed
+                {
+                    data: null,
+                    render: data => {
+                        const borrowDate = data.borrowDate;
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <div>
+                                    <div>${ moment(borrowDate).format('MMM. D, YYYY; hh:mm A') }</div>
+                                    <div class="small font-italic text-secondary">${ moment(borrowDate).fromNow() }</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }, 
+                
+                // No. of copies borrowed
+                {
+                    data: null,
+                    render: data => {
+                        return  `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-copy"></i>
+                                </div>
+                                <div>
+                                    <div>${ data.material_borrow_records.length }</div>
+                                </div>
+                            </div>
+                        `
+                    }
+                },
+
+                // Issued by
+                {
+                    data: null,
+                    render: data => {
+                        const addedBy = data.added_by_librarian;
+                        return `
+                            <div class="d-flex align-items-baseline">
+                                <div class="icon-container text-primary">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div>
+                                    <div>${ addedBy.firstName } ${ addedBy.lastName }</div>
+                                    <div class="small font-italic text-secondary">${ addedBy.userType }</div>
+                                </div>
+                            </div>
+                        `
+                    }
+                },
+
+                // Actions
+                {
+                    data: null,
+                    class: 'text-center',
+                    render: data => {
+                        return `
+                            <div class="btn btn-sm btn-muted">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </div>
+                        `
+                    }
+                }
+            ],
+            columnDefs: [{
+                targets: [5],
+                orderable: false
+            }],
+            order: [[0, 'desc']]
+        })
     }
 }

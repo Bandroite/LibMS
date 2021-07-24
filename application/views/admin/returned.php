@@ -1,7 +1,7 @@
 <?php $this->load->view('admin/components/title_header', [
     'icon'     => 'undo',
-    'title'    => 'Returned Books',
-    'subtitle' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+    'title'    => 'Returned Copies',
+    'subtitle' => 'Manage the list of returned copies here.'
 ]); ?>
 
 <!-- Show Alert -->
@@ -10,16 +10,16 @@
 <?php $this->load->view('admin/components/summary_card', [
     'theme' => 'danger',
     'icon'  => 'undo',
-    'title' => 'Returned Materials',
-    'id'    => 'returnedMaterials',
-    'value' => '234'
+    'title' => 'Returned Copies',
+    'id'    => 'returnedCopiesCount',
+    'value' => '0'
 ]); ?>
 
 <!-- Returned Books Table -->
 <div class="card mb-4">
     <div class="card-header py-3 bg-white">
         <i class="fas fa-list text-primary mr-1"></i>
-        <span>List of Returned Books</span>
+        <span>List of Returned Copies</span>
     </div>
     <div class="card-body">
         <div class="table-responsive">

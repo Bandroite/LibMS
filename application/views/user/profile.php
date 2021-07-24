@@ -5,6 +5,9 @@
         <h6 class="text-secondary">View your information here</h6>
     </div>
 
+    <!-- Alert -->
+    <div id="alertContainer"></div>
+
     <div class="row" id="borrowerProfile">
         <div class="col-lg-4 mb-4 mb-sm-0">
             <div class="card">
@@ -34,9 +37,13 @@
                     </h4>
                     <table class="table mt-3" id="borrowerDetails"></table>
                     <div class="form-group text-center">
-                        <button class="btn btn-blue">
+                        <button class="btn btn-blue" id="editBorrowerInfo">
                             <i class="fas fa-edit mr-1"></i>
                             <span>Edit your information</span>
+                        </button>
+                        <button class="btn btn-danger mt-1 mt-md-0" data-toggle="modal" data-target="#changePasswordModal">
+                            <i class="fas fa-user-lock mr-1"></i>
+                            <span>Change your password</span>
                         </button>
                     </div>
                 </div>

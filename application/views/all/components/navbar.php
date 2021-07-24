@@ -77,7 +77,7 @@
                                 <div id="transactionsCountContainer"></div>
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a 
+                            <!-- <a 
                                 class = "dropdown-item"  
                                 href  = "<?= base_url() ?>me/edit-info"
                             >
@@ -91,7 +91,7 @@
                                 <i class="fas fa-user-lock dropdown-icon-item"></i>
                                 <span>Account Settings</span>
                             </a>
-                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div> -->
                             <a 
                                 class = "dropdown-item"
                                 href  = "<?= base_url() ?>logout"                            

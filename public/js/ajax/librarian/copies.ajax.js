@@ -282,3 +282,25 @@ add_copyAJAX = () => {
         }
     })
 }
+
+
+
+/**
+ * ===============================================================================
+ * AVAILABLE COPIES COUNT AJAX
+ * ===============================================================================
+ */
+
+if($('#availableCopies').length) {
+    $.ajax({
+        url: `${ BASE_URL_API }librarian/copies/available/count`,
+        type: 'GET',
+        headers: AJAX_HEADERS,
+        success: result => {
+            if(result) {
+                const data = result.data;
+                $('#availableCopies').html(data);
+            }
+        }
+    })
+}
