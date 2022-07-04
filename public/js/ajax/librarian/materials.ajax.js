@@ -189,13 +189,6 @@ loadMaterialsDT = () => {
                                         <i class="fas fa-eye dropdown-icon-item text-info"></i>
                                         <span>View Details</span>
                                     </a>
-                                    <div
-                                        class="dropdown-item"
-                                        onclick = "addCopy('${data.materialID}')"
-                                    >
-                                        <i class="fas fa-plus mr-1 text-primary"></i>
-                                        <span>Add copy of this material</span>
-                                    </div>
                                     <a 
                                         class="dropdown-item"
                                         href="${ BASE_URL_WEB }admin/edit-material/${ id }"
@@ -203,14 +196,6 @@ loadMaterialsDT = () => {
                                         <i class="fas fa-edit dropdown-icon-item text-blue"></i>
                                         <span>Edit</span>
                                     </a>
-                                    <div 
-                                        class="dropdown-item"
-                                        data-toggle="modal"
-                                        data-target="#removeMaterialModal"
-                                    >
-                                        <i class="fas fa-trash-alt dropdown-icon-item text-danger"></i>
-                                        <span>Remove</span>
-                                    </div>
                                 </div>
                             </div>
                         `
